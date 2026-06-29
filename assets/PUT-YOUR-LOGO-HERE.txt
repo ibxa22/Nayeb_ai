@@ -1,0 +1,3 @@
+Put your local SVG logo here and rename it exactly: nayeblogo.svg
+
+The HTML already references assets/nayeblogo.svg for the logo, favicon, and social preview image.
