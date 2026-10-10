@@ -1,249 +1,592 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nayeb | AI Procurement Intelligence</title>
-    
-    <!-- Google Fonts: Inter for English, Tajawal for Arabic -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Tajawal:wght@300;400;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        nayebTeal: '#00A499',
-                        nayebOlive: '#6B8E5F',
-                        nayebOffWhite: '#FAF9F5',
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'Tajawal', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        body { background-color: #FAF9F5; }
-        /* Hide AR by default */
-        [lang="en"] .lang-ar { display: none; }
-        /* When AR is active, hide EN */
-        [lang="ar"] .lang-en { display: none; }
-        
-        .feature-list li {
-            position: relative;
-            padding-left: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-        [dir="rtl"] .feature-list li {
-            padding-left: 0;
-            padding-right: 1.5rem;
-        }
-        .feature-list li::before {
-            content: "•";
-            color: #00A499;
-            font-weight: bold;
-            position: absolute;
-            left: 0;
-            top: 0;
-        }
-        [dir="rtl"] .feature-list li::before {
-            left: auto;
-            right: 0;
-        }
-    </style>
-</head>
-<body class="text-gray-800 antialiased transition-all duration-300">
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Nayeb</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Readex+Pro:wght@300;400;500;600&display=swap">
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<style>
+/* Layout (calm, Duna-like): centred hero with announcement pill → product UI floating on a soft dune backdrop → compliance strip → three big-number pillars → module grid with role filter (cards carry their own mini UI) → dark CTA with security points */
+:root{
+  --bg:#FBF9F1; --surface:#FFFFFF; --sand:#F4F0E3; --ink:#1B2422; --muted:#5E6A66; --line:#E6E2D4;
+  --teal:#00A99D; --teal-ink:#00786F; --teal-soft:#DCF1EE; --on-teal:#FFFFFF;
+  --olive:#69895D; --olive-ink:#4E6B44; --olive-soft:#E7EDE1;
+  --dune-a:#CFEAE5; --dune-b:#DCE6D2; --dune-c:#EFE9D8;
+  --logo-stroke:#333333;
+  --risk:#B8412C; --risk-soft:#FAE8E3; --warn:#9A6400; --warn-soft:#F8EDD5; --ok:#2E7A4C; --ok-soft:#E1F1E6;
+  --shadow:0 1px 2px rgba(27,36,34,.04),0 24px 48px -24px rgba(27,36,34,.28);
+  --font-display:"Readex Pro","IBM Plex Sans Arabic",system-ui,sans-serif;
+  --font-body:"IBM Plex Sans Arabic","Segoe UI",Tahoma,system-ui,sans-serif;
+  --font-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0F1614; --surface:#161F1D; --sand:#131C1A; --ink:#E9EEEB; --muted:#9DABA6; --line:#26332F;
+  --teal:#18B8AC; --teal-ink:#5AD3C8; --teal-soft:#0F302C; --on-teal:#06201D;
+  --olive:#8EAF80; --olive-ink:#A9C79C; --olive-soft:#1C2A1B;
+  --dune-a:#123632; --dune-b:#1E2E1C; --dune-c:#1A2220;
+  --logo-stroke:#0F1614;
+  --risk:#F08A74; --risk-soft:#3A1C16; --warn:#E3B24E; --warn-soft:#33280F; --ok:#6CC28E; --ok-soft:#12291C;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 24px 48px -24px rgba(0,0,0,.7); color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#0F1614; --surface:#161F1D; --sand:#131C1A; --ink:#E9EEEB; --muted:#9DABA6; --line:#26332F;
+  --teal:#18B8AC; --teal-ink:#5AD3C8; --teal-soft:#0F302C; --on-teal:#06201D;
+  --olive:#8EAF80; --olive-ink:#A9C79C; --olive-soft:#1C2A1B;
+  --dune-a:#123632; --dune-b:#1E2E1C; --dune-c:#1A2220;
+  --logo-stroke:#0F1614;
+  --risk:#F08A74; --risk-soft:#3A1C16; --warn:#E3B24E; --warn-soft:#33280F; --ok:#6CC28E; --ok-soft:#12291C;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 24px 48px -24px rgba(0,0,0,.7); color-scheme:dark;
+}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+html[lang="ar"] body{line-height:1.75}
+.wrap{max-width:1160px;margin-inline:auto;padding-inline:20px}
+h1,h2,h3{font-family:var(--font-display);text-wrap:balance;color:var(--ink);font-weight:500}
+.label{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--teal-ink)}
+.label::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.lead{color:var(--muted);font-size:18px;max-width:56ch}
+bdi{unicode-bidi:isolate}
+:focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:8px}
 
-    <!-- Navigation -->
-    <nav class="fixed w-full z-50 bg-white border-b border-gray-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-20">
-                <div class="flex items-center">
-                    <img src="assets/nayeblogo.svg" alt="Nayeb Logo" class="h-10 w-auto">
-                    <span class="ml-3 text-2xl font-bold text-gray-900 lang-en">Nayeb</span>
-                    <span class="mr-3 text-2xl font-bold text-gray-900 lang-ar">نائب</span>
-                </div>
-                <div class="flex items-center space-x-4 rtl:space-x-reverse">
-                    <button onclick="toggleLanguage()" class="text-nayebOlive font-semibold hover:text-nayebTeal transition">
-                        <span class="lang-en">عربي</span>
-                        <span class="lang-ar">English</span>
-                    </button>
-                    <a href="#modules" class="bg-nayebTeal text-white px-6 py-2 rounded-lg font-semibold hover:bg-opacity-90 transition">
-                        <span class="lang-en">Explore Products</span>
-                        <span class="lang-ar">استكشف المنتجات</span>
-                    </a>
-                </div>
-            </div>
-        </div>
+/* nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(14px)}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-weight:600;font-size:21px;color:var(--ink);text-decoration:none}
+.brand small{font-weight:400;font-size:13px;color:var(--muted);font-family:var(--font-body)}
+.navlink{color:var(--muted);text-decoration:none;font-size:15px}
+.navlink:hover{color:var(--ink)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;font-weight:500;font-size:15px;padding:12px 22px;text-decoration:none;cursor:pointer;border:1px solid transparent;transition:background .2s,border-color .2s,transform .2s}
+.btn:hover{transform:translateY(-1px)}
+.btn-dark{background:var(--ink);color:var(--bg)}
+.btn-dark:hover{background:var(--teal-ink)}
+.btn-light{background:var(--surface);border-color:var(--line);color:var(--ink)}
+.btn-light:hover{border-color:var(--teal)}
+.btn-sm{padding:8px 16px;font-size:14px}
+.lang-btn{min-width:84px}
+.flip{display:inline-block}
+[dir="rtl"] .flip{transform:scaleX(-1)}
+@media (prefers-reduced-motion: reduce){.btn:hover{transform:none}}
+
+/* hero */
+.hero{padding-block:56px 24px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:22px}
+.announce{display:inline-flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:5px 14px 5px 5px;font-size:14px;color:var(--ink);text-decoration:none}
+[dir="rtl"] .announce{padding:5px 5px 5px 14px}
+.announce b{background:var(--olive-soft);color:var(--olive-ink);border-radius:999px;padding:2px 10px;font-weight:600;font-size:12px}
+.announce:hover{border-color:var(--olive)}
+.hero h1{font-size:clamp(36px,6.4vw,72px);line-height:1.04;letter-spacing:-.035em;max-width:16ch}
+html[lang="ar"] .hero h1{line-height:1.3;letter-spacing:0;max-width:18ch}
+.hero h1 .accent{color:var(--teal)}
+.hero .lead{margin-inline:auto}
+
+/* dunes + product UI */
+.dunes{position:relative;border-radius:32px;overflow:hidden;padding:48px 20px 56px;background:
+  radial-gradient(70% 90% at 10% 0%,var(--dune-a),transparent 70%),
+  radial-gradient(60% 80% at 100% 20%,var(--dune-b),transparent 70%),var(--sand)}
+.dunes svg.waves{position:absolute;inset-inline:0;bottom:0;width:100%;height:55%;pointer-events:none}
+.ui{position:relative;max-width:720px;margin-inline:auto;background:var(--surface);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);overflow:hidden;text-align:start}
+.ui-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.ui-head strong{font-family:var(--font-display);font-weight:500;font-size:16px}
+.live{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--teal-ink);white-space:nowrap}
+.live i{width:8px;height:8px;border-radius:50%;background:var(--teal);animation:pulse 1.8s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--teal) 55%,transparent)}100%{box-shadow:0 0 0 9px transparent}}
+.item{display:grid;grid-template-columns:auto 1fr auto;gap:4px 12px;padding:13px 18px;border-bottom:1px solid var(--line);align-items:center}
+.item:last-child{border-bottom:0}
+.sev{width:10px;height:10px;border-radius:50%}
+.sev.risk{background:var(--risk)} .sev.warn{background:var(--warn)} .sev.ok{background:var(--ok)} .sev.olive{background:var(--olive)}
+.item .msg{font-size:15px;min-width:0}
+.item .msg small{display:block;font-size:12px;color:var(--muted)}
+.modtag{font-weight:600;color:var(--teal-ink);background:var(--teal-soft);border-radius:999px;padding:3px 10px;border:0;cursor:pointer;font-size:12px;font-family:inherit;white-space:nowrap}
+.modtag:hover{background:var(--teal);color:var(--on-teal)}
+.item.enter{animation:enter .45s ease-out}
+@keyframes enter{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:none}}
+.ui-foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;padding:10px 18px;background:var(--sand);font-size:13px;color:var(--muted)}
+@media (prefers-reduced-motion: reduce){.live i,.item.enter{animation:none}}
+@media (max-width:520px){.item{grid-template-columns:auto 1fr}.item .modtag{grid-column:2;justify-self:start}}
+
+.strip{display:flex;flex-direction:column;align-items:center;gap:14px;padding-block:28px 8px;text-align:center}
+.strip p{font-size:14px;color:var(--muted)}
+.strip ul{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 34px;list-style:none;margin:0;padding:0}
+.strip li{font-family:var(--font-display);font-size:19px;font-weight:500;color:color-mix(in srgb,var(--ink) 55%,var(--bg))}
+
+/* sections */
+section{scroll-margin-top:70px}
+.sec{padding-block:72px}
+.sec-head{display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px;margin-bottom:36px}
+.sec-head h2{font-size:clamp(28px,4vw,46px);line-height:1.1;letter-spacing:-.025em;max-width:20ch}
+html[lang="ar"] .sec-head h2{line-height:1.35;letter-spacing:0}
+.sec-head .lead{margin-inline:auto}
+
+.pillars{display:grid;gap:16px;grid-template-columns:1fr}
+@media (min-width:820px){.pillars{grid-template-columns:repeat(3,1fr)}}
+.pillar{background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:8px}
+.pillar .big{font-family:var(--font-display);font-size:64px;font-weight:300;line-height:1;letter-spacing:-.04em;color:var(--teal)}
+.pillar .big small{font-size:22px;letter-spacing:0;margin-inline-start:6px;color:var(--muted);font-weight:400}
+.pillar h3{font-size:19px;margin-top:8px}
+.pillar p{color:var(--muted);font-size:15px}
+
+/* filter + modules */
+.filter{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
+.chip{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:8px 16px;font-size:14px;cursor:pointer;transition:all .2s}
+.chip:hover{border-color:var(--teal)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.rolebar{max-width:760px;margin:18px auto 28px;text-align:center;min-height:52px}
+.rolebar .q{font-family:var(--font-display);font-size:18px;line-height:1.55;font-weight:400}
+.rolebar .q small{display:block;font-family:var(--font-body);font-size:13px;font-weight:600;color:var(--risk);margin-bottom:2px}
+.rolebar .hint{color:var(--muted);font-size:15px}
+.rolebar .count{display:inline-block;margin-top:8px;font-size:13px;font-weight:600;color:var(--teal-ink);background:var(--teal-soft);border-radius:999px;padding:3px 12px}
+
+.grid-mods{display:grid;gap:16px;grid-template-columns:1fr}
+@media (min-width:660px){.grid-mods{grid-template-columns:1fr 1fr}}
+@media (min-width:1040px){.grid-mods{grid-template-columns:repeat(3,1fr)}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:10px;display:flex;flex-direction:column;min-width:0;transition:opacity .35s,filter .35s,border-color .35s,box-shadow .35s;scroll-margin-top:90px}
+.card.on{border-color:var(--teal);box-shadow:0 0 0 3px var(--teal-soft)}
+.card.dim{opacity:.4;filter:grayscale(1)}
+.card.dim:hover{opacity:.7}
+.card.flash{border-color:var(--teal);box-shadow:0 0 0 4px var(--teal-soft)}
+.shot{position:relative;border-radius:18px;padding:26px 18px;overflow:hidden;background:radial-gradient(80% 100% at 0% 0%,var(--dune-a),transparent 70%),radial-gradient(70% 90% at 100% 100%,var(--dune-b),transparent 70%),var(--sand)}
+.card.olive .shot{background:radial-gradient(80% 100% at 0% 0%,var(--dune-b),transparent 70%),radial-gradient(70% 90% at 100% 100%,var(--dune-c),transparent 70%),var(--sand)}
+.mini{background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:12px 14px;display:grid;grid-template-columns:auto 1fr;gap:4px 10px;align-items:center}
+.mini .sev{grid-row:span 2;align-self:start;margin-top:6px}
+.mini small{font-size:11px;font-weight:600;color:var(--muted)}
+.mini p{font-size:14px;line-height:1.45}
+.body{padding:18px 14px 12px;display:flex;flex-direction:column;gap:12px;flex:1}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.mode{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;border-radius:999px;padding:2px 10px;white-space:nowrap}
+.mode.auto{background:var(--teal-soft);color:var(--teal-ink)}
+.mode.auto i{width:6px;height:6px;border-radius:50%;background:var(--teal);animation:pulse 1.8s infinite}
+.mode.demand{background:var(--sand);color:var(--muted);border:1px solid var(--line)}
+@media (prefers-reduced-motion: reduce){.mode.auto i{animation:none}}
+.card h3{font-size:26px;line-height:1.15;letter-spacing:-.02em}
+html[lang="ar"] .card h3{letter-spacing:0;line-height:1.35}
+.alt{font-size:14px;color:var(--muted)}
+.alt span{color:var(--teal-ink);font-family:var(--font-display)}
+.card.olive .alt span,.card.olive .label{color:var(--olive-ink)}
+.card.olive .label::before{background:var(--olive)}
+.val{font-size:16px;line-height:1.5}
+.foryou{background:var(--teal-soft);border-radius:14px;padding:12px 14px;font-size:15px;line-height:1.55}
+.foryou b{display:block;font-size:12px;color:var(--teal-ink);margin-bottom:2px}
+.flist{list-style:none;margin:0;padding:0;display:grid;gap:7px}
+.flist li{display:grid;grid-template-columns:16px 1fr;gap:8px;font-size:14px;align-items:start}
+.flist svg{margin-top:4px;color:var(--teal)}
+.flist li.soon{color:var(--muted)}
+.flist li.soon svg{color:var(--olive)}
+.soon-pill{display:inline-block;font-size:11px;font-weight:600;background:var(--olive-soft);color:var(--olive-ink);border-radius:999px;padding:0 8px;margin-inline-start:6px;vertical-align:1px}
+details{margin-top:auto;border-top:1px solid var(--line);padding-top:10px}
+summary{cursor:pointer;font-size:14px;font-weight:600;color:var(--ink);list-style:none;display:flex;align-items:center;gap:6px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";margin-inline-start:auto;font-size:18px;color:var(--muted)}
+details[open] summary::after{content:"−"}
+.dbody{display:grid;gap:10px;padding-top:10px}
+.wwh > div{display:grid;grid-template-columns:84px 1fr;gap:8px;padding-block:6px;border-bottom:1px solid var(--line);font-size:14px}
+.wwh dt{font-weight:600;color:var(--teal-ink)}
+.wwh dd{min-width:0}
+.fdesc{list-style:none;padding:0;margin:0;display:grid;gap:6px;font-size:13px;color:var(--muted)}
+.fdesc b{color:var(--ink);font-weight:600}
+.fdesc code{font-family:var(--font-mono);font-size:12px}
+
+/* cta */
+.cta{position:relative;overflow:hidden;background:var(--ink);color:var(--bg);border-radius:32px;padding:40px 24px;display:grid;gap:26px}
+@media (min-width:900px){.cta{grid-template-columns:1fr 1.1fr;padding:52px}}
+.cta h2{color:var(--bg);font-size:clamp(28px,3.6vw,42px);line-height:1.15;letter-spacing:-.02em}
+html[lang="ar"] .cta h2{letter-spacing:0;line-height:1.35}
+.cta p{color:color-mix(in srgb,var(--bg) 70%,var(--ink))}
+.cta hr{grid-column:1/-1;border:0;border-top:1px solid color-mix(in srgb,var(--bg) 16%,var(--ink));margin:0}
+.trust{grid-column:1/-1;display:grid;gap:12px;grid-template-columns:1fr}
+@media (min-width:760px){.trust{grid-template-columns:repeat(3,1fr)}}
+.trust div{display:flex;gap:10px;align-items:flex-start;font-size:15px;color:color-mix(in srgb,var(--bg) 82%,var(--ink))}
+.trust svg{flex:none;margin-top:3px;color:var(--teal)}
+.form{display:grid;gap:10px;grid-template-columns:1fr}
+@media (min-width:560px){.form{grid-template-columns:1fr 1fr}}
+.form label{display:grid;gap:4px;font-size:13px;font-weight:600;color:color-mix(in srgb,var(--bg) 78%,var(--ink));min-width:0}
+.form input,.form select{width:100%;min-width:0;background:color-mix(in srgb,var(--bg) 7%,var(--ink));border:1px solid color-mix(in srgb,var(--bg) 20%,var(--ink));color:var(--bg);border-radius:12px;padding:11px 12px;font:inherit;font-weight:400;font-size:15px}
+.form .full{grid-column:1/-1}
+.form .btn{background:var(--teal);color:var(--on-teal)}
+.form .note{font-size:14px;color:var(--bg);background:color-mix(in srgb,var(--teal) 30%,var(--ink));border-radius:12px;padding:10px 12px}
+footer{padding-block:28px;color:var(--muted);font-size:13px}
+</style>
+
+<header class="nav">
+  <div class="wrap flex items-center justify-between gap-4 py-3">
+    <a href="#top" class="brand" aria-label="Nayeb">
+      <svg width="34" height="34" viewBox="68 88 254 258" aria-hidden="true"><g transform="matrix(1 0 0 1.0059 1 1.435)" stroke="var(--logo-stroke)" stroke-width="5"><path d="M217.148 108.312 306.254 185.986C312.831 191.715 313.767 201.599 308.376 208.462L219.27 321.979C209.661 334.234 189.98 327.432 189.98 311.858L189.98 120.667C189.98 106.602 206.541 99.0646 217.148 108.312Z" fill="#69895D"/><path d="M165.295 108.312 254.401 185.986C260.977 191.715 261.913 201.599 256.522 208.462L215.089 261.252 167.416 321.979C157.807 334.234 138.126 327.432 138.126 311.858L138.126 120.667C138.139 106.602 154.7 99.0646 165.295 108.312Z" fill="#FBF9F1"/><path d="M101.298 103.383 190.404 181.057C196.981 186.785 197.917 196.669 192.526 203.533L103.42 317.049C93.8106 329.304 74.13 322.503 74.13 306.928L74.13 115.738C74.1424 101.673 90.6907 94.1476 101.298 103.383Z" fill="#00A99D"/></g></svg>
+      <span>نائب</span><small>Nayeb</small>
+    </a>
+    <nav class="hidden md:flex items-center gap-8">
+      <a class="navlink" href="#modules" data-i18n="nav_mods">Modules</a>
+      <a class="navlink" href="#why" data-i18n="nav_why">Why Nayeb</a>
+      <a class="navlink" href="#demo" data-i18n="nav_sec">Security</a>
     </nav>
+    <div class="flex items-center gap-2">
+      <button id="langBtn" class="btn btn-light btn-sm lang-btn" type="button">العربية</button>
+      <a href="#demo" class="btn btn-dark btn-sm hidden sm:inline-flex" data-i18n="cta_book">Book a diagnostic</a>
+    </div>
+  </div>
+</header>
 
-    <!-- Clean Hero Section -->
-    <section class="pt-32 pb-16 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto text-center">
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 text-gray-900 lang-en">
-            The AI Intelligence Overlay for Your ERP
-        </h1>
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 text-gray-900 lang-ar">
-            طبقة الذكاء الاصطناعي لنظامك المالي
-        </h1>
-        
-        <p class="text-lg md:text-xl text-gray-600 mb-8 lang-en">
-            Nayeb is a read-only diagnostic overlay that sits on top of your existing ERP. It translates raw data into actionable truth—revealing hidden budgets, exposing true vendor costs, enforcing Saudi compliance (ZATCA/Nitaqat), and stopping financial leakage before it happens. Zero integration risk.
-        </p>
-        <p class="text-lg md:text-xl text-gray-600 mb-8 lang-ar">
-            "نائب" هو طبقة تحليلية (للقراءة فقط) تعمل فوق نظام الـ ERP الخاص بك. يترجم البيانات الخام إلى حقائق قابلة للتنفيذ—يكشف الميزانيات المخفية، ويوضح التكاليف الحقيقية للموردين، ويفرض الامتثال لاشتراطات المملكة (الزكاة ونطاقات)، ويوقف التسرب المالي قبل حدوثه. وبدون أي مخاطر في التكامل البرمجي.
-        </p>
-    </section>
+<main id="top">
+  <section class="wrap hero">
+    <a class="announce" href="#m-save"><b data-i18n="ann_b">Coming soon</b><span data-i18n="ann">External market benchmarking for Draft and Save</span><span class="flip" aria-hidden="true">→</span></a>
+    <h1 id="heroTitle">The AI Intelligence <span class="accent">Overlay</span> for Your ERP</h1>
+    <p class="lead" data-i18n="hero_sub">Your ERP knows more than it tells you. Nayeb reads it, never writes to it, and surfaces hidden budgets, true vendor costs, collusion and ZATCA or Nitaqat gaps before a riyal leaves the company.</p>
+    <div class="flex flex-wrap justify-center gap-3">
+      <a href="#demo" class="btn btn-dark" data-i18n="cta_book">Book a diagnostic</a>
+      <a href="#modules" class="btn btn-light"><span data-i18n="cta_mods">Explore the modules</span> <span class="flip" aria-hidden="true">→</span></a>
+    </div>
+  </section>
 
-    <!-- Product Modules Section (Detailed) -->
-    <section id="modules" class="py-16 bg-white border-t border-gray-100">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
-                
-                <!-- Nayeb Draft -->
-                <div class="bg-nayebOffWhite p-8 rounded-2xl border border-gray-200 shadow-sm">
-                    <h3 class="text-2xl font-bold text-gray-900 mb-1 lang-en">Nayeb Draft <span class="text-gray-400 font-normal">· Smart Intake</span></h3>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-1 lang-ar">نائب صُغ <span class="text-gray-400 font-normal">· الطلب الذكي</span></h3>
-                    <p class="text-nayebTeal font-semibold mb-6 lang-en">Aligns business needs with actual budgets.</p>
-                    <p class="text-nayebTeal font-semibold mb-6 lang-ar">مواءمة احتياجات العمل مع الميزانيات الفعلية.</p>
-                    
-                    <ul class="feature-list text-gray-700 text-sm space-y-2 lang-en">
-                        <li><strong>Historical SOW Templates:</strong> Extracts technical specs and SLAs from historically successful, zero-change-order ERP PRs.</li>
-                        <li><strong>True Budget Translator:</strong> Applies accrual accounting logic to active POs, showing business units their available "Hidden Funds" for the current year.</li>
-                        <li><strong>ERP-Ready Outputs:</strong> Generates clean, compliant PR drafts ready for immediate ERP upload.</li>
-                        <li class="mt-4"><span class="bg-blue-100 text-blue-800 text-xs font-bold px-2 py-1 rounded">Coming Soon</span> <strong>External Market Benchmarking:</strong> Provides realistic budget estimates for net-new requests based on live industry averages.</li>
-                    </ul>
-                    <ul class="feature-list text-gray-700 text-sm space-y-2 lang-ar">
-                        <li><strong>نماذج كراسات الشروط التاريخية:</strong> استخراج المواصفات الفنية واتفاقيات مستوى الخدمة من طلبات الشراء الناجحة السابقة.</li>
-                        <li><strong>مترجم الميزانية الحقيقية:</strong> يطبق منطق المحاسبة الاستحقاقية على أوامر الشراء الفعالة، ليعرض للوحدات الميزانية المتبقية الفعلية لهذا العام.</li>
-                        <li><strong>مخرجات جاهزة للنظام:</strong> إنشاء مسودات طلبات شراء نظيفة ومتوافقة وجاهزة للرفع المباشر.</li>
-                        <li class="mt-4"><span class="bg-blue-100 text-blue-800 text-xs font-bold px-2 py-1 rounded">قريباً</span> <strong>المقارنة المعيارية للسوق:</strong> توفير تقديرات ميزانية واقعية للطلبات الجديدة بناءً على متوسطات السوق الحية.</li>
-                    </ul>
-                </div>
-
-                <!-- Nayeb Vendor -->
-                <div class="bg-nayebOffWhite p-8 rounded-2xl border border-gray-200 shadow-sm">
-                    <h3 class="text-2xl font-bold text-gray-900 mb-1 lang-en">Nayeb Vendor <span class="text-gray-400 font-normal">· Compliance</span></h3>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-1 lang-ar">نائب المورّد <span class="text-gray-400 font-normal">· التقييم والمطابقة</span></h3>
-                    <p class="text-nayebOlive font-semibold mb-6 lang-en">Ranks vendors on reality, not just bids.</p>
-                    <p class="text-nayebOlive font-semibold mb-6 lang-ar">تقييم الموردين بناءً على الواقع، وليس العروض فقط.</p>
-                    
-                    <ul class="feature-list text-gray-700 text-sm space-y-2 lang-en">
-                        <li><strong>TCO Scorecards:</strong> Evaluates vendors based on actual historical lead times, delay rates, and change-order frequency, overriding marketing claims.</li>
-                        <li><strong>National Compliance Radar:</strong> Instantly highlights a vendor’s Local Content (المحتوى المحلي) score, Saudization (Nitaqat) tier, and ZATCA e-invoicing history.</li>
-                        <li><strong>Automated Vendor Debriefs:</strong> Generates read-only PDF reports for losing vendors, explaining exactly where their bid fell short to improve future supplier relationships.</li>
-                    </ul>
-                    <ul class="feature-list text-gray-700 text-sm space-y-2 lang-ar">
-                        <li><strong>بطاقات التكلفة الإجمالية:</strong> تقييم الموردين بناءً على أوقات التسليم الفعلية، ومعدلات التأخير، وتكرار أوامر التغيير السابقة.</li>
-                        <li><strong>رادار الامتثال الوطني:</strong> يبرز فوراً نقاط المحتوى المحلي للمورد، وتصنيف نطاقات، وسجل التزامه بفوترة الزكاة (ZATCA).</li>
-                        <li><strong>تقارير إفادة تلقائية:</strong> إصدار تقارير PDF تشرح للموردين الخاسرين أسباب خسارة المناقصة لتحسين جودة العروض المستقبلية.</li>
-                    </ul>
-                </div>
-
-                <!-- Nayeb Save -->
-                <div class="bg-nayebOffWhite p-8 rounded-2xl border border-gray-200 shadow-sm">
-                    <h3 class="text-2xl font-bold text-gray-900 mb-1 lang-en">Nayeb Save <span class="text-gray-400 font-normal">· Commercial Leverage</span></h3>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-1 lang-ar">نائب وفّر <span class="text-gray-400 font-normal">· القوة التجارية</span></h3>
-                    <p class="text-nayebTeal font-semibold mb-6 lang-en">Data ammunition to negotiate and cut costs.</p>
-                    <p class="text-nayebTeal font-semibold mb-6 lang-ar">بيانات دقيقة للتفاوض وخفض التكاليف.</p>
-                    
-                    <ul class="feature-list text-gray-700 text-sm space-y-2 lang-en">
-                        <li><strong>Internal Price Variance:</strong> Cross-references proposed bids against the exact prices paid for the same items in your ERP previously.</li>
-                        <li><strong>Leakage Detection:</strong> Identifies unclaimed rebates and alerts management to bad contracts 60 days before they auto-renew.</li>
-                        <li class="mt-4"><span class="bg-blue-100 text-blue-800 text-xs font-bold px-2 py-1 rounded">Coming Soon</span> <strong>External Market Benchmarking:</strong> Compares vendor bids against anonymized market averages to expose when you are overpaying compared to industry standards.</li>
-                    </ul>
-                    <ul class="feature-list text-gray-700 text-sm space-y-2 lang-ar">
-                        <li><strong>تباين الأسعار الداخلي:</strong> مقارنة العروض المقدمة بالأسعار الفعلية المدفوعة لنفس الأصناف في النظام مسبقاً.</li>
-                        <li><strong>كشف التسرب المالي:</strong> تحديد الخصومات غير المطالب بها والتنبيه بالعقود قبل 60 يوماً من تجددها التلقائي.</li>
-                        <li class="mt-4"><span class="bg-blue-100 text-blue-800 text-xs font-bold px-2 py-1 rounded">قريباً</span> <strong>المقارنة المعيارية للسوق:</strong> مقارنة عروض الموردين بمتوسطات السوق لكشف الموردين الذين يفرضون أسعاراً أعلى من المعايير الحالية.</li>
-                    </ul>
-                </div>
-
-                <!-- Nayeb Verify -->
-                <div class="bg-nayebOffWhite p-8 rounded-2xl border border-gray-200 shadow-sm">
-                    <h3 class="text-2xl font-bold text-gray-900 mb-1 lang-en">Nayeb Verify <span class="text-gray-400 font-normal">· Quality Control</span></h3>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-1 lang-ar">نائب تحقّق <span class="text-gray-400 font-normal">· مراقبة الجودة</span></h3>
-                    <p class="text-nayebOlive font-semibold mb-6 lang-en">Ensures you actually get what you paid for.</p>
-                    <p class="text-nayebOlive font-semibold mb-6 lang-ar">يضمن استلامك لما دفعت ثمنه فعلياً.</p>
-                    
-                    <ul class="feature-list text-gray-700 text-sm space-y-2 lang-en">
-                        <li><strong>The 3-Way Match Detective:</strong> Automatically cross-checks Purchase Orders, Goods Receipts, and Invoices.</li>
-                        <li><strong>Phantom Inventory Alerts:</strong> Instantly flags items that have been invoiced by the vendor but have no corresponding receipt logged in the ERP.</li>
-                        <li><strong>Targeted Spot-Checks:</strong> Analyzes historical vendor failure rates to suggest exactly which specific line items operations should physically verify.</li>
-                    </ul>
-                    <ul class="feature-list text-gray-700 text-sm space-y-2 lang-ar">
-                        <li><strong>محقق المطابقة الثلاثية:</strong> مطابقة تلقائية بين أوامر الشراء، وإيصالات الاستلام، والفواتير.</li>
-                        <li><strong>تنبيهات المخزون الوهمي:</strong> رصد الأصناف التي تمت فوترتها ولم يُسجل استلامها في النظام.</li>
-                        <li><strong>توجيه الفحص الميداني:</strong> تحليل معدلات فشل الموردين السابقة لاقتراح الأصناف الدقيقة التي تتطلب فحصاً مادياً من قبل فريق العمليات.</li>
-                    </ul>
-                </div>
-
-                <!-- Nayeb Protect -->
-                <div class="bg-nayebOffWhite p-8 rounded-2xl border border-gray-200 shadow-sm">
-                    <h3 class="text-2xl font-bold text-gray-900 mb-1 lang-en">Nayeb Protect <span class="text-gray-400 font-normal">· Financial Shield</span></h3>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-1 lang-ar">نائب احمِ <span class="text-gray-400 font-normal">· الدرع المالي</span></h3>
-                    <p class="text-nayebTeal font-semibold mb-6 lang-en">Stops wrong payments right before the AP run.</p>
-                    <p class="text-nayebTeal font-semibold mb-6 lang-ar">يوقف الدفعات الخاطئة قبل دورة الدفع.</p>
-                    
-                    <ul class="feature-list text-gray-700 text-sm space-y-2 lang-en">
-                        <li><strong>Duplicate Invoice Radar:</strong> Catches double-billing attempts even if submitted on different dates or with slightly modified invoice numbers.</li>
-                        <li><strong>Split Order Detection:</strong> Identifies POs that were maliciously split into smaller amounts to bypass executive approval limits.</li>
-                        <li><strong>Fraud Prevention:</strong> Flags suspicious, unverified changes to vendor bank routing details prior to releasing funds.</li>
-                    </ul>
-                    <ul class="feature-list text-gray-700 text-sm space-y-2 lang-ar">
-                        <li><strong>رادار الفواتير المكررة:</strong> التقاط محاولات الفوترة المزدوجة حتى وإن قُدمت بتواريخ مختلفة أو بأرقام فواتير معدلة قليلاً.</li>
-                        <li><strong>رصد تجزئة الطلبات:</strong> تحديد أوامر الشراء التي تم تقسيمها للتحايل على صلاحيات الاعتماد المالي.</li>
-                        <li><strong>منع الاحتيال البنكي:</strong> التنبيه عند حدوث تغييرات مفاجئة وغير معتمدة في تفاصيل الحسابات البنكية للموردين قبل تحويل الأموال.</li>
-                    </ul>
-                </div>
-
-                <!-- Nayeb Audit Trail -->
-                <div class="bg-nayebOffWhite p-8 rounded-2xl border border-gray-200 shadow-sm">
-                    <h3 class="text-2xl font-bold text-gray-900 mb-1 lang-en">Audit Trail <span class="text-gray-400 font-normal">· Oversight</span></h3>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-1 lang-ar">سجل نائب <span class="text-gray-400 font-normal">· الرقابة التنفيذية</span></h3>
-                    <p class="text-nayebOlive font-semibold mb-6 lang-en">Tracks organizational risk and bypassed warnings.</p>
-                    <p class="text-nayebOlive font-semibold mb-6 lang-ar">يتتبع المخاطر التنظيمية والتنبيهات المتجاوزة.</p>
-                    
-                    <ul class="feature-list text-gray-700 text-sm space-y-2 lang-en">
-                        <li><strong>Silent Exception Logging:</strong> Automatically tracks every instance where a user proceeds in the ERP despite a Nayeb red-flag warning.</li>
-                        <li><strong>Mandatory Reason Codes:</strong> Forces users to justify bypassed alerts by selecting a formal reason (e.g., Sole Source, Executive Override, Emergency).</li>
-                        <li><strong>Immutable Risk Ledger:</strong> Creates a transparent, unalterable report for executives to review compliance behavior across all departments.</li>
-                    </ul>
-                    <ul class="feature-list text-gray-700 text-sm space-y-2 lang-ar">
-                        <li><strong>تسجيل التجاوزات بصمت:</strong> التتبع التلقائي لكل حالة يتجاهل فيها المستخدم تنبيهاً عالي الخطورة من النظام.</li>
-                        <li><strong>رموز الأسباب الإلزامية:</strong> إجبار المستخدمين على تبرير تجاوز التنبيهات باختيار سبب رسمي (مثل: مورد حصري، توجيه إداري، طوارئ).</li>
-                        <li><strong>سجل مخاطر غير قابل للتعديل:</strong> إنشاء تقرير شفاف ونهائي للإدارة العليا لمراجعة سلوك الامتثال عبر جميع الإدارات.</li>
-                    </ul>
-                </div>
-
-            </div>
+  <div class="wrap">
+    <div class="dunes">
+      <svg class="waves" viewBox="0 0 1200 300" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0 170 C 220 90, 420 220, 640 150 S 1020 70, 1200 140 L1200 300 L0 300Z" fill="var(--dune-a)" opacity=".7"/>
+        <path d="M0 230 C 260 170, 520 280, 760 220 S 1080 180, 1200 220 L1200 300 L0 300Z" fill="var(--dune-b)" opacity=".85"/>
+        <path d="M0 280 C 300 240, 620 300, 900 265 S 1140 255, 1200 270 L1200 300 L0 300Z" fill="var(--dune-c)"/>
+      </svg>
+      <div class="ui">
+        <div class="ui-head">
+          <strong data-i18n="feed_t">What Nayeb found this morning</strong>
+          <span class="live"><i></i><span data-i18n="feed_live">Example feed</span></span>
         </div>
-    </section>
+        <div id="feed"></div>
+        <div class="ui-foot"><span data-i18n="feed_tip">Tap a module to see it</span><span data-i18n="feed_zero">ERP changes: 0</span></div>
+      </div>
+    </div>
+    <div class="strip">
+      <p data-i18n="strip_p">Built for Saudi enterprises where compliance matters</p>
+      <ul id="stripList"></ul>
+    </div>
+  </div>
 
-    <!-- Footer -->
-    <footer class="bg-white text-gray-500 py-12 border-t border-gray-200 text-center">
-        <div class="max-w-7xl mx-auto px-4">
-            <img src="assets/nayeblogo.svg" alt="Nayeb Logo" class="h-10 w-auto mb-4 mx-auto opacity-50 grayscale">
-            <p class="text-sm lang-en">© 2026 Nayeb Intelligence. All rights reserved. Built for modern ERP environments.</p>
-            <p class="text-sm lang-ar">© 2026 ذكاء نائب. جميع الحقوق محفوظة. صُمم لبيئات الأنظمة المالية الحديثة.</p>
-        </div>
-    </footer>
+  <section id="why" class="sec wrap">
+    <div class="sec-head">
+      <span class="label" data-i18n="why_l">Why Nayeb</span>
+      <h2 data-i18n="why_h">Catch it before it costs you</h2>
+    </div>
+    <div class="pillars">
+      <div class="pillar"><div class="big">0</div><h3 data-i18n="p1_t">Writes to your ERP</h3><p data-i18n="p1_d">Nayeb reads only. No migration, no new workflow, and an easier sign-off from IT.</p></div>
+      <div class="pillar"><div class="big">5<small>/ 6</small></div><h3 data-i18n="p2_t">Checkpoints, PR to payment</h3><p data-i18n="p2_d">Five stage checks, plus one audit ledger watching all of them.</p></div>
+      <div class="pillar"><div class="big">60</div><h3 data-i18n="p3_t">Days' warning before renewals</h3><p data-i18n="p3_d">Time to renegotiate and claim rebates before a contract rolls over at the old price.</p></div>
+    </div>
+  </section>
 
-    <!-- Localization Script -->
-    <script>
-        function toggleLanguage() {
-            const htmlTag = document.documentElement;
-            if (htmlTag.lang === "en") {
-                htmlTag.lang = "ar";
-                htmlTag.dir = "rtl";
-            } else {
-                htmlTag.lang = "en";
-                htmlTag.dir = "ltr";
-            }
-        }
-    </script>
-</body>
-</html>
+  <section id="modules" class="sec band" style="padding-top:24px">
+    <div class="wrap">
+      <div class="sec-head" style="margin-bottom:22px">
+        <span class="label" data-i18n="m_l">The modules</span>
+        <h2 data-i18n="m_h">Six modules. Pick your role.</h2>
+        <p class="lead" data-i18n="m_lead">Your modules light up and show exactly how they help you.</p>
+      </div>
+      <div class="filter" id="filter" role="group" aria-label="Filter by role"></div>
+      <div class="rolebar" id="rolebar" aria-live="polite"></div>
+      <div class="grid-mods" id="mods"></div>
+    </div>
+  </section>
+
+  <section id="demo" class="wrap" style="padding-block:24px 36px">
+    <div class="cta">
+      <div class="flex flex-col gap-4 min-w-0">
+        <h2 data-i18n="c_h2">See what your ERP already knows</h2>
+        <p data-i18n="c_p">Book a diagnostic. We walk through each module with the teams that would use it.</p>
+      </div>
+      <form class="form" id="demoForm" novalidate>
+        <label><span data-i18n="fm_name">Full name</span><input id="fName" autocomplete="name"></label>
+        <label><span data-i18n="fm_co">Company</span><input id="fCo" autocomplete="organization"></label>
+        <label><span data-i18n="fm_email">Work email</span><input id="fEmail" type="email" autocomplete="email"></label>
+        <label><span data-i18n="fm_role">Your role</span><select id="fRole"></select></label>
+        <button class="btn full" type="submit" data-i18n="fm_go">Request diagnostic</button>
+        <p class="note full" id="formNote" hidden></p>
+      </form>
+      <hr>
+      <div class="trust">
+        <div><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3L4 6v6c0 5 3.4 8 8 9 4.6-1 8-4 8-9V6z"/><path d="M9 12l2 2 4-4"/></svg><span data-i18n="tr1">Read-only. Nayeb can't create, change or delete an ERP record.</span></div>
+        <div><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16M12 4v16"/></svg><span data-i18n="tr2">No new system. Teams keep working in the ERP they know.</span></div>
+        <div><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg><span data-i18n="tr3">ZATCA, Nitaqat and Local Content built into every vendor score.</span></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap flex flex-wrap justify-between gap-3">
+  <span>© 2026 Nayeb · نائب</span>
+  <span data-i18n="foot">AI intelligence overlay for ERP · Built for Saudi enterprises</span>
+</footer>
+
+<script>
+const I = {
+  nav_mods:{en:"Modules",ar:"الوحدات"},
+  nav_why:{en:"Why Nayeb",ar:"ليش نائب"},
+  nav_sec:{en:"Security",ar:"الأمان"},
+  cta_book:{en:"Book a diagnostic",ar:"احجز جلسة تشخيص"},
+  cta_mods:{en:"Explore the modules",ar:"تعرّف على الوحدات"},
+  ann_b:{en:"Coming soon",ar:"قريباً"},
+  ann:{en:"External market benchmarking for Draft and Save",ar:"المقارنة بأسعار السوق في نائب صُغ ونائب وفّر"},
+  hero_sub:{en:"Your ERP knows more than it tells you. Nayeb reads it, never writes to it, and surfaces hidden budgets, true vendor costs, collusion and ZATCA or Nitaqat gaps before a riyal leaves the company.",
+            ar:"نظامك يعرف أكثر من اللي يقوله لك. نائب يقرأ الـ ERP بدون ما يعدّل فيه شي، ويطلّع لك الميزانيات المخفية، وتكلفة الموردين الحقيقية، والتواطؤ، وثغرات زاتكا ونطاقات، قبل ما يطلع ريال من الشركة."},
+  feed_t:{en:"What Nayeb found this morning",ar:"وش لقى نائب الصباح"},
+  feed_live:{en:"Example feed",ar:"مثال توضيحي"},
+  feed_tip:{en:"Tap a module to see it",ar:"اضغط اسم الوحدة لتشوفها"},
+  feed_zero:{en:"ERP changes: 0",ar:"تعديلات على الـ ERP: 0"},
+  strip_p:{en:"Built for Saudi enterprises where compliance matters",ar:"مصمّم للشركات السعودية اللي يهمها الامتثال"},
+  why_l:{en:"Why Nayeb",ar:"ليش نائب"},
+  why_h:{en:"Catch it before it costs you",ar:"اكتشفها قبل ما تكلّفك"},
+  p1_t:{en:"Writes to your ERP",ar:"تعديل على الـ ERP"},
+  p1_d:{en:"Nayeb reads only. No migration, no new workflow, and an easier sign-off from IT.",ar:"نائب يقرأ بس. لا ترحيل بيانات، ولا إجراءات جديدة، وموافقة تقنية المعلومات أسهل."},
+  p2_t:{en:"Modules alert you on their own",ar:"وحدات تنبّهك من نفسها"},
+  p2_d:{en:"Nobody has to remember to check. Nayeb flags the issue as soon as it shows up in your ERP data.",ar:"ما تحتاج أحد يتذكّر يراجع. نائب ينبّه أول ما تبان المشكلة في بيانات الـ ERP."},
+  auto:{en:"Proactive",ar:"استباقي"},
+  demand:{en:"On demand",ar:"عند الطلب"},
+  p3_t:{en:"Days' warning before renewals",ar:"يوم تنبيه قبل التجديد"},
+  p3_d:{en:"Time to renegotiate and claim rebates before a contract rolls over at the old price.",ar:"وقت كافي تعيد فيه التفاوض وتطالب بالخصومات قبل ما يتجدد العقد بالسعر القديم."},
+  m_l:{en:"The modules",ar:"الوحدات"},
+  m_h:{en:"Six modules. Pick your role.",ar:"ست وحدات. اختر دورك."},
+  m_lead:{en:"Your modules light up and show exactly how they help you.",ar:"تنوّر لك الوحدات اللي تخصك، وتوضّح لك بالضبط وش تفيدك فيه."},
+  all:{en:"All modules",ar:"كل الوحدات"},
+  hint:{en:"Choose your role above to see which modules are built for you.",ar:"اختر دورك من فوق وتشوف الوحدات المصمّمة لك."},
+  pain:{en:"Sound familiar?",ar:"يصير عندكم؟"},
+  count1:{en:"1 module for you",ar:"وحدة مخصّصة لك"},
+  count2:{en:"2 modules for you",ar:"وحدتين مخصّصة لك"},
+  countN:{en:"{n} modules for you",ar:"{n} وحدات مخصّصة لك"},
+  foryou:{en:"For you as {r}",ar:"وش يفيدك كـ{r}"},
+  details:{en:"Who · Why · How",ar:"لمن · ليش · وين يشتغل"},
+  who:{en:"Who",ar:"لمن؟"}, why:{en:"Why",ar:"ليش؟"}, how:{en:"How",ar:"وين يشتغل؟"},
+  sig:{en:"Example alert",ar:"مثال تنبيه"},
+  soon:{en:"Coming soon",ar:"قريباً"},
+  c_h2:{en:"See what your ERP already knows",ar:"خلّ نظامك يقولك اللي يعرفه"},
+  c_p:{en:"Book a diagnostic. We walk through each module with the teams that would use it.",ar:"احجز جلسة تشخيص، ونمرّ على كل وحدة مع الفرق اللي بتستخدمها."},
+  fm_name:{en:"Full name",ar:"الاسم"},
+  fm_co:{en:"Company",ar:"الشركة"},
+  fm_email:{en:"Work email",ar:"إيميل العمل"},
+  fm_role:{en:"Your role",ar:"دورك"},
+  fm_go:{en:"Request diagnostic",ar:"اطلب جلسة التشخيص"},
+  fm_missing:{en:"Please add your name, company and a valid work email.",ar:"فضلاً عبّ الاسم والشركة وإيميل عمل صحيح."},
+  fm_ok:{en:"Thanks. Your request is captured on this page. Connect this form to your CRM to receive submissions.",ar:"شكراً لك! انحفظ طلبك في هالصفحة. اربط النموذج بالـ CRM عشان توصلك الطلبات."},
+  tr1:{en:"Read-only. Nayeb can't create, change or delete an ERP record.",ar:"قراءة فقط: نائب ما يقدر يضيف أو يعدّل أو يحذف أي سجل في الـ ERP."},
+  tr2:{en:"No new system. Teams keep working in the ERP they know.",ar:"بدون نظام جديد: فرقكم تكمل شغلها على نفس الـ ERP."},
+  tr3:{en:"ZATCA, Nitaqat and Local Content built into every vendor score.",ar:"زاتكا ونطاقات والمحتوى المحلي داخلة في تقييم كل مورد."},
+  foot:{en:"AI intelligence overlay for ERP · Built for Saudi enterprises",ar:"طبقة ذكاء اصطناعي فوق الـ ERP · مصمّمة للشركات السعودية"}
+};
+const STRIP = {en:["ZATCA","Nitaqat","Local Content","Procure-to-Pay","Read-only"],ar:["زاتكا","نطاقات","المحتوى المحلي","من الطلب للدفع","قراءة فقط"]};
+const HERO = {
+  en:'The AI Intelligence <span class="accent">Overlay</span> for Your ERP',
+  ar:'<span class="accent">طبقة الذكاء الاصطناعي</span> لنظامك المالي'
+};
+
+const check = '<svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+const clock = '<svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2.5 2"/><path d="M8 5v3l2 1.3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>';
+
+const MODS = [
+ {id:"draft",stage:1,name:{en:"Nayeb Draft",ar:"نائب صُغ"},tag:{en:"Smart Intake",ar:"إعداد الطلبات الذكي"},stageName:{en:"Intake (PR)",ar:"الطلب (PR)"},
+  val:{en:"Write PRs that pass the first time, against budget you actually have.",ar:"ارفع PR يعدّي من أول مرة، على ميزانية موجودة فعلاً."},
+  mini:{sev:"ok",t:{en:"Budget found",ar:"ميزانية متاحة"},m:{en:"SAR 412,000 freed for Marketing this year",ar:"412,000 ريال صارت متاحة للتسويق هالسنة"}},
+  who:{en:"Business users & department heads (Marketing, IT…).",ar:"مستخدمو الأعمال ورؤساء الأقسام (التسويق، تقنية المعلومات…)."},
+  why:{en:"Match needs to the real budget and write flawless PRs without procurement delays.",ar:"توافق احتياجك مع الميزانية الفعلية، وترفع PR مضبوط بدون تأخير من المشتريات."},
+  how:{en:"At intake, guiding the user before the PR is submitted to the ERP.",ar:"في مرحلة الطلب، ويوجّهك قبل رفع الـ PR على الـ ERP."},
+  feats:[
+   {t:{en:"Historical SOW templates",ar:"قوالب نطاق العمل (SOW) من الأرشيف"},d:{en:"Specs pulled from past PRs that closed with zero change orders.",ar:"مواصفات من طلبات سابقة خلصت بدون أي أمر تغيير (Change Order)."}},
+   {t:{en:"True Budget Translator",ar:"مترجم الميزانية الحقيقية"},d:{en:"Applies accrual logic to open POs to reveal each unit's hidden funds this year.",ar:"يطبّق منطق الاستحقاق (Accruals) على الـ PO المفتوحة ويوضّح لكل قسم ميزانيته المخفية هالسنة."}},
+   {t:{en:"ERP-ready outputs",ar:"مسودات جاهزة للـ ERP"},d:{en:"Clean, compliant PR drafts ready to submit.",ar:"PR نظيف ومتوافق، جاهز للرفع."}},
+   {soon:true,t:{en:"External market benchmarking",ar:"المقارنة بأسعار السوق"},d:{en:"Budget estimates for net-new requests.",ar:"تقدير ميزانية الطلبات الجديدة كلياً."}}
+  ]},
+ {id:"vendor",stage:2,name:{en:"Nayeb Vendor",ar:"نائب المورّد"},tag:{en:"Compliance",ar:"تقييم الموردين والامتثال"},stageName:{en:"Sourcing",ar:"التوريد والمنافسات"},
+  val:{en:"Know who you're really buying from before you award.",ar:"اعرف مع مين تتعامل فعلاً قبل الترسية."},
+  mini:{sev:"risk",t:{en:"Collusion risk",ar:"شبهة تواطؤ"},m:{en:"V-20931 won 7 of 9 tenders, each within 1.5% of the internal cap",ar:"<bdi>V-20931</bdi> فاز بـ 7 من 9 منافسات، كلها في حدود 1.5% من السقف الداخلي"}},
+  who:{en:"Procurement reps & buyers.",ar:"مسؤولو المشتريات والمشترين (Buyers)."},
+  why:{en:"Objective vendor evaluation, fraud and favoritism detection, national compliance.",ar:"تقييم موضوعي للموردين، وكشف الاحتيال والمحاباة، وتطبيق الامتثال الوطني."},
+  how:{en:"During sourcing and bid evaluation: shortlists and risk scorecards.",ar:"وقت التوريد وتقييم العروض: قائمة مختصرة (Shortlist) وبطاقة مخاطر لكل مورد."},
+  feats:[
+   {t:{en:"Collusion & budget-sniping radar",ar:"رادار التواطؤ واقتناص الميزانية"},d:{en:"Vendors who keep winning just under hidden budget caps, a sign of insider leaks.",ar:"مورد يفوز باستمرار بعروض قريبة بشكل مريب من سقف الميزانية الداخلي."}},
+   {t:{en:"Departmental monopoly alerts",ar:"تنبيه احتكار الإدارات"},d:{en:"One team keeps picking the same vendor for vague or out-of-category work.",ar:"قسم يختار نفس المورد كل مرة لأعمال نطاقها مبهم أو خارج تخصصه."}},
+   {t:{en:"TCO scorecards & national compliance",ar:"بطاقة التكلفة الإجمالية (TCO) والامتثال"},d:{en:"True cost after delays and change orders, plus Local Content, Nitaqat and ZATCA.",ar:"التكلفة الفعلية بعد التأخير وأوامر التغيير، مع المحتوى المحلي ونطاقات وزاتكا."}}
+  ]},
+ {id:"save",stage:3,name:{en:"Nayeb Save",ar:"نائب وفّر"},tag:{en:"Commercial Leverage",ar:"القوة التفاوضية"},stageName:{en:"Commercial & renewal",ar:"التقييم التجاري والتجديد"},
+  val:{en:"Walk into every negotiation with the prices you've already paid.",ar:"ادخل كل تفاوض وبيدك الأسعار اللي سبق دفعتها."},
+  mini:{sev:"warn",t:{en:"Price variance",ar:"فرق سعر"},m:{en:"Laptop bid SAR 5,640 vs SAR 4,910 on your last PO · +14.9%",ar:"عرض اللابتوب 5,640 ريال وآخر PO كان 4,910 ريال · <bdi>+14.9%</bdi>"}},
+  who:{en:"Procurement reps & buyers.",ar:"فريق المشتريات والمشترين (Buyers)."},
+  why:{en:"Data-backed negotiation leverage and no leakage from bad contracts.",ar:"قوة تفاوضية مبنية على أرقام، وبدون تسرّب من العقود الضعيفة."},
+  how:{en:"During commercial evaluation and 60 days before contract renewal.",ar:"وقت التقييم التجاري، وقبل تجديد العقد بـ 60 يوم."},
+  feats:[
+   {t:{en:"Internal price variance",ar:"فروقات الأسعار الداخلية"},d:{en:"Every bid vs. the exact prices you've paid before in the ERP.",ar:"كل عرض مقابل الأسعار اللي دفعتها فعلياً قبل في الـ ERP."}},
+   {t:{en:"Leakage detection",ar:"كشف التسرّب"},d:{en:"Unclaimed rebates and contracts about to auto-renew.",ar:"خصومات ما انطالب فيها، وعقود بتتجدد تلقائي."}},
+   {soon:true,t:{en:"External market benchmarking",ar:"المقارنة بمتوسطات السوق"},d:{en:"Bids vs. anonymized market averages.",ar:"عروض الموردين مقابل متوسطات سوق مجهولة المصدر."}}
+  ]},
+ {id:"verify",stage:4,name:{en:"Nayeb Verify",ar:"نائب تحقّق"},tag:{en:"Quality Control",ar:"ضبط الجودة"},stageName:{en:"Receipt & invoice (GRN)",ar:"الاستلام والفوترة (GRN)"},
+  val:{en:"Pay only for what actually arrived.",ar:"لا تدفع إلا على اللي وصل فعلاً."},
+  mini:{sev:"warn",t:{en:"Phantom inventory",ar:"مخزون وهمي"},m:{en:"INV-88213: 400 units invoiced, 360 on the GRN",ar:"<bdi>INV-88213</bdi>: 400 وحدة مفوترة و360 بس في الـ GRN"}},
+  who:{en:"Receiving teams in operations & finance.",ar:"فرق الاستلام في العمليات والمالية."},
+  why:{en:"Receive exactly what you paid for and send inspectors where it counts.",ar:"تستلم اللي دفعت قيمته بالضبط، وتوجّه الفحص للمكان الصح."},
+  how:{en:"At goods receipt (GRN) and invoicing.",ar:"وقت استلام البضاعة (GRN) والفوترة."},
+  feats:[
+   {t:{en:"3-way match detective",ar:"محقّق المطابقة الثلاثية (3-Way Match)"},d:{en:"Auto cross-checks PO, GRN and invoice.",ar:"يطابق الـ PO والـ GRN والفاتورة تلقائياً."}},
+   {t:{en:"Phantom inventory alerts",ar:"تنبيه المخزون الوهمي"},d:{en:"Items invoiced but never logged as received.",ar:"بنود مفوترة وما انسجلت كمستلمة في الـ ERP."}},
+   {t:{en:"Targeted spot-checks",ar:"فحص ميداني موجّه"},d:{en:"Lines worth inspecting, based on each vendor's failure history.",ar:"البنود اللي تستاهل فحص فعلي حسب سجل إخفاق المورد."}}
+  ]},
+ {id:"protect",stage:5,name:{en:"Nayeb Protect",ar:"نائب احمِ"},tag:{en:"Financial Shield",ar:"الدرع المالي"},stageName:{en:"Payment run",ar:"دورة الدفع"},
+  val:{en:"The last check before a riyal leaves the company.",ar:"آخر فحص قبل ما يطلع أي ريال من الشركة."},
+  mini:{sev:"risk",t:{en:"Payment on hold",ar:"دفعة معلّقة"},m:{en:"Vendor IBAN SA03 8000 •••• 7519 matches an employee on payroll",ar:"آيبان المورد <bdi>SA03 8000 •••• 7519</bdi> يطابق موظف في مسيّر الرواتب"}},
+  who:{en:"Finance & accounts payable (AP).",ar:"المالية والحسابات الدائنة (AP)."},
+  why:{en:"A final shield against fraud, kickbacks and billing errors before cash leaves.",ar:"آخر خط دفاع ضد الاحتيال والعمولات وأخطاء الفوترة، قبل ما يطلع الريال."},
+  how:{en:"Anomaly detection right before the AP payment run.",ar:"يفحص الحالات الشاذة مباشرة قبل تنفيذ دورة الدفع."},
+  feats:[
+   {t:{en:"Conflict of interest (HR × AP)",ar:"تضارب المصالح (الموارد البشرية × الدائنين)"},d:{en:"Vendor IBAN, phone and address vs. HR and payroll, to stop payments to employee-owned shells.",ar:"آيبان وجوال وعنوان المورد مقابل بيانات الموظفين ومسيّر الرواتب، لإيقاف الدفع لشركات وهمية تابعة لموظفين."}},
+   {t:{en:"Just-in-time shell vendor alert",ar:"تنبيه المورد المستحدث"},d:{en:"High-value invoices from vendors created days before the PO.",ar:"فواتير كبيرة من مورد انضاف في الـ Vendor Master قبل الـ PO بكم يوم."}},
+   {t:{en:"Duplicate & split order radar",ar:"رادار التكرار وتجزئة الطلبات"},d:{en:"Double billing and POs split to dodge approval limits.",ar:"فواتير مكررة، و PO مقسّمة عشان تعدّي من مصفوفة الصلاحيات."}}
+  ]},
+ {id:"audit",stage:0,olive:true,name:{en:"Audit Trail",ar:"سجل نائب"},tag:{en:"Oversight",ar:"الرقابة التنفيذية"},stageName:{en:"All stages",ar:"كل المراحل"},
+  val:{en:"Every ignored warning, on record.",ar:"كل تحذير تم تجاوزه، موثّق عندك."},
+  mini:{sev:"olive",t:{en:"Exception logged",ar:"استثناء مسجّل"},m:{en:"Split-PO alert bypassed · reason: Executive Override",ar:"تجاوز تنبيه تجزئة PO · السبب: استثناء تنفيذي"}},
+  who:{en:"CEO, CFO, CPO & internal audit committees.",ar:"الرئيس التنفيذي، والمدير المالي، ومدير المشتريات، ولجان التدقيق الداخلي."},
+  why:{en:"Track the company's real risk tolerance and hold every department accountable.",ar:"تعرف حجم المخاطر اللي تتحمّلها الشركة فعلاً، وتحاسب كل إدارة."},
+  how:{en:"A secure executive dashboard logging user actions in real time.",ar:"لوحة رقابة تنفيذية آمنة تسجّل تصرفات المستخدمين لحظة بلحظة."},
+  feats:[
+   {t:{en:"Silent exception logging",ar:"تسجيل صامت للاستثناءات"},d:{en:"Every time someone proceeds despite a Nayeb red flag.",ar:"كل مرة أحد يكمل في الـ ERP رغم تحذير أحمر من نائب."}},
+   {t:{en:"Mandatory reason codes",ar:"سبب تجاوز إلزامي"},d:{en:"Bypass only with a reason, such as Sole Source or Executive Override.",ar:"ما يكمل المستخدم إلا بسبب، مثل «مورد وحيد» أو «استثناء تنفيذي»."}},
+   {t:{en:"Immutable risk ledger",ar:"سجل مخاطر غير قابل للتعديل"},d:{en:"A transparent, unalterable compliance report for executives.",ar:"تقرير امتثال شفاف محد يقدر يعدّل عليه، للإدارة العليا."}}
+  ]}
+];
+
+const ROLES = [
+ {id:"dept",label:{en:"Department Head",ar:"رؤساء الأقسام"},
+  pain:{en:"It's Q4, the budget report says you're spent, and your last PR came back twice for missing specs.",ar:"آخر ربع في السنة، وتقرير الميزانية يقول خلصت، وآخر PR رجع لك مرتين لأن المواصفات ناقصة."},
+  fit:{draft:{en:"See this year's real available budget, then submit a PR built from specs that already passed.",ar:"تشوف ميزانيتك المتاحة فعلاً هالسنة، وترفع PR مبني على مواصفات سبق واعتمدت."}}},
+ {id:"buyer",label:{en:"Procurement",ar:"المشتريات"},
+  pain:{en:"Same vendor wins again, a few riyals under a cap that's meant to be internal. Sharp pricing, or a leak?",ar:"نفس المورد يفوز مرة ثانية، وعرضه تحت السقف الداخلي بكم ريال بس. شطارة ولا فيه تسريب؟"},
+  fit:{vendor:{en:"A ranked shortlist with TCO and compliance scores, plus a warning when a win looks too convenient.",ar:"قائمة مختصرة مرتّبة بالتكلفة الإجمالية ودرجات الامتثال، وتنبيه إذا فيه ترسية شكلها مريح زيادة."},
+       save:{en:"Counter any bid with the exact price on your last PO, and get 60 days' warning before a contract auto-renews with rebates unclaimed.",ar:"ترد على أي عرض بالسعر الفعلي في آخر PO، وتوصلك تنبيهات قبل تجديد أي عقد بـ 60 يوم مع الخصومات اللي ما انطالب فيها."}}},
+ {id:"recv",label:{en:"Receiving & Warehouse",ar:"الاستلام والمستودعات"},
+  pain:{en:"Invoice says 400 units, the warehouse logged 360, and you have two inspectors for 90 deliveries.",ar:"الفاتورة 400 وحدة والمستودع مسجّل 360، وعندك مفتّشين اثنين لـ 90 شحنة."},
+  fit:{verify:{en:"Know which invoices don't match the GRN, and which deliveries deserve a physical check.",ar:"تعرف أي فاتورة ما تطابق الـ GRN، وأي شحنة تستاهل فحص ميداني."}}},
+ {id:"ap",label:{en:"Finance & AP",ar:"المالية والدائنين"},
+  pain:{en:"The payment run is tomorrow. In 1,200 invoices, one vendor's IBAN matches an employee on payroll.",ar:"دورة الدفع بكرة. وبين 1,200 فاتورة فيه مورد آيبانه يطابق موظف في مسيّر الرواتب."},
+  fit:{protect:{en:"Hold suspicious payments before the run: employee-linked IBANs, brand-new vendors, duplicates.",ar:"توقف الدفعات المشبوهة قبل التنفيذ: آيبان مرتبط بموظف، مورد جديد، أو فاتورة مكررة."},
+       verify:{en:"Release payments knowing the PO, GRN and invoice already agree.",ar:"تصرف وأنت مطمّن إن الـ PO والـ GRN والفاتورة متطابقة."}}},
+ {id:"exec",label:{en:"Executives & Audit",ar:"الإدارة العليا والتدقيق"},
+  pain:{en:"Warnings get clicked past, and you find out at year-end audit, months after the money moved.",ar:"التحذيرات يتجاوزونها بضغطة زر، وما تدري إلا في مراجعة آخر السنة بعد ما طلعت الفلوس بشهور."},
+  fit:{audit:{en:"Every bypassed alert, who bypassed it and why, in a ledger nobody can edit.",ar:"كل تنبيه تم تجاوزه، ومين تجاوزه وليش، في سجل محد يقدر يعدّله."},
+       protect:{en:"Stop internal fraud at the last gate, not at year-end audit.",ar:"توقف الاحتيال الداخلي عند آخر بوابة، مو في مراجعة آخر السنة."},
+       vendor:{en:"Spot favoritism and insider leaks across departments early.",ar:"تكتشف المحاباة وتسريب المعلومات بين الإدارات من بدري."}}}
+];
+
+const FEED = [
+ {m:"protect",sev:"risk",t:"08:52",msg:{en:"Vendor IBAN matches an employee on payroll · payment on hold",ar:"آيبان مورد يطابق موظف في مسيّر الرواتب · الدفعة معلّقة"}},
+ {m:"draft",sev:"ok",t:"08:47",msg:{en:"SAR 412,000 freed for Marketing this year",ar:"412,000 ريال صارت متاحة للتسويق هالسنة"}},
+ {m:"vendor",sev:"risk",t:"08:41",msg:{en:"Vendor won 7 of 9 tenders, each just under the internal cap",ar:"مورد فاز بـ 7 من 9 منافسات، كلها تحت السقف الداخلي بشوي"}},
+ {m:"save",sev:"warn",t:"08:36",msg:{en:"Bid is 14.9% above your last PO price",ar:"العرض أعلى 14.9% من سعر آخر PO"}},
+ {m:"verify",sev:"warn",t:"08:30",msg:{en:"40 units invoiced but not on the GRN",ar:"40 وحدة مفوترة وما هي موجودة في الـ GRN"}},
+ {m:"audit",sev:"olive",t:"08:24",msg:{en:"Split-PO alert bypassed · reason: Executive Override",ar:"تجاوز تنبيه تجزئة PO · السبب: استثناء تنفيذي"}},
+ {m:"save",sev:"warn",t:"08:18",msg:{en:"Contract auto-renews in 60 days · rebate unclaimed",ar:"عقد يتجدد تلقائي بعد 60 يوم · خصم ما انطالب فيه"}},
+ {m:"protect",sev:"risk",t:"08:11",msg:{en:"Possible duplicate of INV-77098",ar:"احتمال فاتورة مكررة مع <bdi>INV-77098</bdi>"}}
+];
+
+let lang = "en", role = "all", feedStart = 0, timer = null;
+try { const s = localStorage.getItem("nayeb-lang"); if (s === "ar" || s === "en") lang = s; } catch (e) {}
+if (location.hash === "#ar") lang = "ar";
+
+const $ = s => document.querySelector(s);
+const t = k => (I[k] ? I[k][lang] : k);
+const L = o => o[lang];
+const modName = id => L(MODS.find(m => m.id === id).name);
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function renderFeed(animate){
+  const shown = [0,1,2,3].map(k => FEED[(feedStart + k) % FEED.length]);
+  $("#feed").innerHTML = shown.map((f,i) => `
+    <div class="item ${animate && i===0 ? "enter" : ""}"><span class="sev ${f.sev}"></span>
+      <p class="msg">${L(f.msg)}<small>${f.t}</small></p>
+      <button class="modtag" type="button" data-go="${f.m}">${modName(f.m)}</button></div>`).join("");
+}
+function startFeed(){
+  clearInterval(timer);
+  if (reduce) return;
+  timer = setInterval(() => { feedStart = (feedStart - 1 + FEED.length) % FEED.length; renderFeed(true); }, 3200);
+}
+
+function renderFilter(){
+  const chips = [{id:"all",label:I.all}].concat(ROLES);
+  $("#filter").innerHTML = chips.map(r =>
+    `<button class="chip" type="button" data-role="${r.id}" aria-pressed="${r.id===role}">${L(r.label)}</button>`).join("");
+}
+
+function renderMods(){
+  const r = ROLES.find(x => x.id === role);
+  const bar = $("#rolebar");
+  if (!r) bar.innerHTML = `<p class="hint">${t("hint")}</p>`;
+  else {
+    const n = Object.keys(r.fit).length;
+    const cnt = n === 1 ? t("count1") : n === 2 ? t("count2") : t("countN").replace("{n}", n);
+    bar.innerHTML = `<p class="q"><small>${t("pain")}</small>${L(r.pain)}</p><span class="count">${cnt}</span>`;
+  }
+  const order = r ? Object.keys(r.fit) : [];
+  $("#mods").innerHTML = MODS.map((m, i) => {
+    const fit = r && r.fit[m.id];
+    const state = !r ? "" : fit ? "on" : "dim";
+    const ord = !r ? i : fit ? order.indexOf(m.id) : 10 + i;
+    const mode = m.id === "draft" ? `<span class="mode demand">${t("demand")}</span>` : `<span class="mode auto"><i></i>${t("auto")}</span>`;
+    return `<article class="card ${state}${m.olive ? " olive" : ""}" id="m-${m.id}" style="order:${ord}">
+      <div class="shot"><div class="mini"><span class="sev ${m.mini.sev}"></span><small>${L(m.mini.t)}</small><p>${L(m.mini.m)}</p></div></div>
+      <div class="body">
+        <div class="top"><span class="label">${L(m.tag)}</span>${mode}</div>
+        <div><h3>${L(m.name)}</h3><p class="alt"><span>${lang==="ar" ? m.name.en : m.name.ar}</span></p></div>
+        <p class="val">${L(m.val)}</p>
+        ${fit ? `<div class="foryou"><b>${t("foryou").replace("{r}", L(r.label))}</b>${L(fit)}</div>` : ""}
+        <ul class="flist">${m.feats.map(f => `<li class="${f.soon ? "soon" : ""}">${f.soon ? clock : check}<span>${L(f.t)}${f.soon ? `<span class="soon-pill">${t("soon")}</span>` : ""}</span></li>`).join("")}</ul>
+        <details>
+          <summary>${t("details")}</summary>
+          <div class="dbody">
+            <dl class="wwh">
+              <div><dt>${t("who")}</dt><dd>${L(m.who)}</dd></div>
+              <div><dt>${t("why")}</dt><dd>${L(m.why)}</dd></div>
+              <div><dt>${t("how")}</dt><dd>${L(m.how)}</dd></div>
+            </dl>
+            <ul class="fdesc">${m.feats.map(f => `<li><b>${L(f.t)}:</b> ${L(f.d)}</li>`).join("")}</ul>
+          </div>
+        </details>
+      </div>
+    </article>`;
+  }).join("");
+}
+
+function renderSelect(){
+  const sel = $("#fRole"), idx = sel.selectedIndex;
+  sel.innerHTML = ROLES.map(r => `<option value="${r.id}">${L(r.label)}</option>`).join("");
+  sel.selectedIndex = idx > -1 ? idx : 0;
+}
+
+function goTo(id){
+  if (role !== "all" && !ROLES.find(r => r.id === role).fit[id]) { role = "all"; renderFilter(); renderMods(); }
+  const el = document.getElementById("m-" + id); if (!el) return;
+  el.scrollIntoView({behavior: reduce ? "auto" : "smooth", block: "center"});
+  el.classList.add("flash"); setTimeout(() => el.classList.remove("flash"), 2200);
+}
+
+function applyLang(){
+  const html = document.documentElement;
+  html.lang = lang; html.dir = lang === "ar" ? "rtl" : "ltr";
+  document.querySelectorAll("[data-i18n]").forEach(el => { const k = el.dataset.i18n; if (I[k]) el.textContent = I[k][lang]; });
+  $("#heroTitle").innerHTML = HERO[lang];
+  $("#stripList").innerHTML = STRIP[lang].map(s => `<li>${s}</li>`).join("");
+  const b = $("#langBtn");
+  b.textContent = lang === "ar" ? "English" : "العربية";
+  b.setAttribute("aria-label", lang === "ar" ? "Switch to English" : "التبديل إلى العربية");
+  renderFeed(false); renderFilter(); renderMods(); renderSelect();
+  $("#formNote").hidden = true;
+  try { localStorage.setItem("nayeb-lang", lang); } catch (e) {}
+}
+
+$("#langBtn").addEventListener("click", () => { lang = lang === "en" ? "ar" : "en"; applyLang(); });
+document.addEventListener("click", e => {
+  const chip = e.target.closest("[data-role]");
+  if (chip) { role = chip.dataset.role; renderFilter(); renderMods(); return; }
+  const go = e.target.closest("[data-go]");
+  if (go) { e.preventDefault(); goTo(go.dataset.go); }
+});
+$("#feed").addEventListener("mouseenter", () => clearInterval(timer));
+$("#feed").addEventListener("mouseleave", startFeed);
+$("#demoForm").addEventListener("submit", e => {
+  e.preventDefault();
+  const ok = $("#fName").value.trim() && $("#fCo").value.trim() && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test($("#fEmail").value.trim());
+  const n = $("#formNote"); n.textContent = ok ? t("fm_ok") : t("fm_missing"); n.hidden = false;
+});
+
+applyLang();
+startFeed();
+</script>
+
+</body></html>
