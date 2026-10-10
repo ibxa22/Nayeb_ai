@@ -191,7 +191,8 @@ html[lang="ar"] .cta h2{letter-spacing:0;line-height:1.35}
 .cta p{color:color-mix(in srgb,var(--bg) 70%,var(--ink))}
 .cta hr{grid-column:1/-1;border:0;border-top:1px solid color-mix(in srgb,var(--bg) 16%,var(--ink));margin:0}
 .trust{grid-column:1/-1;display:grid;gap:12px;grid-template-columns:1fr}
-@media (min-width:760px){.trust{grid-template-columns:repeat(3,1fr)}}
+@media (min-width:640px){.trust{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1000px){.trust{grid-template-columns:repeat(4,1fr)}}
 .trust div{display:flex;gap:10px;align-items:flex-start;font-size:15px;color:color-mix(in srgb,var(--bg) 82%,var(--ink))}
 .trust svg{flex:none;margin-top:3px;color:var(--teal)}
 .form{display:grid;gap:10px;grid-template-columns:1fr}
@@ -208,7 +209,7 @@ footer{padding-block:28px;color:var(--muted);font-size:13px}
   <div class="wrap flex items-center justify-between gap-4 py-3">
     <a href="#top" class="brand" aria-label="Nayeb">
       <svg width="34" height="34" viewBox="68 88 254 258" aria-hidden="true"><g transform="matrix(1 0 0 1.0059 1 1.435)" stroke="var(--logo-stroke)" stroke-width="5"><path d="M217.148 108.312 306.254 185.986C312.831 191.715 313.767 201.599 308.376 208.462L219.27 321.979C209.661 334.234 189.98 327.432 189.98 311.858L189.98 120.667C189.98 106.602 206.541 99.0646 217.148 108.312Z" fill="#69895D"/><path d="M165.295 108.312 254.401 185.986C260.977 191.715 261.913 201.599 256.522 208.462L215.089 261.252 167.416 321.979C157.807 334.234 138.126 327.432 138.126 311.858L138.126 120.667C138.139 106.602 154.7 99.0646 165.295 108.312Z" fill="#FBF9F1"/><path d="M101.298 103.383 190.404 181.057C196.981 186.785 197.917 196.669 192.526 203.533L103.42 317.049C93.8106 329.304 74.13 322.503 74.13 306.928L74.13 115.738C74.1424 101.673 90.6907 94.1476 101.298 103.383Z" fill="#00A99D"/></g></svg>
-      <span>نائب</span><small>Nayeb</small>
+      <span>نايب</span><small>Nayeb</small>
     </a>
     <nav class="hidden md:flex items-center gap-8">
       <a class="navlink" href="#modules" data-i18n="nav_mods">Modules</a>
@@ -224,7 +225,7 @@ footer{padding-block:28px;color:var(--muted);font-size:13px}
 
 <main id="top">
   <section class="wrap hero">
-    <a class="announce" href="#m-save"><b data-i18n="ann_b">Coming soon</b><span data-i18n="ann">External market benchmarking for Draft and Save</span><span class="flip" aria-hidden="true">→</span></a>
+    <a class="announce" href="#modules"><b data-i18n="ann_b">Coming soon</b><span data-i18n="ann">External market benchmarking for Draft and Save</span><span class="flip" aria-hidden="true">→</span></a>
     <h1 id="heroTitle">The AI Intelligence <span class="accent">Overlay</span> for Your ERP</h1>
     <p class="lead" data-i18n="hero_sub">Your ERP knows more than it tells you. Nayeb reads it, never writes to it, and surfaces hidden budgets, true vendor costs, collusion and ZATCA or Nitaqat gaps before a riyal leaves the company.</p>
     <div class="flex flex-wrap justify-center gap-3">
@@ -262,7 +263,7 @@ footer{padding-block:28px;color:var(--muted);font-size:13px}
     </div>
     <div class="pillars">
       <div class="pillar"><div class="big">0</div><h3 data-i18n="p1_t">Writes to your ERP</h3><p data-i18n="p1_d">Nayeb reads only. No migration, no new workflow, and an easier sign-off from IT.</p></div>
-      <div class="pillar"><div class="big">5<small>/ 6</small></div><h3 data-i18n="p2_t">Checkpoints, PR to payment</h3><p data-i18n="p2_d">Five stage checks, plus one audit ledger watching all of them.</p></div>
+      <div class="pillar"><div class="big">5</div><h3 data-i18n="p2_t">Checkpoints, PR to payment</h3><p data-i18n="p2_d">Five stage checks, plus one audit ledger watching all of them.</p></div>
       <div class="pillar"><div class="big">60</div><h3 data-i18n="p3_t">Days' warning before renewals</h3><p data-i18n="p3_d">Time to renegotiate and claim rebates before a contract rolls over at the old price.</p></div>
     </div>
   </section>
@@ -291,188 +292,194 @@ footer{padding-block:28px;color:var(--muted);font-size:13px}
         <label><span data-i18n="fm_co">Company</span><input id="fCo" autocomplete="organization"></label>
         <label><span data-i18n="fm_email">Work email</span><input id="fEmail" type="email" autocomplete="email"></label>
         <label><span data-i18n="fm_role">Your role</span><select id="fRole"></select></label>
+        <label class="full"><span data-i18n="fm_erp">Your ERP</span><select id="fErp"></select></label>
         <button class="btn full" type="submit" data-i18n="fm_go">Request diagnostic</button>
         <p class="note full" id="formNote" hidden></p>
       </form>
       <hr>
       <div class="trust">
-        <div><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3L4 6v6c0 5 3.4 8 8 9 4.6-1 8-4 8-9V6z"/><path d="M9 12l2 2 4-4"/></svg><span data-i18n="tr1">Read-only. Nayeb can't create, change or delete an ERP record.</span></div>
-        <div><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16M12 4v16"/></svg><span data-i18n="tr2">No new system. Teams keep working in the ERP they know.</span></div>
-        <div><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg><span data-i18n="tr3">ZATCA, Nitaqat and Local Content built into every vendor score.</span></div>
+        <div><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg><span data-i18n="tr1"></span></div>
+        <div><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg><span data-i18n="tr2"></span></div>
+        <div><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg><span data-i18n="tr3"></span></div>
+        <div><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg><span data-i18n="tr4"></span></div>
       </div>
     </div>
   </section>
 </main>
 
 <footer class="wrap flex flex-wrap justify-between gap-3">
-  <span>© 2026 Nayeb · نائب</span>
+  <span>© 2026 Nayeb · نايب</span>
   <span data-i18n="foot">AI intelligence overlay for ERP · Built for Saudi enterprises</span>
 </footer>
 
 <script>
 const I = {
   nav_mods:{en:"Modules",ar:"الوحدات"},
-  nav_why:{en:"Why Nayeb",ar:"ليش نائب"},
+  nav_why:{en:"Why Nayeb",ar:"لماذا نايب"},
   nav_sec:{en:"Security",ar:"الأمان"},
-  cta_book:{en:"Book a diagnostic",ar:"احجز جلسة تشخيص"},
+  cta_book:{en:"Request a demo",ar:"اطلب عرضاً تجريبياً"},
   cta_mods:{en:"Explore the modules",ar:"تعرّف على الوحدات"},
-  ann_b:{en:"Coming soon",ar:"قريباً"},
-  ann:{en:"External market benchmarking for Draft and Save",ar:"المقارنة بأسعار السوق في نائب صُغ ونائب وفّر"},
-  hero_sub:{en:"Your ERP knows more than it tells you. Nayeb reads it, never writes to it, and surfaces hidden budgets, true vendor costs, collusion and ZATCA or Nitaqat gaps before a riyal leaves the company.",
-            ar:"نظامك يعرف أكثر من اللي يقوله لك. نائب يقرأ الـ ERP بدون ما يعدّل فيه شي، ويطلّع لك الميزانيات المخفية، وتكلفة الموردين الحقيقية، والتواطؤ، وثغرات زاتكا ونطاقات، قبل ما يطلع ريال من الشركة."},
-  feed_t:{en:"What Nayeb found this morning",ar:"وش لقى نائب الصباح"},
+  ann_b:{en:"6 modules",ar:"6 وحدات"},
+  ann:{en:"Covering procurement from PR to payment",ar:"تغطي المشتريات من الطلب إلى الدفع"},
+  hero_sub:{en:"Your ERP holds more than your teams can track. Nayeb reads your procurement data without changing it, shows each department its available budget, reveals true vendor costs, flags unusual patterns and ZATCA or Nitaqat gaps, and recommends action before payment.",
+            ar:"يقرأ نايب بيانات المشتريات في الـ ERP دون أن يغيّر فيها شيئاً، ويوضّح لكل إدارة ميزانيتها المتاحة، والتكلفة الحقيقية للموردين، والأنماط غير المعتادة، ونقاط الامتثال لزاتكا ونطاقات، ثم يقدّم توصياته قبل الصرف."},
+  feed_t:{en:"Nayeb's recommendations this morning",ar:"توصيات نايب هذا الصباح"},
   feed_live:{en:"Example feed",ar:"مثال توضيحي"},
-  feed_tip:{en:"Tap a module to see it",ar:"اضغط اسم الوحدة لتشوفها"},
-  feed_zero:{en:"ERP changes: 0",ar:"تعديلات على الـ ERP: 0"},
-  strip_p:{en:"Built for Saudi enterprises where compliance matters",ar:"مصمّم للشركات السعودية اللي يهمها الامتثال"},
-  why_l:{en:"Why Nayeb",ar:"ليش نائب"},
-  why_h:{en:"Catch it before it costs you",ar:"اكتشفها قبل ما تكلّفك"},
+  feed_tip:{en:"Tap a module to see it",ar:"اضغط على اسم الوحدة لعرضها"},
+  feed_zero:{en:"ERP changes: 0",ar:"التعديلات على الـ ERP: 0"},
+  strip_p:{en:"Built for Saudi enterprises where compliance matters",ar:"مصمّم للشركات السعودية التي تهتم بالامتثال"},
+  why_l:{en:"Why Nayeb",ar:"لماذا نايب"},
+  why_h:{en:"Catch it before it costs you",ar:"اكتشف المشكلة قبل أن تكلّفك"},
   p1_t:{en:"Writes to your ERP",ar:"تعديل على الـ ERP"},
-  p1_d:{en:"Nayeb reads only. No migration, no new workflow, and an easier sign-off from IT.",ar:"نائب يقرأ بس. لا ترحيل بيانات، ولا إجراءات جديدة، وموافقة تقنية المعلومات أسهل."},
-  p2_t:{en:"Modules alert you on their own",ar:"وحدات تنبّهك من نفسها"},
-  p2_d:{en:"Nobody has to remember to check. Nayeb flags the issue as soon as it shows up in your ERP data.",ar:"ما تحتاج أحد يتذكّر يراجع. نائب ينبّه أول ما تبان المشكلة في بيانات الـ ERP."},
-  auto:{en:"Proactive",ar:"استباقي"},
+  p1_d:{en:"Nayeb reads only. No migration, no new workflow, and an easier sign-off from IT.",ar:"نايب للقراءة فقط. لا نقل للبيانات ولا تغيير في الإجراءات، وموافقة أسهل من تقنية المعلومات."},
+  p2_t:{en:"Modules work on their own",ar:"وحدات تعمل تلقائياً"},
+  p2_d:{en:"Nobody has to remember to check. Nayeb alerts you as soon as something shows up in your data.",ar:"لا حاجة للمراجعة اليدوية. ينبّهك نايب فور ظهور أي ملاحظة في البيانات."},
+  auto:{en:"Proactive",ar:"تلقائي"},
   demand:{en:"On demand",ar:"عند الطلب"},
-  p3_t:{en:"Days' warning before renewals",ar:"يوم تنبيه قبل التجديد"},
-  p3_d:{en:"Time to renegotiate and claim rebates before a contract rolls over at the old price.",ar:"وقت كافي تعيد فيه التفاوض وتطالب بالخصومات قبل ما يتجدد العقد بالسعر القديم."},
+  p3_t:{en:"Days' warning before renewals",ar:"يوماً للتنبيه قبل تجديد العقود"},
+  p3_d:{en:"Time to renegotiate and claim rebates before a contract rolls over at the old price.",ar:"وقت كافٍ لإعادة التفاوض والمطالبة بالخصومات قبل تجديد العقد بالسعر القديم."},
   m_l:{en:"The modules",ar:"الوحدات"},
   m_h:{en:"Six modules. Pick your role.",ar:"ست وحدات. اختر دورك."},
-  m_lead:{en:"Your modules light up and show exactly how they help you.",ar:"تنوّر لك الوحدات اللي تخصك، وتوضّح لك بالضبط وش تفيدك فيه."},
+  m_lead:{en:"Your modules light up and show exactly how they help you.",ar:"تظهر لك الوحدات التي تخدمك، وكيف تساعدك في عملك."},
   all:{en:"All modules",ar:"كل الوحدات"},
-  hint:{en:"Choose your role above to see which modules are built for you.",ar:"اختر دورك من فوق وتشوف الوحدات المصمّمة لك."},
-  pain:{en:"Sound familiar?",ar:"يصير عندكم؟"},
-  count1:{en:"1 module for you",ar:"وحدة مخصّصة لك"},
-  count2:{en:"2 modules for you",ar:"وحدتين مخصّصة لك"},
-  countN:{en:"{n} modules for you",ar:"{n} وحدات مخصّصة لك"},
-  foryou:{en:"For you as {r}",ar:"وش يفيدك كـ{r}"},
-  details:{en:"Who · Why · How",ar:"لمن · ليش · وين يشتغل"},
-  who:{en:"Who",ar:"لمن؟"}, why:{en:"Why",ar:"ليش؟"}, how:{en:"How",ar:"وين يشتغل؟"},
+  hint:{en:"Choose your role above to see which modules are built for you.",ar:"اختر دورك لعرض الوحدات المناسبة لك."},
+  pain:{en:"Sound familiar?",ar:"هل يحدث هذا لديكم؟"},
+  count1:{en:"1 module for you",ar:"وحدة واحدة لك"},
+  count2:{en:"2 modules for you",ar:"وحدتان لك"},
+  countN:{en:"{n} modules for you",ar:"{n} وحدات لك"},
+  foryou:{en:"For you as {r}",ar:"الفائدة لك"},
+  details:{en:"Who · Why · How",ar:"لمن · لماذا · متى تعمل"},
+  who:{en:"Who",ar:"لمن؟"}, why:{en:"Why",ar:"لماذا؟"}, how:{en:"How",ar:"متى تعمل؟"},
   sig:{en:"Example alert",ar:"مثال تنبيه"},
   soon:{en:"Coming soon",ar:"قريباً"},
-  c_h2:{en:"See what your ERP already knows",ar:"خلّ نظامك يقولك اللي يعرفه"},
-  c_p:{en:"Book a diagnostic. We walk through each module with the teams that would use it.",ar:"احجز جلسة تشخيص، ونمرّ على كل وحدة مع الفرق اللي بتستخدمها."},
+  c_h2:{en:"See what your procurement data is telling you",ar:"اكتشف ما تقوله بيانات مشترياتك"},
+  c_p:{en:"Request a demo. We show each module to the teams that would use it.",ar:"اطلب عرضاً تجريبياً، ونستعرض كل وحدة مع الفرق التي ستستخدمها."},
   fm_name:{en:"Full name",ar:"الاسم"},
   fm_co:{en:"Company",ar:"الشركة"},
-  fm_email:{en:"Work email",ar:"إيميل العمل"},
+  fm_email:{en:"Work email",ar:"البريد الإلكتروني للعمل"},
   fm_role:{en:"Your role",ar:"دورك"},
-  fm_go:{en:"Request diagnostic",ar:"اطلب جلسة التشخيص"},
-  fm_missing:{en:"Please add your name, company and a valid work email.",ar:"فضلاً عبّ الاسم والشركة وإيميل عمل صحيح."},
-  fm_ok:{en:"Thanks. Your request is captured on this page. Connect this form to your CRM to receive submissions.",ar:"شكراً لك! انحفظ طلبك في هالصفحة. اربط النموذج بالـ CRM عشان توصلك الطلبات."},
-  tr1:{en:"Read-only. Nayeb can't create, change or delete an ERP record.",ar:"قراءة فقط: نائب ما يقدر يضيف أو يعدّل أو يحذف أي سجل في الـ ERP."},
-  tr2:{en:"No new system. Teams keep working in the ERP they know.",ar:"بدون نظام جديد: فرقكم تكمل شغلها على نفس الـ ERP."},
-  tr3:{en:"ZATCA, Nitaqat and Local Content built into every vendor score.",ar:"زاتكا ونطاقات والمحتوى المحلي داخلة في تقييم كل مورد."},
-  foot:{en:"AI intelligence overlay for ERP · Built for Saudi enterprises",ar:"طبقة ذكاء اصطناعي فوق الـ ERP · مصمّمة للشركات السعودية"}
+  fm_erp:{en:"Your ERP",ar:"نظام الـ ERP لديكم"},
+  erp_other:{en:"Other",ar:"نظام آخر"},
+  fm_go:{en:"Request a demo",ar:"اطلب العرض التجريبي"},
+  fm_missing:{en:"Please add your name, company and a valid work email.",ar:"يرجى إدخال الاسم والشركة وبريد إلكتروني صحيح."},
+  fm_ok:{en:"Thanks. Your request is captured on this page. Connect this form to your CRM to receive submissions.",ar:"شكراً لك. تم حفظ طلبك في هذه الصفحة. اربط النموذج بنظام الـ CRM لاستقبال الطلبات."},
+  tr1:{en:"Read-only. Nayeb can't create, change or delete an ERP record.",ar:"للقراءة فقط: لا يستطيع نايب إضافة أي سجل في الـ ERP أو تعديله أو حذفه."},
+  tr2:{en:"Nayeb recommends. Your team decides.",ar:"نايب يوصي، والقرار لفريقكم."},
+  tr3:{en:"Data hosted in Saudi Arabia.",ar:"استضافة البيانات داخل المملكة."},
+  tr4:{en:"ZATCA, Nitaqat and Local Content in every vendor score.",ar:"زاتكا ونطاقات والمحتوى المحلي ضمن تقييم كل مورد."},
+  foot:{en:"AI overlay for procurement management · Built for Saudi enterprises",ar:"طبقة ذكاء اصطناعي لإدارة ومتابعة المشتريات · مصمّمة للشركات السعودية"}
 };
-const STRIP = {en:["ZATCA","Nitaqat","Local Content","Procure-to-Pay","Read-only"],ar:["زاتكا","نطاقات","المحتوى المحلي","من الطلب للدفع","قراءة فقط"]};
+const STRIP = {en:["ZATCA","Nitaqat","Local Content","Procure-to-Pay","Read-only"],ar:["زاتكا","نطاقات","المحتوى المحلي","من الطلب إلى الدفع","للقراءة فقط"]};
 const HERO = {
-  en:'The AI Intelligence <span class="accent">Overlay</span> for Your ERP',
-  ar:'<span class="accent">طبقة الذكاء الاصطناعي</span> لنظامك المالي'
+  en:'The AI Intelligence <span class="accent">Overlay</span> for Your Procurement',
+  ar:'<span class="accent">طبقة الذكاء الاصطناعي</span> لإدارة ومتابعة المشتريات'
 };
+const ERPS = ["SAP","Oracle","Microsoft Dynamics","Odoo"];
 
 const check = '<svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 const clock = '<svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2.5 2"/><path d="M8 5v3l2 1.3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>';
 
 const MODS = [
- {id:"draft",stage:1,name:{en:"Nayeb Draft",ar:"نائب صُغ"},tag:{en:"Smart Intake",ar:"إعداد الطلبات الذكي"},stageName:{en:"Intake (PR)",ar:"الطلب (PR)"},
-  val:{en:"Write PRs that pass the first time, against budget you actually have.",ar:"ارفع PR يعدّي من أول مرة، على ميزانية موجودة فعلاً."},
-  mini:{sev:"ok",t:{en:"Budget found",ar:"ميزانية متاحة"},m:{en:"SAR 412,000 freed for Marketing this year",ar:"412,000 ريال صارت متاحة للتسويق هالسنة"}},
-  who:{en:"Business users & department heads (Marketing, IT…).",ar:"مستخدمو الأعمال ورؤساء الأقسام (التسويق، تقنية المعلومات…)."},
-  why:{en:"Match needs to the real budget and write flawless PRs without procurement delays.",ar:"توافق احتياجك مع الميزانية الفعلية، وترفع PR مضبوط بدون تأخير من المشتريات."},
-  how:{en:"At intake, guiding the user before the PR is submitted to the ERP.",ar:"في مرحلة الطلب، ويوجّهك قبل رفع الـ PR على الـ ERP."},
+ {id:"draft",name:{en:"Nayeb Draft",ar:"نايب الطلبات"},tag:{en:"Smart Intake",ar:"إعداد طلبات الشراء"},
+  val:{en:"Write PRs that pass the first time, against budget you can actually see.",ar:"طلب شراء (PR) يُقبل من أول مرة، وضمن ميزانية واضحة أمامك."},
+  mini:{sev:"ok",t:{en:"Available budget",ar:"ميزانية متاحة"},m:{en:"SAR 412,000 available to Marketing this year",ar:"412,000 ريال متاحة للتسويق هذا العام"}},
+  who:{en:"Business users & department heads (Marketing, IT…).",ar:"موظفو الإدارات ورؤساء الأقسام (التسويق، تقنية المعلومات…)."},
+  why:{en:"Match needs to the real budget and write clear PRs without procurement delays.",ar:"مطابقة الاحتياج مع الميزانية الفعلية، ورفع طلبات شراء دقيقة دون تأخير."},
+  how:{en:"At intake, guiding the user before the PR is submitted to the ERP.",ar:"عند إعداد الطلب، قبل رفعه على الـ ERP."},
   feats:[
-   {t:{en:"Historical SOW templates",ar:"قوالب نطاق العمل (SOW) من الأرشيف"},d:{en:"Specs pulled from past PRs that closed with zero change orders.",ar:"مواصفات من طلبات سابقة خلصت بدون أي أمر تغيير (Change Order)."}},
-   {t:{en:"True Budget Translator",ar:"مترجم الميزانية الحقيقية"},d:{en:"Applies accrual logic to open POs to reveal each unit's hidden funds this year.",ar:"يطبّق منطق الاستحقاق (Accruals) على الـ PO المفتوحة ويوضّح لكل قسم ميزانيته المخفية هالسنة."}},
-   {t:{en:"ERP-ready outputs",ar:"مسودات جاهزة للـ ERP"},d:{en:"Clean, compliant PR drafts ready to submit.",ar:"PR نظيف ومتوافق، جاهز للرفع."}},
-   {soon:true,t:{en:"External market benchmarking",ar:"المقارنة بأسعار السوق"},d:{en:"Budget estimates for net-new requests.",ar:"تقدير ميزانية الطلبات الجديدة كلياً."}}
+   {t:{en:"Historical SOW templates",ar:"قوالب نطاق العمل (SOW)"},d:{en:"Specs pulled from past PRs that closed with zero change orders.",ar:"مواصفات من طلبات سابقة اكتملت دون أوامر تغيير."}},
+   {t:{en:"Clear available budget",ar:"الميزانية المتاحة بوضوح"},d:{en:"Applies accrual logic to open POs and shows each department the budget it actually has this year.",ar:"يحسب الاستحقاقات (Accruals) على أوامر الشراء المفتوحة، ويوضّح لكل إدارة المبلغ المتاح لها فعلاً هذا العام."}},
+   {t:{en:"ERP-ready PR drafts",ar:"طلبات جاهزة للـ ERP"},d:{en:"A complete, compliant PR draft for the user to submit.",ar:"مسودة طلب شراء مكتملة، يرفعها المستخدم بنفسه."}},
+   {soon:true,t:{en:"External market benchmarking",ar:"مقارنة بأسعار السوق"},d:{en:"Budget estimates for net-new requests.",ar:"تقدير ميزانية الطلبات الجديدة."}}
   ]},
- {id:"vendor",stage:2,name:{en:"Nayeb Vendor",ar:"نائب المورّد"},tag:{en:"Compliance",ar:"تقييم الموردين والامتثال"},stageName:{en:"Sourcing",ar:"التوريد والمنافسات"},
-  val:{en:"Know who you're really buying from before you award.",ar:"اعرف مع مين تتعامل فعلاً قبل الترسية."},
-  mini:{sev:"risk",t:{en:"Collusion risk",ar:"شبهة تواطؤ"},m:{en:"V-20931 won 7 of 9 tenders, each within 1.5% of the internal cap",ar:"<bdi>V-20931</bdi> فاز بـ 7 من 9 منافسات، كلها في حدود 1.5% من السقف الداخلي"}},
-  who:{en:"Procurement reps & buyers.",ar:"مسؤولو المشتريات والمشترين (Buyers)."},
-  why:{en:"Objective vendor evaluation, fraud and favoritism detection, national compliance.",ar:"تقييم موضوعي للموردين، وكشف الاحتيال والمحاباة، وتطبيق الامتثال الوطني."},
-  how:{en:"During sourcing and bid evaluation: shortlists and risk scorecards.",ar:"وقت التوريد وتقييم العروض: قائمة مختصرة (Shortlist) وبطاقة مخاطر لكل مورد."},
+ {id:"vendor",name:{en:"Nayeb Vendor",ar:"نايب الموردين"},tag:{en:"Vendor evaluation",ar:"تقييم الموردين والامتثال"},
+  val:{en:"Know your vendors well before you award.",ar:"اعرف مورديك جيداً قبل الترسية."},
+  mini:{sev:"warn",t:{en:"Worth a closer look",ar:"نمط يستحق المراجعة"},m:{en:"V-20931 won 7 of 9 tenders, each within 1.5% of the internal cap",ar:"<bdi>V-20931</bdi> فاز بـ 7 من 9 منافسات، جميعها بفارق أقل من 1.5% عن السقف الداخلي"}},
+  who:{en:"Procurement reps & buyers.",ar:"فريق المشتريات والمشترون (Buyers)."},
+  why:{en:"Fair vendor evaluation, early notice of unusual patterns, and national compliance.",ar:"تقييم عادل للموردين، وملاحظة الأنماط غير المعتادة مبكراً، والالتزام بمتطلبات الامتثال الوطنية."},
+  how:{en:"During sourcing and bid evaluation: shortlists and vendor scorecards.",ar:"أثناء التوريد وتقييم العروض، مع قائمة مختصرة وبطاقة تقييم لكل مورد."},
   feats:[
-   {t:{en:"Collusion & budget-sniping radar",ar:"رادار التواطؤ واقتناص الميزانية"},d:{en:"Vendors who keep winning just under hidden budget caps, a sign of insider leaks.",ar:"مورد يفوز باستمرار بعروض قريبة بشكل مريب من سقف الميزانية الداخلي."}},
-   {t:{en:"Departmental monopoly alerts",ar:"تنبيه احتكار الإدارات"},d:{en:"One team keeps picking the same vendor for vague or out-of-category work.",ar:"قسم يختار نفس المورد كل مرة لأعمال نطاقها مبهم أو خارج تخصصه."}},
-   {t:{en:"TCO scorecards & national compliance",ar:"بطاقة التكلفة الإجمالية (TCO) والامتثال"},d:{en:"True cost after delays and change orders, plus Local Content, Nitaqat and ZATCA.",ar:"التكلفة الفعلية بعد التأخير وأوامر التغيير، مع المحتوى المحلي ونطاقات وزاتكا."}}
+   {t:{en:"Unusual award patterns",ar:"أنماط الترسية غير المعتادة"},d:{en:"Vendors who keep winning just under internal budget caps, flagged for a closer look.",ar:"مورد يفوز باستمرار بعروض قريبة جداً من السقف الداخلي، فينبّهك لمراجعتها."}},
+   {t:{en:"Repeat-vendor alerts",ar:"تنبيه تكرار المورد نفسه"},d:{en:"One department keeps choosing the same vendor for vague or out-of-category work.",ar:"إدارة تختار المورد نفسه دائماً لأعمال غير واضحة أو خارج تخصصه."}},
+   {t:{en:"TCO scorecards & national compliance",ar:"التكلفة الإجمالية (TCO) والامتثال"},d:{en:"True cost after delays and change orders, plus Local Content, Nitaqat and ZATCA.",ar:"التكلفة الفعلية بعد التأخير وأوامر التغيير، مع تقييم المحتوى المحلي ونطاقات وزاتكا."}}
   ]},
- {id:"save",stage:3,name:{en:"Nayeb Save",ar:"نائب وفّر"},tag:{en:"Commercial Leverage",ar:"القوة التفاوضية"},stageName:{en:"Commercial & renewal",ar:"التقييم التجاري والتجديد"},
-  val:{en:"Walk into every negotiation with the prices you've already paid.",ar:"ادخل كل تفاوض وبيدك الأسعار اللي سبق دفعتها."},
-  mini:{sev:"warn",t:{en:"Price variance",ar:"فرق سعر"},m:{en:"Laptop bid SAR 5,640 vs SAR 4,910 on your last PO · +14.9%",ar:"عرض اللابتوب 5,640 ريال وآخر PO كان 4,910 ريال · <bdi>+14.9%</bdi>"}},
-  who:{en:"Procurement reps & buyers.",ar:"فريق المشتريات والمشترين (Buyers)."},
-  why:{en:"Data-backed negotiation leverage and no leakage from bad contracts.",ar:"قوة تفاوضية مبنية على أرقام، وبدون تسرّب من العقود الضعيفة."},
-  how:{en:"During commercial evaluation and 60 days before contract renewal.",ar:"وقت التقييم التجاري، وقبل تجديد العقد بـ 60 يوم."},
+ {id:"save",name:{en:"Nayeb Save",ar:"نايب التوفير"},tag:{en:"Commercial Leverage",ar:"قوة التفاوض"},
+  val:{en:"Walk into every negotiation with the prices you've already paid.",ar:"تفاوض وأمامك الأسعار التي دفعتها سابقاً."},
+  mini:{sev:"warn",t:{en:"Price variance",ar:"فرق في السعر"},m:{en:"Laptop bid SAR 5,640 vs SAR 4,910 on your last PO · +14.9%",ar:"عرض اللابتوب 5,640 ريال، وآخر سعر في الـ PO كان 4,910 ريال · <bdi>+14.9%</bdi>"}},
+  who:{en:"Procurement reps & buyers.",ar:"فريق المشتريات والمشترون (Buyers)."},
+  why:{en:"Data-backed negotiation and fewer losses from weak contracts.",ar:"تفاوض مبني على أرقام، وتقليل الهدر في العقود."},
+  how:{en:"During commercial evaluation and 60 days before contract renewal.",ar:"أثناء التقييم التجاري، وقبل تجديد العقد بـ 60 يوماً."},
   feats:[
-   {t:{en:"Internal price variance",ar:"فروقات الأسعار الداخلية"},d:{en:"Every bid vs. the exact prices you've paid before in the ERP.",ar:"كل عرض مقابل الأسعار اللي دفعتها فعلياً قبل في الـ ERP."}},
-   {t:{en:"Leakage detection",ar:"كشف التسرّب"},d:{en:"Unclaimed rebates and contracts about to auto-renew.",ar:"خصومات ما انطالب فيها، وعقود بتتجدد تلقائي."}},
-   {soon:true,t:{en:"External market benchmarking",ar:"المقارنة بمتوسطات السوق"},d:{en:"Bids vs. anonymized market averages.",ar:"عروض الموردين مقابل متوسطات سوق مجهولة المصدر."}}
+   {t:{en:"Internal price variance",ar:"مقارنة الأسعار الداخلية"},d:{en:"Every bid vs. the exact prices you've paid before in the ERP.",ar:"كل عرض مقابل الأسعار المدفوعة سابقاً في الـ ERP."}},
+   {t:{en:"Missed savings",ar:"وفورات غير مستغلة"},d:{en:"Unclaimed rebates and contracts about to auto-renew.",ar:"خصومات لم يُطالب بها، وعقود ستتجدد تلقائياً."}},
+   {soon:true,t:{en:"External market benchmarking",ar:"مقارنة بمتوسطات السوق"},d:{en:"Bids vs. anonymized market averages.",ar:"عروض الموردين مقابل متوسطات السوق دون أسماء."}}
   ]},
- {id:"verify",stage:4,name:{en:"Nayeb Verify",ar:"نائب تحقّق"},tag:{en:"Quality Control",ar:"ضبط الجودة"},stageName:{en:"Receipt & invoice (GRN)",ar:"الاستلام والفوترة (GRN)"},
-  val:{en:"Pay only for what actually arrived.",ar:"لا تدفع إلا على اللي وصل فعلاً."},
-  mini:{sev:"warn",t:{en:"Phantom inventory",ar:"مخزون وهمي"},m:{en:"INV-88213: 400 units invoiced, 360 on the GRN",ar:"<bdi>INV-88213</bdi>: 400 وحدة مفوترة و360 بس في الـ GRN"}},
+ {id:"verify",name:{en:"Nayeb Verify",ar:"نايب التحقّق"},tag:{en:"Quality Control",ar:"ضبط الجودة"},
+  val:{en:"Pay only for what actually arrived.",ar:"ادفع فقط مقابل ما تم استلامه فعلاً."},
+  mini:{sev:"warn",t:{en:"Quantity mismatch",ar:"كميات غير مستلمة"},m:{en:"INV-88213: 400 units invoiced, 360 on the GRN",ar:"<bdi>INV-88213</bdi>: الفاتورة 400 وحدة، والمستلم في الـ GRN ‏360 وحدة"}},
   who:{en:"Receiving teams in operations & finance.",ar:"فرق الاستلام في العمليات والمالية."},
-  why:{en:"Receive exactly what you paid for and send inspectors where it counts.",ar:"تستلم اللي دفعت قيمته بالضبط، وتوجّه الفحص للمكان الصح."},
-  how:{en:"At goods receipt (GRN) and invoicing.",ar:"وقت استلام البضاعة (GRN) والفوترة."},
+  why:{en:"Receive exactly what you paid for and send inspectors where it counts.",ar:"التأكد من استلام كل ما تم دفعه، وتوجيه الفحص حيث يلزم."},
+  how:{en:"At goods receipt (GRN) and invoicing.",ar:"عند استلام البضاعة (GRN) والفوترة."},
   feats:[
-   {t:{en:"3-way match detective",ar:"محقّق المطابقة الثلاثية (3-Way Match)"},d:{en:"Auto cross-checks PO, GRN and invoice.",ar:"يطابق الـ PO والـ GRN والفاتورة تلقائياً."}},
-   {t:{en:"Phantom inventory alerts",ar:"تنبيه المخزون الوهمي"},d:{en:"Items invoiced but never logged as received.",ar:"بنود مفوترة وما انسجلت كمستلمة في الـ ERP."}},
-   {t:{en:"Targeted spot-checks",ar:"فحص ميداني موجّه"},d:{en:"Lines worth inspecting, based on each vendor's failure history.",ar:"البنود اللي تستاهل فحص فعلي حسب سجل إخفاق المورد."}}
+   {t:{en:"3-way match",ar:"المطابقة الثلاثية (3-Way Match)"},d:{en:"Auto cross-checks PO, GRN and invoice.",ar:"مطابقة الـ PO والـ GRN والفاتورة تلقائياً."}},
+   {t:{en:"Unreceived quantity alerts",ar:"تنبيه الكميات غير المستلمة"},d:{en:"Items invoiced but not logged as received.",ar:"بنود في الفاتورة لم تُسجّل كمستلمة في الـ ERP."}},
+   {t:{en:"Targeted spot-checks",ar:"فحص ميداني موجّه"},d:{en:"Lines worth inspecting, based on each vendor's delivery history.",ar:"تحديد البنود التي تحتاج فحصاً فعلياً بناءً على سجل المورد."}}
   ]},
- {id:"protect",stage:5,name:{en:"Nayeb Protect",ar:"نائب احمِ"},tag:{en:"Financial Shield",ar:"الدرع المالي"},stageName:{en:"Payment run",ar:"دورة الدفع"},
-  val:{en:"The last check before a riyal leaves the company.",ar:"آخر فحص قبل ما يطلع أي ريال من الشركة."},
-  mini:{sev:"risk",t:{en:"Payment on hold",ar:"دفعة معلّقة"},m:{en:"Vendor IBAN SA03 8000 •••• 7519 matches an employee on payroll",ar:"آيبان المورد <bdi>SA03 8000 •••• 7519</bdi> يطابق موظف في مسيّر الرواتب"}},
+ {id:"protect",name:{en:"Nayeb Protect",ar:"نايب الحماية"},tag:{en:"Financial Shield",ar:"الحماية المالية"},
+  val:{en:"A final review before payment goes out.",ar:"مراجعة أخيرة قبل الصرف."},
+  mini:{sev:"risk",t:{en:"Hold recommended",ar:"توصية بإيقاف الدفعة"},m:{en:"Vendor IBAN SA03 8000 •••• 7519 matches an employee on payroll",ar:"آيبان المورد <bdi>SA03 8000 •••• 7519</bdi> مطابق لموظف في مسيّر الرواتب"}},
   who:{en:"Finance & accounts payable (AP).",ar:"المالية والحسابات الدائنة (AP)."},
-  why:{en:"A final shield against fraud, kickbacks and billing errors before cash leaves.",ar:"آخر خط دفاع ضد الاحتيال والعمولات وأخطاء الفوترة، قبل ما يطلع الريال."},
-  how:{en:"Anomaly detection right before the AP payment run.",ar:"يفحص الحالات الشاذة مباشرة قبل تنفيذ دورة الدفع."},
+  why:{en:"Catch errors and unusual payments before they go out, so AP can review them.",ar:"رصد الأخطاء والدفعات غير المعتادة قبل الصرف، ليراجعها فريق الدائنين."},
+  how:{en:"Right before the AP payment run.",ar:"قبل تنفيذ دورة الدفع مباشرة."},
   feats:[
-   {t:{en:"Conflict of interest (HR × AP)",ar:"تضارب المصالح (الموارد البشرية × الدائنين)"},d:{en:"Vendor IBAN, phone and address vs. HR and payroll, to stop payments to employee-owned shells.",ar:"آيبان وجوال وعنوان المورد مقابل بيانات الموظفين ومسيّر الرواتب، لإيقاف الدفع لشركات وهمية تابعة لموظفين."}},
-   {t:{en:"Just-in-time shell vendor alert",ar:"تنبيه المورد المستحدث"},d:{en:"High-value invoices from vendors created days before the PO.",ar:"فواتير كبيرة من مورد انضاف في الـ Vendor Master قبل الـ PO بكم يوم."}},
-   {t:{en:"Duplicate & split order radar",ar:"رادار التكرار وتجزئة الطلبات"},d:{en:"Double billing and POs split to dodge approval limits.",ar:"فواتير مكررة، و PO مقسّمة عشان تعدّي من مصفوفة الصلاحيات."}}
+   {t:{en:"Conflict of interest check (HR × AP)",ar:"فحص تعارض المصالح (الموارد البشرية × الدائنين)"},d:{en:"Matches vendor IBAN, phone and address against HR and payroll records and alerts AP to any match.",ar:"مطابقة آيبان المورد ورقمه وعنوانه مع بيانات الموظفين ومسيّر الرواتب، والتنبيه عند أي تطابق."}},
+   {t:{en:"New vendor alert",ar:"تنبيه المورد الجديد"},d:{en:"High-value invoices from vendors created days before the PO.",ar:"فواتير بمبالغ كبيرة من مورد أُضيف في الـ Vendor Master قبل الـ PO بأيام."}},
+   {t:{en:"Duplicate & split order check",ar:"فحص التكرار وتجزئة الطلبات"},d:{en:"Double billing and POs split to stay under approval limits.",ar:"فواتير مكررة، وأوامر شراء مجزّأة بما يتجاوز مصفوفة الصلاحيات."}}
   ]},
- {id:"audit",stage:0,olive:true,name:{en:"Audit Trail",ar:"سجل نائب"},tag:{en:"Oversight",ar:"الرقابة التنفيذية"},stageName:{en:"All stages",ar:"كل المراحل"},
-  val:{en:"Every ignored warning, on record.",ar:"كل تحذير تم تجاوزه، موثّق عندك."},
-  mini:{sev:"olive",t:{en:"Exception logged",ar:"استثناء مسجّل"},m:{en:"Split-PO alert bypassed · reason: Executive Override",ar:"تجاوز تنبيه تجزئة PO · السبب: استثناء تنفيذي"}},
+ {id:"audit",olive:true,name:{en:"Audit Trail",ar:"سجل نايب"},tag:{en:"Oversight",ar:"الرقابة التنفيذية"},
+  val:{en:"Every recommendation and decision, on record.",ar:"كل توصية وكل قرار، موثّق لديك."},
+  mini:{sev:"olive",t:{en:"Decision logged",ar:"قرار مسجّل"},m:{en:"Split-PO recommendation dismissed · reason: Executive Override",ar:"تجاوز توصية تجزئة PO · السبب: استثناء تنفيذي"}},
   who:{en:"CEO, CFO, CPO & internal audit committees.",ar:"الرئيس التنفيذي، والمدير المالي، ومدير المشتريات، ولجان التدقيق الداخلي."},
-  why:{en:"Track the company's real risk tolerance and hold every department accountable.",ar:"تعرف حجم المخاطر اللي تتحمّلها الشركة فعلاً، وتحاسب كل إدارة."},
-  how:{en:"A secure executive dashboard logging user actions in real time.",ar:"لوحة رقابة تنفيذية آمنة تسجّل تصرفات المستخدمين لحظة بلحظة."},
+  why:{en:"See the real level of risk and keep every department accountable.",ar:"معرفة حجم المخاطر الفعلي، ومتابعة التزام كل إدارة."},
+  how:{en:"A secure executive dashboard that logs decisions in real time.",ar:"لوحة رقابة آمنة تسجّل القرارات لحظياً."},
   feats:[
-   {t:{en:"Silent exception logging",ar:"تسجيل صامت للاستثناءات"},d:{en:"Every time someone proceeds despite a Nayeb red flag.",ar:"كل مرة أحد يكمل في الـ ERP رغم تحذير أحمر من نائب."}},
-   {t:{en:"Mandatory reason codes",ar:"سبب تجاوز إلزامي"},d:{en:"Bypass only with a reason, such as Sole Source or Executive Override.",ar:"ما يكمل المستخدم إلا بسبب، مثل «مورد وحيد» أو «استثناء تنفيذي»."}},
-   {t:{en:"Immutable risk ledger",ar:"سجل مخاطر غير قابل للتعديل"},d:{en:"A transparent, unalterable compliance report for executives.",ar:"تقرير امتثال شفاف محد يقدر يعدّل عليه، للإدارة العليا."}}
+   {t:{en:"Exception logging",ar:"تسجيل الاستثناءات"},d:{en:"Every time a transaction goes ahead despite a Nayeb recommendation.",ar:"كل مرة تتم فيها معاملة رغم توصية من نايب."}},
+   {t:{en:"Reason codes",ar:"سبب واضح لكل تجاوز"},d:{en:"Dismissing a recommendation requires a reason, such as Sole Source or Executive Override.",ar:"عند تجاوز أي توصية يُذكر السبب، مثل «مورد وحيد» أو «استثناء تنفيذي»."}},
+   {t:{en:"Immutable risk ledger",ar:"سجل غير قابل للتعديل"},d:{en:"A transparent, unalterable compliance report for executives.",ar:"تقرير امتثال واضح لا يمكن تعديله، للإدارة العليا."}}
   ]}
 ];
 
 const ROLES = [
  {id:"dept",label:{en:"Department Head",ar:"رؤساء الأقسام"},
-  pain:{en:"It's Q4, the budget report says you're spent, and your last PR came back twice for missing specs.",ar:"آخر ربع في السنة، وتقرير الميزانية يقول خلصت، وآخر PR رجع لك مرتين لأن المواصفات ناقصة."},
-  fit:{draft:{en:"See this year's real available budget, then submit a PR built from specs that already passed.",ar:"تشوف ميزانيتك المتاحة فعلاً هالسنة، وترفع PR مبني على مواصفات سبق واعتمدت."}}},
+  pain:{en:"It's Q4, the budget report says you're spent, and your last PR came back twice for missing specs.",ar:"نهاية السنة، والتقرير يقول إن الميزانية انتهت، وآخر طلب شراء أُعيد مرتين بسبب نقص المواصفات."},
+  fit:{draft:{en:"See the budget you actually have this year, then submit a PR built from specs that already passed.",ar:"تعرف ميزانيتك المتاحة فعلاً، وترفع طلب شراء مبنياً على مواصفات معتمدة سابقاً."}}},
  {id:"buyer",label:{en:"Procurement",ar:"المشتريات"},
-  pain:{en:"Same vendor wins again, a few riyals under a cap that's meant to be internal. Sharp pricing, or a leak?",ar:"نفس المورد يفوز مرة ثانية، وعرضه تحت السقف الداخلي بكم ريال بس. شطارة ولا فيه تسريب؟"},
-  fit:{vendor:{en:"A ranked shortlist with TCO and compliance scores, plus a warning when a win looks too convenient.",ar:"قائمة مختصرة مرتّبة بالتكلفة الإجمالية ودرجات الامتثال، وتنبيه إذا فيه ترسية شكلها مريح زيادة."},
-       save:{en:"Counter any bid with the exact price on your last PO, and get 60 days' warning before a contract auto-renews with rebates unclaimed.",ar:"ترد على أي عرض بالسعر الفعلي في آخر PO، وتوصلك تنبيهات قبل تجديد أي عقد بـ 60 يوم مع الخصومات اللي ما انطالب فيها."}}},
+  pain:{en:"The same vendor wins again, very close to the internal cap. Coincidence?",ar:"المورد نفسه يفوز مرة أخرى، وبسعر قريب جداً من السقف الداخلي. هل هي صدفة؟"},
+  fit:{vendor:{en:"A ranked shortlist with TCO and compliance scores, plus a note when an award pattern is worth a closer look.",ar:"قائمة موردين مرتّبة حسب التكلفة الإجمالية والامتثال، مع تنبيه عند أي نمط ترسية يستحق المراجعة."},
+       save:{en:"Counter any bid with the exact price on your last PO, and get 60 days' warning before a contract auto-renews with rebates unclaimed.",ar:"ترد على أي عرض بآخر سعر في الـ PO، وتصلك تنبيهات قبل تجديد العقود بـ 60 يوماً مع الخصومات التي لم يُطالب بها."}}},
  {id:"recv",label:{en:"Receiving & Warehouse",ar:"الاستلام والمستودعات"},
-  pain:{en:"Invoice says 400 units, the warehouse logged 360, and you have two inspectors for 90 deliveries.",ar:"الفاتورة 400 وحدة والمستودع مسجّل 360، وعندك مفتّشين اثنين لـ 90 شحنة."},
-  fit:{verify:{en:"Know which invoices don't match the GRN, and which deliveries deserve a physical check.",ar:"تعرف أي فاتورة ما تطابق الـ GRN، وأي شحنة تستاهل فحص ميداني."}}},
- {id:"ap",label:{en:"Finance & AP",ar:"المالية والدائنين"},
-  pain:{en:"The payment run is tomorrow. In 1,200 invoices, one vendor's IBAN matches an employee on payroll.",ar:"دورة الدفع بكرة. وبين 1,200 فاتورة فيه مورد آيبانه يطابق موظف في مسيّر الرواتب."},
-  fit:{protect:{en:"Hold suspicious payments before the run: employee-linked IBANs, brand-new vendors, duplicates.",ar:"توقف الدفعات المشبوهة قبل التنفيذ: آيبان مرتبط بموظف، مورد جديد، أو فاتورة مكررة."},
-       verify:{en:"Release payments knowing the PO, GRN and invoice already agree.",ar:"تصرف وأنت مطمّن إن الـ PO والـ GRN والفاتورة متطابقة."}}},
+  pain:{en:"Invoice says 400 units, the warehouse logged 360, and you have two inspectors for 90 deliveries.",ar:"الفاتورة 400 وحدة، والمستودع سجّل 360، ولديك مفتشان فقط لـ 90 شحنة."},
+  fit:{verify:{en:"Know which invoices don't match the GRN, and which deliveries deserve a physical check.",ar:"تعرف أي فاتورة لا تطابق الـ GRN، وأي شحنة تحتاج فحصاً فعلياً."}}},
+ {id:"ap",label:{en:"Finance & AP",ar:"المالية والدائنون"},
+  pain:{en:"The payment run is tomorrow, and there are 1,200 invoices to check.",ar:"دورة الدفع غداً، وأمامك 1,200 فاتورة تحتاج مراجعة."},
+  fit:{protect:{en:"Get a short list of payments to review before the run: IBAN matches, brand-new vendors, duplicates.",ar:"قائمة مختصرة بالدفعات التي تحتاج مراجعة قبل التنفيذ: تطابق آيبان، أو مورد جديد، أو فاتورة مكررة."},
+       verify:{en:"Release payments knowing the PO, GRN and invoice already agree.",ar:"صرف الدفعات بثقة بعد تطابق الـ PO والـ GRN والفاتورة."}}},
  {id:"exec",label:{en:"Executives & Audit",ar:"الإدارة العليا والتدقيق"},
-  pain:{en:"Warnings get clicked past, and you find out at year-end audit, months after the money moved.",ar:"التحذيرات يتجاوزونها بضغطة زر، وما تدري إلا في مراجعة آخر السنة بعد ما طلعت الفلوس بشهور."},
-  fit:{audit:{en:"Every bypassed alert, who bypassed it and why, in a ledger nobody can edit.",ar:"كل تنبيه تم تجاوزه، ومين تجاوزه وليش، في سجل محد يقدر يعدّله."},
-       protect:{en:"Stop internal fraud at the last gate, not at year-end audit.",ar:"توقف الاحتيال الداخلي عند آخر بوابة، مو في مراجعة آخر السنة."},
-       vendor:{en:"Spot favoritism and insider leaks across departments early.",ar:"تكتشف المحاباة وتسريب المعلومات بين الإدارات من بدري."}}}
+  pain:{en:"You only see what happened at year-end audit, months after the money moved.",ar:"لا تظهر الصورة كاملة إلا في تدقيق نهاية السنة، بعد صرف المبالغ بأشهر."},
+  fit:{audit:{en:"Every recommendation, who dismissed it and why, in a ledger nobody can edit.",ar:"كل توصية، ومن تجاوزها ولماذا، في سجل لا يمكن تعديله."},
+       protect:{en:"Unusual payments are reviewed before they go out, not at year-end.",ar:"مراجعة الدفعات غير المعتادة قبل الصرف، لا في نهاية السنة."},
+       vendor:{en:"See repeated award patterns across departments early.",ar:"ملاحظة أنماط الترسية المتكررة بين الإدارات مبكراً."}}}
 ];
 
 const FEED = [
- {m:"protect",sev:"risk",t:"08:52",msg:{en:"Vendor IBAN matches an employee on payroll · payment on hold",ar:"آيبان مورد يطابق موظف في مسيّر الرواتب · الدفعة معلّقة"}},
- {m:"draft",sev:"ok",t:"08:47",msg:{en:"SAR 412,000 freed for Marketing this year",ar:"412,000 ريال صارت متاحة للتسويق هالسنة"}},
- {m:"vendor",sev:"risk",t:"08:41",msg:{en:"Vendor won 7 of 9 tenders, each just under the internal cap",ar:"مورد فاز بـ 7 من 9 منافسات، كلها تحت السقف الداخلي بشوي"}},
- {m:"save",sev:"warn",t:"08:36",msg:{en:"Bid is 14.9% above your last PO price",ar:"العرض أعلى 14.9% من سعر آخر PO"}},
- {m:"verify",sev:"warn",t:"08:30",msg:{en:"40 units invoiced but not on the GRN",ar:"40 وحدة مفوترة وما هي موجودة في الـ GRN"}},
- {m:"audit",sev:"olive",t:"08:24",msg:{en:"Split-PO alert bypassed · reason: Executive Override",ar:"تجاوز تنبيه تجزئة PO · السبب: استثناء تنفيذي"}},
- {m:"save",sev:"warn",t:"08:18",msg:{en:"Contract auto-renews in 60 days · rebate unclaimed",ar:"عقد يتجدد تلقائي بعد 60 يوم · خصم ما انطالب فيه"}},
- {m:"protect",sev:"risk",t:"08:11",msg:{en:"Possible duplicate of INV-77098",ar:"احتمال فاتورة مكررة مع <bdi>INV-77098</bdi>"}}
+ {m:"protect",sev:"risk",t:"08:52",msg:{en:"Vendor IBAN matches an employee on payroll · hold recommended",ar:"آيبان مورد مطابق لموظف في مسيّر الرواتب · يوصي بمراجعة الدفعة"}},
+ {m:"draft",sev:"ok",t:"08:47",msg:{en:"SAR 412,000 available to Marketing this year",ar:"412,000 ريال متاحة للتسويق هذا العام"}},
+ {m:"vendor",sev:"warn",t:"08:41",msg:{en:"Vendor won 7 of 9 tenders close to the internal cap · worth a review",ar:"مورد فاز بـ 7 من 9 منافسات قريبة من السقف الداخلي · يستحق المراجعة"}},
+ {m:"save",sev:"warn",t:"08:36",msg:{en:"Bid is 14.9% above your last PO price",ar:"العرض أعلى بـ 14.9% من آخر سعر في الـ PO"}},
+ {m:"verify",sev:"warn",t:"08:30",msg:{en:"40 units invoiced but not on the GRN",ar:"40 وحدة في الفاتورة غير موجودة في الـ GRN"}},
+ {m:"audit",sev:"olive",t:"08:24",msg:{en:"Split-PO recommendation dismissed · reason: Executive Override",ar:"تجاوز توصية تجزئة PO · السبب: استثناء تنفيذي"}},
+ {m:"save",sev:"warn",t:"08:18",msg:{en:"Contract auto-renews in 60 days · rebate unclaimed",ar:"عقد يتجدد تلقائياً بعد 60 يوماً · خصم لم يُطالب به"}},
+ {m:"protect",sev:"risk",t:"08:11",msg:{en:"Possible duplicate of INV-77098 · review recommended",ar:"احتمال تكرار مع الفاتورة <bdi>INV-77098</bdi> · يوصي بالمراجعة"}}
 ];
 
 let lang = "ar", role = "all", feedStart = 0, timer = null;
@@ -548,6 +555,9 @@ function renderSelect(){
   const sel = $("#fRole"), idx = sel.selectedIndex;
   sel.innerHTML = ROLES.map(r => `<option value="${r.id}">${L(r.label)}</option>`).join("");
   sel.selectedIndex = idx > -1 ? idx : 0;
+  const e = $("#fErp"), ei = e.selectedIndex;
+  e.innerHTML = ERPS.map(x => `<option>${x}</option>`).join("") + `<option>${t("erp_other")}</option>`;
+  e.selectedIndex = ei > -1 ? ei : 0;
 }
 
 function goTo(id){
