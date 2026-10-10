@@ -475,9 +475,10 @@ const FEED = [
  {m:"protect",sev:"risk",t:"08:11",msg:{en:"Possible duplicate of INV-77098",ar:"احتمال فاتورة مكررة مع <bdi>INV-77098</bdi>"}}
 ];
 
-let lang = "en", role = "all", feedStart = 0, timer = null;
+let lang = "ar", role = "all", feedStart = 0, timer = null;
 try { const s = localStorage.getItem("nayeb-lang"); if (s === "ar" || s === "en") lang = s; } catch (e) {}
 if (location.hash === "#ar") lang = "ar";
+if (location.hash === "#en") lang = "en";
 
 const $ = s => document.querySelector(s);
 const t = k => (I[k] ? I[k][lang] : k);
