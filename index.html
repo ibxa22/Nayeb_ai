@@ -6,7 +6,7 @@
     <title>Nayeb | AI Procurement Intelligence</title>
     
     <!-- Google Fonts: Inter for English, Tajawal for Arabic -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Tajawal:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Tajawal:wght@300;400;600;700&display=swap" rel="stylesheet">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -28,22 +28,38 @@
     </script>
     <style>
         body { background-color: #FAF9F5; }
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
         /* Hide AR by default */
         [lang="en"] .lang-ar { display: none; }
         /* When AR is active, hide EN */
         [lang="ar"] .lang-en { display: none; }
+        
+        .feature-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        [dir="rtl"] .feature-list li {
+            padding-left: 0;
+            padding-right: 1.5rem;
+        }
+        .feature-list li::before {
+            content: "•";
+            color: #00A499;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        [dir="rtl"] .feature-list li::before {
+            left: auto;
+            right: 0;
+        }
     </style>
 </head>
 <body class="text-gray-800 antialiased transition-all duration-300">
 
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 glass-panel border-b border-gray-200">
+    <nav class="fixed w-full z-50 bg-white border-b border-gray-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-20">
                 <div class="flex items-center">
@@ -56,152 +72,163 @@
                         <span class="lang-en">عربي</span>
                         <span class="lang-ar">English</span>
                     </button>
-                    <a href="#demo" class="bg-nayebTeal text-white px-6 py-2 rounded-lg font-semibold hover:bg-opacity-90 transition shadow-lg">
-                        <span class="lang-en">Request Demo</span>
-                        <span class="lang-ar">اطلب عرضاً تجريبياً</span>
+                    <a href="#modules" class="bg-nayebTeal text-white px-6 py-2 rounded-lg font-semibold hover:bg-opacity-90 transition">
+                        <span class="lang-en">Explore Products</span>
+                        <span class="lang-ar">استكشف المنتجات</span>
                     </a>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- Hero / Pain Point Section -->
-    <section class="pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col lg:flex-row items-center relative">
-        <!-- Text Content -->
-        <div class="lg:w-1/2 lg:pr-12 rtl:lg:pl-12 rtl:lg:pr-0 z-10">
-            <div class="inline-block bg-red-100 text-red-700 font-semibold px-4 py-1 rounded-full text-sm mb-6 lang-en">The Problem</div>
-            <div class="inline-block bg-red-100 text-red-700 font-semibold px-4 py-1 rounded-full text-sm mb-6 lang-ar">المشكلة</div>
-            
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 text-gray-900 lang-en">
-                Your ERP is hiding your <span class="text-nayebTeal">true budget.</span><br>
-                Your vendors are hiding their <span class="text-nayebOlive">true costs.</span>
-            </h1>
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 text-gray-900 lang-ar">
-                نظام الـ ERP يخفي <span class="text-nayebTeal">ميزانيتك الحقيقية.</span><br>
-                وموردوك يخفون <span class="text-nayebOlive">تكلفتهم الفعلية.</span>
-            </h1>
-            
-            <p class="text-lg md:text-xl text-gray-600 mb-8 lang-en">
-                Millions of Riyals are trapped in accrual accounting blind spots, auto-renewing contracts, and unchecked vendor compliance. Nayeb is the AI-powered read-only overlay that translates your ERP data into actionable truth. Zero integration risk. ZATCA & Nitaqat compliant.
-            </p>
-            <p class="text-lg md:text-xl text-gray-600 mb-8 lang-ar">
-                ملايين الريالات محتجزة في نقاط عمياء محاسبية، وعقود تتجدد تلقائياً، وموردين غير ملتزمين. "نائب" هو طبقة ذكاء اصطناعي (للقراءة فقط) تترجم بيانات نظامك إلى حقائق قابلة للتنفيذ. بدون مخاطر تكامل، وداعم متكامل لاشتراطات هيئة الزكاة والمحتوى المحلي.
-            </p>
-            
-            <div class="flex flex-col sm:flex-row gap-4">
-                <a href="#modules" class="bg-nayebOlive text-white text-center px-8 py-4 rounded-lg font-bold hover:bg-opacity-90 transition shadow-lg lang-en">See How It Works</a>
-                <a href="#modules" class="bg-nayebOlive text-white text-center px-8 py-4 rounded-lg font-bold hover:bg-opacity-90 transition shadow-lg lang-ar">شاهد كيف يعمل</a>
-            </div>
-        </div>
-
-        <!-- Image Content (Glassmorphism Overlay Concept) -->
-        <div class="lg:w-1/2 mt-16 lg:mt-0 relative">
-            <div class="absolute inset-0 bg-gradient-to-tr from-nayebTeal to-nayebOlive opacity-20 rounded-3xl transform rotate-3"></div>
-            <div class="glass-panel p-2 rounded-3xl shadow-2xl relative transform -rotate-2 hover:rotate-0 transition duration-500">
-                <img src="watermarked_img_6976720104025021614.jpg" alt="Nayeb Dashboard Interface" class="rounded-2xl w-full h-auto">
-                <!-- Floating Alert Element -->
-                <div class="absolute -bottom-6 -left-6 bg-white p-4 rounded-xl shadow-xl border-l-4 border-nayebTeal animate-bounce">
-                    <p class="text-xs text-gray-500 lang-en">Nayeb Draft Alert</p>
-                    <p class="text-xs text-gray-500 lang-ar">تنبيه نائب صُغ</p>
-                    <p class="font-bold text-gray-900 lang-en">500,000 SAR Hidden Budget Found</p>
-                    <p class="font-bold text-gray-900 lang-ar">تم العثور على ميزانية مخفية بقيمة 500,000 ريال</p>
-                </div>
-            </div>
-        </div>
+    <!-- Clean Hero Section -->
+    <section class="pt-32 pb-16 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto text-center">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 text-gray-900 lang-en">
+            The AI Intelligence Overlay for Your ERP
+        </h1>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 text-gray-900 lang-ar">
+            طبقة الذكاء الاصطناعي لنظامك المالي
+        </h1>
+        
+        <p class="text-lg md:text-xl text-gray-600 mb-8 lang-en">
+            Nayeb is a read-only diagnostic overlay that sits on top of your existing ERP. It translates raw data into actionable truth—revealing hidden budgets, exposing true vendor costs, enforcing Saudi compliance (ZATCA/Nitaqat), and stopping financial leakage before it happens. Zero integration risk.
+        </p>
+        <p class="text-lg md:text-xl text-gray-600 mb-8 lang-ar">
+            "نائب" هو طبقة تحليلية (للقراءة فقط) تعمل فوق نظام الـ ERP الخاص بك. يترجم البيانات الخام إلى حقائق قابلة للتنفيذ—يكشف الميزانيات المخفية، ويوضح التكاليف الحقيقية للموردين، ويفرض الامتثال لاشتراطات المملكة (الزكاة ونطاقات)، ويوقف التسرب المالي قبل حدوثه. وبدون أي مخاطر في التكامل البرمجي.
+        </p>
     </section>
 
-    <!-- Product Modules Section -->
-    <section id="modules" class="py-20 bg-white">
+    <!-- Product Modules Section (Detailed) -->
+    <section id="modules" class="py-16 bg-white border-t border-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold text-gray-900 lang-en">The Intelligence Layer Your ERP is Missing</h2>
-                <h2 class="text-3xl font-bold text-gray-900 lang-ar">طبقة الذكاء التي يفتقدها نظامك المالي</h2>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Module 1 -->
-                <div class="bg-nayebOffWhite p-8 rounded-2xl border border-gray-100 hover:shadow-xl transition relative overflow-hidden group">
-                    <div class="absolute top-0 right-0 w-2 h-full bg-nayebTeal transform translate-x-2 group-hover:translate-x-0 transition rtl:right-auto rtl:left-0 rtl:-translate-x-2 rtl:group-hover:translate-x-0"></div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2 lang-en">Nayeb Draft <span class="text-gray-400 font-normal">· Smart Intake</span></h3>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2 lang-ar">نائب صُغ <span class="text-gray-400 font-normal">· الطلب الذكي</span></h3>
-                    <p class="text-nayebTeal font-semibold mb-4 lang-en">The True Budget Translator</p>
-                    <p class="text-nayebTeal font-semibold mb-4 lang-ar">مترجم الميزانية الحقيقية</p>
-                    <p class="text-gray-600 text-sm lang-en">Translates ERP accrual accounting into operational reality, showing business units their "Hidden Funds" before they draft a PR.</p>
-                    <p class="text-gray-600 text-sm lang-ar">يترجم المحاسبة الاستحقاقية إلى واقع تشغيلي، ويعرض للوحدات الميزانية المخفية قبل صياغة طلب الشراء.</p>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                
+                <!-- Nayeb Draft -->
+                <div class="bg-nayebOffWhite p-8 rounded-2xl border border-gray-200 shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-1 lang-en">Nayeb Draft <span class="text-gray-400 font-normal">· Smart Intake</span></h3>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-1 lang-ar">نائب صُغ <span class="text-gray-400 font-normal">· الطلب الذكي</span></h3>
+                    <p class="text-nayebTeal font-semibold mb-6 lang-en">Aligns business needs with actual budgets.</p>
+                    <p class="text-nayebTeal font-semibold mb-6 lang-ar">مواءمة احتياجات العمل مع الميزانيات الفعلية.</p>
+                    
+                    <ul class="feature-list text-gray-700 text-sm space-y-2 lang-en">
+                        <li><strong>Historical SOW Templates:</strong> Extracts technical specs and SLAs from historically successful, zero-change-order ERP PRs.</li>
+                        <li><strong>True Budget Translator:</strong> Applies accrual accounting logic to active POs, showing business units their available "Hidden Funds" for the current year.</li>
+                        <li><strong>ERP-Ready Outputs:</strong> Generates clean, compliant PR drafts ready for immediate ERP upload.</li>
+                        <li class="mt-4"><span class="bg-blue-100 text-blue-800 text-xs font-bold px-2 py-1 rounded">Coming Soon</span> <strong>External Market Benchmarking:</strong> Provides realistic budget estimates for net-new requests based on live industry averages.</li>
+                    </ul>
+                    <ul class="feature-list text-gray-700 text-sm space-y-2 lang-ar">
+                        <li><strong>نماذج كراسات الشروط التاريخية:</strong> استخراج المواصفات الفنية واتفاقيات مستوى الخدمة من طلبات الشراء الناجحة السابقة.</li>
+                        <li><strong>مترجم الميزانية الحقيقية:</strong> يطبق منطق المحاسبة الاستحقاقية على أوامر الشراء الفعالة، ليعرض للوحدات الميزانية المتبقية الفعلية لهذا العام.</li>
+                        <li><strong>مخرجات جاهزة للنظام:</strong> إنشاء مسودات طلبات شراء نظيفة ومتوافقة وجاهزة للرفع المباشر.</li>
+                        <li class="mt-4"><span class="bg-blue-100 text-blue-800 text-xs font-bold px-2 py-1 rounded">قريباً</span> <strong>المقارنة المعيارية للسوق:</strong> توفير تقديرات ميزانية واقعية للطلبات الجديدة بناءً على متوسطات السوق الحية.</li>
+                    </ul>
                 </div>
 
-                <!-- Module 2 -->
-                <div class="bg-nayebOffWhite p-8 rounded-2xl border border-gray-100 hover:shadow-xl transition relative overflow-hidden group">
-                    <div class="absolute top-0 right-0 w-2 h-full bg-nayebOlive transform translate-x-2 group-hover:translate-x-0 transition rtl:right-auto rtl:left-0 rtl:-translate-x-2 rtl:group-hover:translate-x-0"></div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2 lang-en">Nayeb Vendor <span class="text-gray-400 font-normal">· Compliance</span></h3>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2 lang-ar">نائب المورّد <span class="text-gray-400 font-normal">· التقييم والمطابقة</span></h3>
-                    <p class="text-nayebOlive font-semibold mb-4 lang-en">Saudi Compliance Radar</p>
-                    <p class="text-nayebOlive font-semibold mb-4 lang-ar">رادار الامتثال السعودي</p>
-                    <p class="text-gray-600 text-sm lang-en">Evaluates vendors on true historical cost (TCO) and ranks them instantly on Local Content, Nitaqat, and ZATCA compliance.</p>
-                    <p class="text-gray-600 text-sm lang-ar">يقيّم الموردين بناءً على التكلفة الفعلية التاريخية ويرتبهم فوراً حسب المحتوى المحلي ونطاقات والتزام الزكاة.</p>
+                <!-- Nayeb Vendor -->
+                <div class="bg-nayebOffWhite p-8 rounded-2xl border border-gray-200 shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-1 lang-en">Nayeb Vendor <span class="text-gray-400 font-normal">· Compliance</span></h3>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-1 lang-ar">نائب المورّد <span class="text-gray-400 font-normal">· التقييم والمطابقة</span></h3>
+                    <p class="text-nayebOlive font-semibold mb-6 lang-en">Ranks vendors on reality, not just bids.</p>
+                    <p class="text-nayebOlive font-semibold mb-6 lang-ar">تقييم الموردين بناءً على الواقع، وليس العروض فقط.</p>
+                    
+                    <ul class="feature-list text-gray-700 text-sm space-y-2 lang-en">
+                        <li><strong>TCO Scorecards:</strong> Evaluates vendors based on actual historical lead times, delay rates, and change-order frequency, overriding marketing claims.</li>
+                        <li><strong>National Compliance Radar:</strong> Instantly highlights a vendor’s Local Content (المحتوى المحلي) score, Saudization (Nitaqat) tier, and ZATCA e-invoicing history.</li>
+                        <li><strong>Automated Vendor Debriefs:</strong> Generates read-only PDF reports for losing vendors, explaining exactly where their bid fell short to improve future supplier relationships.</li>
+                    </ul>
+                    <ul class="feature-list text-gray-700 text-sm space-y-2 lang-ar">
+                        <li><strong>بطاقات التكلفة الإجمالية:</strong> تقييم الموردين بناءً على أوقات التسليم الفعلية، ومعدلات التأخير، وتكرار أوامر التغيير السابقة.</li>
+                        <li><strong>رادار الامتثال الوطني:</strong> يبرز فوراً نقاط المحتوى المحلي للمورد، وتصنيف نطاقات، وسجل التزامه بفوترة الزكاة (ZATCA).</li>
+                        <li><strong>تقارير إفادة تلقائية:</strong> إصدار تقارير PDF تشرح للموردين الخاسرين أسباب خسارة المناقصة لتحسين جودة العروض المستقبلية.</li>
+                    </ul>
                 </div>
 
-                <!-- Module 3 -->
-                <div class="bg-nayebOffWhite p-8 rounded-2xl border border-gray-100 hover:shadow-xl transition relative overflow-hidden group">
-                    <div class="absolute top-0 right-0 w-2 h-full bg-nayebTeal transform translate-x-2 group-hover:translate-x-0 transition rtl:right-auto rtl:left-0 rtl:-translate-x-2 rtl:group-hover:translate-x-0"></div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2 lang-en">Nayeb Save <span class="text-gray-400 font-normal">· Commercial</span></h3>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2 lang-ar">نائب وفّر <span class="text-gray-400 font-normal">· التجاري</span></h3>
-                    <p class="text-nayebTeal font-semibold mb-4 lang-en">Market Benchmark Arbitrage</p>
-                    <p class="text-nayebTeal font-semibold mb-4 lang-ar">المقارنة المعيارية للسوق</p>
-                    <p class="text-gray-600 text-sm lang-en">Flags price variance against past purchases and external market data, giving procurement hard leverage to negotiate lower bids.</p>
-                    <p class="text-gray-600 text-sm lang-ar">يكشف تباين الأسعار مقارنة بالمشتريات السابقة وبيانات السوق، مما يمنح المشتريات قوة تفاوضية فعلية لخفض التكاليف.</p>
+                <!-- Nayeb Save -->
+                <div class="bg-nayebOffWhite p-8 rounded-2xl border border-gray-200 shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-1 lang-en">Nayeb Save <span class="text-gray-400 font-normal">· Commercial Leverage</span></h3>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-1 lang-ar">نائب وفّر <span class="text-gray-400 font-normal">· القوة التجارية</span></h3>
+                    <p class="text-nayebTeal font-semibold mb-6 lang-en">Data ammunition to negotiate and cut costs.</p>
+                    <p class="text-nayebTeal font-semibold mb-6 lang-ar">بيانات دقيقة للتفاوض وخفض التكاليف.</p>
+                    
+                    <ul class="feature-list text-gray-700 text-sm space-y-2 lang-en">
+                        <li><strong>Internal Price Variance:</strong> Cross-references proposed bids against the exact prices paid for the same items in your ERP previously.</li>
+                        <li><strong>Leakage Detection:</strong> Identifies unclaimed rebates and alerts management to bad contracts 60 days before they auto-renew.</li>
+                        <li class="mt-4"><span class="bg-blue-100 text-blue-800 text-xs font-bold px-2 py-1 rounded">Coming Soon</span> <strong>External Market Benchmarking:</strong> Compares vendor bids against anonymized market averages to expose when you are overpaying compared to industry standards.</li>
+                    </ul>
+                    <ul class="feature-list text-gray-700 text-sm space-y-2 lang-ar">
+                        <li><strong>تباين الأسعار الداخلي:</strong> مقارنة العروض المقدمة بالأسعار الفعلية المدفوعة لنفس الأصناف في النظام مسبقاً.</li>
+                        <li><strong>كشف التسرب المالي:</strong> تحديد الخصومات غير المطالب بها والتنبيه بالعقود قبل 60 يوماً من تجددها التلقائي.</li>
+                        <li class="mt-4"><span class="bg-blue-100 text-blue-800 text-xs font-bold px-2 py-1 rounded">قريباً</span> <strong>المقارنة المعيارية للسوق:</strong> مقارنة عروض الموردين بمتوسطات السوق لكشف الموردين الذين يفرضون أسعاراً أعلى من المعايير الحالية.</li>
+                    </ul>
                 </div>
 
-                <!-- Module 4 -->
-                <div class="bg-nayebOffWhite p-8 rounded-2xl border border-gray-100 hover:shadow-xl transition relative overflow-hidden group">
-                    <div class="absolute top-0 right-0 w-2 h-full bg-nayebOlive transform translate-x-2 group-hover:translate-x-0 transition rtl:right-auto rtl:left-0 rtl:-translate-x-2 rtl:group-hover:translate-x-0"></div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2 lang-en">Nayeb Protect <span class="text-gray-400 font-normal">· Financial Shield</span></h3>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2 lang-ar">نائب احمِ <span class="text-gray-400 font-normal">· الدرع المالي</span></h3>
-                    <p class="text-nayebOlive font-semibold mb-4 lang-en">Pre-Payment Fraud Radar</p>
-                    <p class="text-nayebOlive font-semibold mb-4 lang-ar">رادار الاحتيال قبل الدفع</p>
-                    <p class="text-gray-600 text-sm lang-en">Pauses high-risk payments by catching duplicate invoices, split POs, and unauthorized bank routing changes right before the AP run.</p>
-                    <p class="text-gray-600 text-sm lang-ar">يوقف الدفعات الخطرة بالتقاط الفواتير المكررة، وأوامر الشراء المجزأة، والتغييرات البنكية قبل دورة الدفع.</p>
+                <!-- Nayeb Verify -->
+                <div class="bg-nayebOffWhite p-8 rounded-2xl border border-gray-200 shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-1 lang-en">Nayeb Verify <span class="text-gray-400 font-normal">· Quality Control</span></h3>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-1 lang-ar">نائب تحقّق <span class="text-gray-400 font-normal">· مراقبة الجودة</span></h3>
+                    <p class="text-nayebOlive font-semibold mb-6 lang-en">Ensures you actually get what you paid for.</p>
+                    <p class="text-nayebOlive font-semibold mb-6 lang-ar">يضمن استلامك لما دفعت ثمنه فعلياً.</p>
+                    
+                    <ul class="feature-list text-gray-700 text-sm space-y-2 lang-en">
+                        <li><strong>The 3-Way Match Detective:</strong> Automatically cross-checks Purchase Orders, Goods Receipts, and Invoices.</li>
+                        <li><strong>Phantom Inventory Alerts:</strong> Instantly flags items that have been invoiced by the vendor but have no corresponding receipt logged in the ERP.</li>
+                        <li><strong>Targeted Spot-Checks:</strong> Analyzes historical vendor failure rates to suggest exactly which specific line items operations should physically verify.</li>
+                    </ul>
+                    <ul class="feature-list text-gray-700 text-sm space-y-2 lang-ar">
+                        <li><strong>محقق المطابقة الثلاثية:</strong> مطابقة تلقائية بين أوامر الشراء، وإيصالات الاستلام، والفواتير.</li>
+                        <li><strong>تنبيهات المخزون الوهمي:</strong> رصد الأصناف التي تمت فوترتها ولم يُسجل استلامها في النظام.</li>
+                        <li><strong>توجيه الفحص الميداني:</strong> تحليل معدلات فشل الموردين السابقة لاقتراح الأصناف الدقيقة التي تتطلب فحصاً مادياً من قبل فريق العمليات.</li>
+                    </ul>
                 </div>
 
-                <!-- Module 5 -->
-                <div class="bg-nayebOffWhite p-8 rounded-2xl border border-gray-100 hover:shadow-xl transition relative overflow-hidden group">
-                    <div class="absolute top-0 right-0 w-2 h-full bg-nayebTeal transform translate-x-2 group-hover:translate-x-0 transition rtl:right-auto rtl:left-0 rtl:-translate-x-2 rtl:group-hover:translate-x-0"></div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2 lang-en">Nayeb Verify <span class="text-gray-400 font-normal">· Quality Control</span></h3>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2 lang-ar">نائب تحقّق <span class="text-gray-400 font-normal">· مراقبة الجودة</span></h3>
-                    <p class="text-nayebTeal font-semibold mb-4 lang-en">The 3-Way Match Detective</p>
-                    <p class="text-nayebTeal font-semibold mb-4 lang-ar">محقق المطابقة الثلاثية</p>
-                    <p class="text-gray-600 text-sm lang-en">Cross-checks POs, Goods Receipts, and Invoices. Identifies "Phantom Inventory" and flags specific lines requiring physical spot-checks.</p>
-                    <p class="text-gray-600 text-sm lang-ar">يطابق أوامر الشراء والاستلام والفواتير. يحدد "المخزون الوهمي" ويوجه العمليات لمواقع الفحص الميداني بدقة.</p>
+                <!-- Nayeb Protect -->
+                <div class="bg-nayebOffWhite p-8 rounded-2xl border border-gray-200 shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-1 lang-en">Nayeb Protect <span class="text-gray-400 font-normal">· Financial Shield</span></h3>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-1 lang-ar">نائب احمِ <span class="text-gray-400 font-normal">· الدرع المالي</span></h3>
+                    <p class="text-nayebTeal font-semibold mb-6 lang-en">Stops wrong payments right before the AP run.</p>
+                    <p class="text-nayebTeal font-semibold mb-6 lang-ar">يوقف الدفعات الخاطئة قبل دورة الدفع.</p>
+                    
+                    <ul class="feature-list text-gray-700 text-sm space-y-2 lang-en">
+                        <li><strong>Duplicate Invoice Radar:</strong> Catches double-billing attempts even if submitted on different dates or with slightly modified invoice numbers.</li>
+                        <li><strong>Split Order Detection:</strong> Identifies POs that were maliciously split into smaller amounts to bypass executive approval limits.</li>
+                        <li><strong>Fraud Prevention:</strong> Flags suspicious, unverified changes to vendor bank routing details prior to releasing funds.</li>
+                    </ul>
+                    <ul class="feature-list text-gray-700 text-sm space-y-2 lang-ar">
+                        <li><strong>رادار الفواتير المكررة:</strong> التقاط محاولات الفوترة المزدوجة حتى وإن قُدمت بتواريخ مختلفة أو بأرقام فواتير معدلة قليلاً.</li>
+                        <li><strong>رصد تجزئة الطلبات:</strong> تحديد أوامر الشراء التي تم تقسيمها للتحايل على صلاحيات الاعتماد المالي.</li>
+                        <li><strong>منع الاحتيال البنكي:</strong> التنبيه عند حدوث تغييرات مفاجئة وغير معتمدة في تفاصيل الحسابات البنكية للموردين قبل تحويل الأموال.</li>
+                    </ul>
                 </div>
 
-                <!-- Module 6 -->
-                <div class="bg-nayebOffWhite p-8 rounded-2xl border border-gray-100 hover:shadow-xl transition relative overflow-hidden group">
-                    <div class="absolute top-0 right-0 w-2 h-full bg-nayebOlive transform translate-x-2 group-hover:translate-x-0 transition rtl:right-auto rtl:left-0 rtl:-translate-x-2 rtl:group-hover:translate-x-0"></div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2 lang-en">Audit Trail <span class="text-gray-400 font-normal">· Oversight</span></h3>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2 lang-ar">سجل نائب <span class="text-gray-400 font-normal">· الرقابة</span></h3>
-                    <p class="text-nayebOlive font-semibold mb-4 lang-en">Executive Accountability</p>
-                    <p class="text-nayebOlive font-semibold mb-4 lang-ar">المساءلة الإدارية</p>
-                    <p class="text-gray-600 text-sm lang-en">Silently logs whenever a user ignores a Nayeb alert, requiring a mandatory reason code for executive review and compliance tracking.</p>
-                    <p class="text-gray-600 text-sm lang-ar">يسجل بصمت كل تجاوز لتنبيهات النظام، ملزماً المستخدم بإدخال "رمز سبب" لتتم مراجعته من قبل الإدارة العليا.</p>
+                <!-- Nayeb Audit Trail -->
+                <div class="bg-nayebOffWhite p-8 rounded-2xl border border-gray-200 shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-1 lang-en">Audit Trail <span class="text-gray-400 font-normal">· Oversight</span></h3>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-1 lang-ar">سجل نائب <span class="text-gray-400 font-normal">· الرقابة التنفيذية</span></h3>
+                    <p class="text-nayebOlive font-semibold mb-6 lang-en">Tracks organizational risk and bypassed warnings.</p>
+                    <p class="text-nayebOlive font-semibold mb-6 lang-ar">يتتبع المخاطر التنظيمية والتنبيهات المتجاوزة.</p>
+                    
+                    <ul class="feature-list text-gray-700 text-sm space-y-2 lang-en">
+                        <li><strong>Silent Exception Logging:</strong> Automatically tracks every instance where a user proceeds in the ERP despite a Nayeb red-flag warning.</li>
+                        <li><strong>Mandatory Reason Codes:</strong> Forces users to justify bypassed alerts by selecting a formal reason (e.g., Sole Source, Executive Override, Emergency).</li>
+                        <li><strong>Immutable Risk Ledger:</strong> Creates a transparent, unalterable report for executives to review compliance behavior across all departments.</li>
+                    </ul>
+                    <ul class="feature-list text-gray-700 text-sm space-y-2 lang-ar">
+                        <li><strong>تسجيل التجاوزات بصمت:</strong> التتبع التلقائي لكل حالة يتجاهل فيها المستخدم تنبيهاً عالي الخطورة من النظام.</li>
+                        <li><strong>رموز الأسباب الإلزامية:</strong> إجبار المستخدمين على تبرير تجاوز التنبيهات باختيار سبب رسمي (مثل: مورد حصري، توجيه إداري، طوارئ).</li>
+                        <li><strong>سجل مخاطر غير قابل للتعديل:</strong> إنشاء تقرير شفاف ونهائي للإدارة العليا لمراجعة سلوك الامتثال عبر جميع الإدارات.</li>
+                    </ul>
                 </div>
+
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-gray-300 py-12 border-t-4 border-nayebTeal">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
-            <div class="mb-6 md:mb-0 text-center md:text-left rtl:md:text-right">
-                <img src="assets/nayeblogo.svg" alt="Nayeb Logo" class="h-10 w-auto mb-4 filter grayscale brightness-200 opacity-80 mx-auto md:mx-0">
-                <p class="text-sm lang-en">© 2026 Nayeb Intelligence. All rights reserved.</p>
-                <p class="text-sm lang-ar">© 2026 ذكاء نائب. جميع الحقوق محفوظة.</p>
-            </div>
-            <div class="flex space-x-6 rtl:space-x-reverse">
-                <a href="#" class="hover:text-white transition lang-en">Privacy Policy</a>
-                <a href="#" class="hover:text-white transition lang-ar">سياسة الخصوصية</a>
-                <a href="#" class="hover:text-white transition lang-en">Terms of Service</a>
-                <a href="#" class="hover:text-white transition lang-ar">شروط الخدمة</a>
-            </div>
+    <footer class="bg-white text-gray-500 py-12 border-t border-gray-200 text-center">
+        <div class="max-w-7xl mx-auto px-4">
+            <img src="assets/nayeblogo.svg" alt="Nayeb Logo" class="h-10 w-auto mb-4 mx-auto opacity-50 grayscale">
+            <p class="text-sm lang-en">© 2026 Nayeb Intelligence. All rights reserved. Built for modern ERP environments.</p>
+            <p class="text-sm lang-ar">© 2026 ذكاء نائب. جميع الحقوق محفوظة. صُمم لبيئات الأنظمة المالية الحديثة.</p>
         </div>
     </footer>
 
