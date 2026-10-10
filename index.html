@@ -1,460 +1,222 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr" class="scroll-smooth">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nayeb | AI Procurement Intelligence Overlay</title>
+    <title>Nayeb | AI Procurement Intelligence</title>
     
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- Google Fonts: Inter for English, Tajawal for Arabic -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Tajawal:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        brand: {
-                            teal: '#00A499',
-                            olive: '#6B8E5F',
-                            offwhite: '#FAF9F5',
-                            slate: '#1e293b'
-                        }
+                        nayebTeal: '#00A499',
+                        nayebOlive: '#6B8E5F',
+                        nayebOffWhite: '#FAF9F5',
                     },
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'], 
-                        arabic: ['Cairo', 'sans-serif'],
-                    },
-                    animation: {
-                        'float': 'float 6s ease-in-out infinite',
-                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-10px)' },
-                        }
+                        sans: ['Inter', 'Tajawal', 'sans-serif'],
                     }
                 }
             }
         }
     </script>
-
     <style>
-        /* Language Display Logic */
-        html[lang="en"] .ar { display: none !important; }
-        html[lang="ar"] .en { display: none !important; }
-        
-        /* Font Application Logic */
-        html[lang="en"] { font-family: 'Inter', sans-serif; }
-        html[lang="ar"] { font-family: 'Cairo', sans-serif; }
-
-        body { 
-            background-color: #FAF9F5; 
-            color: #1e293b; 
+        body { background-color: #FAF9F5; }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
-
-        /* Glassmorphism Utilities */
-        .glass {
-            background: rgba(255, 255, 255, 0.65);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
-        }
-        
-        .glass-dark {
-            background: rgba(30, 41, 59, 0.85);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .gradient-text {
-            background: linear-gradient(135deg, #00A499 0%, #6B8E5F 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* Custom Range Slider Styling */
-        input[type=range] {
-            -webkit-appearance: none;
-            width: 100%;
-            background: transparent;
-        }
-        input[type=range]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            height: 24px;
-            width: 24px;
-            border-radius: 50%;
-            background: #00A499;
-            cursor: pointer;
-            margin-top: -8px;
-            box-shadow: 0 2px 6px rgba(0,164,153,0.4);
-            border: 4px solid #fff;
-        }
-        input[type=range]::-webkit-slider-runnable-track {
-            width: 100%;
-            height: 8px;
-            cursor: pointer;
-            background: #e2e8f0;
-            border-radius: 4px;
-        }
-        
-        /* RTL overrides for icons */
-        html[lang="ar"] .icon-flip { transform: scaleX(-1); }
-        
-        .hero-bg {
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(0,164,153,0.08) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(107,142,95,0.08) 0%, transparent 40%);
-        }
+        /* Hide AR by default */
+        [lang="en"] .lang-ar { display: none; }
+        /* When AR is active, hide EN */
+        [lang="ar"] .lang-en { display: none; }
     </style>
 </head>
-<body class="antialiased overflow-x-hidden hero-bg">
+<body class="text-gray-800 antialiased transition-all duration-300">
 
-    <nav class="fixed w-full top-0 z-50 glass">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-panel border-b border-gray-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
-                <!-- Logo -->
-                <div class="flex-shrink-0 flex items-center gap-3 cursor-pointer">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center">
                     <img src="assets/nayeblogo.svg" alt="Nayeb Logo" class="h-10 w-auto">
-                    <span class="font-bold text-2xl text-brand-slate tracking-tight en">Nayeb</span>
-                    <span class="font-bold text-3xl text-brand-slate tracking-tight ar mt-1">نائب</span>
+                    <span class="ml-3 text-2xl font-bold text-gray-900 lang-en">Nayeb</span>
+                    <span class="mr-3 text-2xl font-bold text-gray-900 lang-ar">نائب</span>
                 </div>
-
-                <!-- Right Actions -->
-                <div class="flex items-center gap-4">
-                    <button onclick="toggleLanguage()" class="flex items-center gap-2 text-sm font-semibold text-brand-slate hover:text-brand-teal transition-colors px-4 py-2 rounded-full border border-gray-200 bg-white/50 hover:bg-white shadow-sm">
-                        <i class="ph ph-translate text-lg"></i>
-                        <span class="en">عربي</span>
-                        <span class="ar mt-1">English</span>
+                <div class="flex items-center space-x-4 rtl:space-x-reverse">
+                    <button onclick="toggleLanguage()" class="text-nayebOlive font-semibold hover:text-nayebTeal transition">
+                        <span class="lang-en">عربي</span>
+                        <span class="lang-ar">English</span>
                     </button>
-                    <a href="#demo" class="hidden sm:inline-flex items-center justify-center px-6 py-2.5 text-sm font-bold rounded-xl text-white bg-brand-slate hover:bg-black shadow-md transition-all duration-200">
-                        <span class="en">Request Demo</span>
-                        <span class="ar mt-1">اطلب عرضاً</span>
+                    <a href="#demo" class="bg-nayebTeal text-white px-6 py-2 rounded-lg font-semibold hover:bg-opacity-90 transition shadow-lg">
+                        <span class="lang-en">Request Demo</span>
+                        <span class="lang-ar">اطلب عرضاً تجريبياً</span>
                     </a>
                 </div>
             </div>
         </div>
     </nav>
 
-    <main class="pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+    <!-- Hero / Pain Point Section -->
+    <section class="pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col lg:flex-row items-center relative">
+        <!-- Text Content -->
+        <div class="lg:w-1/2 lg:pr-12 rtl:lg:pl-12 rtl:lg:pr-0 z-10">
+            <div class="inline-block bg-red-100 text-red-700 font-semibold px-4 py-1 rounded-full text-sm mb-6 lang-en">The Problem</div>
+            <div class="inline-block bg-red-100 text-red-700 font-semibold px-4 py-1 rounded-full text-sm mb-6 lang-ar">المشكلة</div>
             
-            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-brand-teal/20 text-brand-teal font-semibold text-sm mb-8 shadow-sm">
-                <i class="ph-fill ph-check-circle"></i>
-                <span class="en">100% Read-Only. Zero Integration Risk.</span>
-                <span class="ar">قراءة فقط 100٪. بدون مخاطر تكامل.</span>
-            </div>
-
-            <h1 class="text-5xl lg:text-7xl font-extrabold text-brand-slate tracking-tight mb-6 leading-tight max-w-5xl mx-auto">
-                <span class="en">The AI Diagnostic <span class="gradient-text">Overlay</span> for your ERP</span>
-                <span class="ar leading-tight">الطبقة الذكية <span class="gradient-text">لتشخيص وتحليل</span> نظام تخطيط الموارد</span>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 text-gray-900 lang-en">
+                Your ERP is hiding your <span class="text-nayebTeal">true budget.</span><br>
+                Your vendors are hiding their <span class="text-nayebOlive">true costs.</span>
+            </h1>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 text-gray-900 lang-ar">
+                نظام الـ ERP يخفي <span class="text-nayebTeal">ميزانيتك الحقيقية.</span><br>
+                وموردوك يخفون <span class="text-nayebOlive">تكلفتهم الفعلية.</span>
             </h1>
             
-            <p class="mt-4 text-xl text-brand-slate/70 mb-12 max-w-3xl mx-auto font-medium">
-                <span class="en">Nayeb sits silently on top of your existing systems. It catches fraud, identifies overpayments, and evaluates true vendor TCO before you make a costly mistake.</span>
-                <span class="ar leading-relaxed">"نائب" يعمل بصمت فوق أنظمتك الحالية. يكتشف الاحتيال، ويحدد المدفوعات الزائدة، ويقيّم التكلفة الفعلية للموردين قبل اتخاذ أي قرار مكلف.</span>
+            <p class="text-lg md:text-xl text-gray-600 mb-8 lang-en">
+                Millions of Riyals are trapped in accrual accounting blind spots, auto-renewing contracts, and unchecked vendor compliance. Nayeb is the AI-powered read-only overlay that translates your ERP data into actionable truth. Zero integration risk. ZATCA & Nitaqat compliant.
             </p>
-
-            <!-- Abstract Visual Representation of the "Overlay" -->
-            <div class="relative w-full max-w-4xl mx-auto mt-16 h-64 sm:h-80 select-none">
-                <!-- Blurred background representing the ERP -->
-                <div class="absolute inset-0 bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden flex flex-col blur-[3px] opacity-60">
-                    <div class="h-12 border-b border-gray-100 bg-gray-50 flex items-center px-4 gap-2">
-                        <div class="w-3 h-3 rounded-full bg-red-400"></div><div class="w-3 h-3 rounded-full bg-amber-400"></div><div class="w-3 h-3 rounded-full bg-green-400"></div>
-                    </div>
-                    <div class="p-6 grid grid-cols-4 gap-4 h-full">
-                        <div class="col-span-1 bg-gray-100 rounded-lg"></div>
-                        <div class="col-span-3 flex flex-col gap-4">
-                            <div class="h-8 w-1/3 bg-gray-200 rounded-md"></div>
-                            <div class="h-full bg-gray-100 rounded-lg"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Sharp Glassmorphism Overlay (Nayeb Action) -->
-                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-11/12 sm:w-2/3 lg:w-1/2 animate-float z-10">
-                    <div class="glass p-6 rounded-2xl flex items-start gap-5 relative overflow-hidden group">
-                        <div class="absolute top-0 left-0 w-1 h-full bg-brand-teal"></div>
-                        <div class="w-12 h-12 rounded-full bg-brand-teal/10 flex items-center justify-center flex-shrink-0">
-                            <i class="ph-fill ph-shield-warning text-brand-teal text-2xl"></i>
-                        </div>
-                        <div class="text-start">
-                            <h4 class="font-bold text-brand-slate text-lg mb-1">
-                                <span class="en">Nayeb Protect Alert</span>
-                                <span class="ar">تنبيه من نائب احمِ</span>
-                            </h4>
-                            <p class="text-sm text-brand-slate/70 font-medium">
-                                <span class="en">Duplicate invoice detected for Vendor #8842. Suspending $45,000 payment from the AP run.</span>
-                                <span class="ar">تم اكتشاف فاتورة مكررة للمورد رقم 8842. تم تعليق دفعة بقيمة 45,000 ريال من دورة الدفع.</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
+            <p class="text-lg md:text-xl text-gray-600 mb-8 lang-ar">
+                ملايين الريالات محتجزة في نقاط عمياء محاسبية، وعقود تتجدد تلقائياً، وموردين غير ملتزمين. "نائب" هو طبقة ذكاء اصطناعي (للقراءة فقط) تترجم بيانات نظامك إلى حقائق قابلة للتنفيذ. بدون مخاطر تكامل، وداعم متكامل لاشتراطات هيئة الزكاة والمحتوى المحلي.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4">
+                <a href="#modules" class="bg-nayebOlive text-white text-center px-8 py-4 rounded-lg font-bold hover:bg-opacity-90 transition shadow-lg lang-en">See How It Works</a>
+                <a href="#modules" class="bg-nayebOlive text-white text-center px-8 py-4 rounded-lg font-bold hover:bg-opacity-90 transition shadow-lg lang-ar">شاهد كيف يعمل</a>
             </div>
         </div>
-    </main>
 
-    <section id="roi-calculator" class="py-24 bg-white border-y border-gray-200">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl lg:text-4xl font-bold text-brand-slate mb-4">
-                    <span class="en">Calculate Your Potential Savings</span>
-                    <span class="ar">احسب مدخراتك المحتملة</span>
-                </h2>
-                <p class="text-brand-slate/60 text-lg max-w-2xl mx-auto">
-                    <span class="en">Interactive intelligence based on regional enterprise data. See the impact Nayeb can make instantly.</span>
-                    <span class="ar">ذكاء تفاعلي يعتمد على بيانات المؤسسات الإقليمية. شاهد تأثير "نائب" فوراً.</span>
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-0 rounded-3xl overflow-hidden shadow-2xl border border-gray-100">
-                <!-- Controls -->
-                <div class="bg-brand-offwhite p-10 lg:p-16 flex flex-col justify-center">
-                    
-                    <div class="mb-10">
-                        <label class="flex justify-between text-sm font-bold text-brand-slate mb-4">
-                            <span class="en">Annual Procurement Spend</span>
-                            <span class="ar">حجم الإنفاق السنوي</span>
-                            <span id="spendDisplay" class="text-brand-teal">50,000,000 SAR</span>
-                        </label>
-                        <input type="range" id="spendSlider" min="1000000" max="500000000" step="1000000" value="50000000" oninput="updateCalculator()">
-                        <div class="flex justify-between text-xs font-semibold text-gray-400 mt-2">
-                            <span>1M</span>
-                            <span>500M+</span>
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="flex justify-between text-sm font-bold text-brand-slate mb-4">
-                            <span class="en">Annual Invoice Volume</span>
-                            <span class="ar">حجم الفواتير السنوي</span>
-                            <span id="invoiceDisplay" class="text-brand-olive">10,000</span>
-                        </label>
-                        <input type="range" id="invoiceSlider" min="1000" max="100000" step="1000" value="10000" oninput="updateCalculator()">
-                        <div class="flex justify-between text-xs font-semibold text-gray-400 mt-2">
-                            <span>1k</span>
-                            <span>100k+</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Results -->
-                <div class="bg-brand-slate text-white p-10 lg:p-16 flex flex-col justify-center relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-64 h-64 bg-brand-teal rounded-full blur-[80px] opacity-20 transform translate-x-1/2 -translate-y-1/2"></div>
-                    
-                    <div class="relative z-10 space-y-10">
-                        <div>
-                            <p class="text-brand-teal text-sm font-bold uppercase tracking-wider mb-2 flex items-center gap-2">
-                                <i class="ph-fill ph-piggy-bank"></i>
-                                <span class="en">Prevented Leakage (Nayeb Save)</span>
-                                <span class="ar">منع التسرب (نائب وفّر)</span>
-                            </p>
-                            <p class="text-4xl font-extrabold" id="leakageResult">1,000,000 SAR</p>
-                            <p class="text-xs text-gray-400 mt-2 en">Based on 2% historical overpayment average.</p>
-                            <p class="text-xs text-gray-400 mt-2 ar">بناءً على متوسط 2% للمدفوعات الزائدة تاريخياً.</p>
-                        </div>
-                        
-                        <div>
-                            <p class="text-brand-olive text-sm font-bold uppercase tracking-wider mb-2 flex items-center gap-2">
-                                <i class="ph-fill ph-shield-check"></i>
-                                <span class="en">Fraud & Errors Stopped (Nayeb Protect)</span>
-                                <span class="ar">إيقاف الاحتيال والأخطاء (نائب احمِ)</span>
-                            </p>
-                            <p class="text-4xl font-extrabold" id="fraudResult">500,000 SAR</p>
-                        </div>
-
-                        <div class="pt-8 border-t border-white/10">
-                            <p class="text-white text-sm font-bold uppercase tracking-wider mb-2">
-                                <span class="en">Total Estimated ROI</span>
-                                <span class="ar">إجمالي العائد التقديري</span>
-                            </p>
-                            <p class="text-5xl lg:text-6xl font-extrabold text-white" id="totalResult">1,500,000 SAR</p>
-                        </div>
-                    </div>
+        <!-- Image Content (Glassmorphism Overlay Concept) -->
+        <div class="lg:w-1/2 mt-16 lg:mt-0 relative">
+            <div class="absolute inset-0 bg-gradient-to-tr from-nayebTeal to-nayebOlive opacity-20 rounded-3xl transform rotate-3"></div>
+            <div class="glass-panel p-2 rounded-3xl shadow-2xl relative transform -rotate-2 hover:rotate-0 transition duration-500">
+                <img src="watermarked_img_6976720104025021614.jpg" alt="Nayeb Dashboard Interface" class="rounded-2xl w-full h-auto">
+                <!-- Floating Alert Element -->
+                <div class="absolute -bottom-6 -left-6 bg-white p-4 rounded-xl shadow-xl border-l-4 border-nayebTeal animate-bounce">
+                    <p class="text-xs text-gray-500 lang-en">Nayeb Draft Alert</p>
+                    <p class="text-xs text-gray-500 lang-ar">تنبيه نائب صُغ</p>
+                    <p class="font-bold text-gray-900 lang-en">500,000 SAR Hidden Budget Found</p>
+                    <p class="font-bold text-gray-900 lang-ar">تم العثور على ميزانية مخفية بقيمة 500,000 ريال</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="py-24 bg-brand-offwhite relative" id="modules">
+    <!-- Product Modules Section -->
+    <section id="modules" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-20">
-                <h2 class="text-3xl lg:text-5xl font-bold text-brand-slate mb-6">
-                    <span class="en">The Complete Intelligence Suite</span>
-                    <span class="ar">مجموعة الذكاء المتكاملة</span>
-                </h2>
-                <div class="w-24 h-1.5 bg-brand-teal mx-auto rounded-full"></div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                
-                <!-- Draft -->
-                <div class="bg-white rounded-3xl p-8 border border-gray-200 hover:border-brand-teal hover:shadow-[0_8px_30px_rgb(0,164,153,0.12)] transition-all duration-300 transform hover:-translate-y-1 relative group cursor-default">
-                    <div class="w-14 h-14 rounded-2xl bg-brand-teal/10 flex items-center justify-center mb-6 text-brand-teal">
-                        <i class="ph-duotone ph-pen-nib text-3xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-brand-slate mb-2">
-                        <span class="en">Nayeb Draft</span>
-                        <span class="ar">نائب صُغ</span>
-                    </h3>
-                    <p class="text-brand-teal text-sm font-bold mb-4 uppercase tracking-wide">Smart SOW Intake</p>
-                    <p class="text-brand-slate/70 leading-relaxed text-start">
-                        <span class="en">Helps business units draft perfect, ERP-ready SOWs based on historically successful templates and market benchmarks.</span>
-                        <span class="ar">يساعد وحدات العمل على صياغة كراسات شروط مثالية جاهزة بناءً على النماذج الناجحة ومؤشرات السوق.</span>
-                    </p>
-                </div>
-
-                <!-- Vendor -->
-                <div class="bg-white rounded-3xl p-8 border border-gray-200 hover:border-brand-olive hover:shadow-[0_8px_30px_rgb(107,142,95,0.12)] transition-all duration-300 transform hover:-translate-y-1 relative group cursor-default">
-                    <div class="absolute top-4 right-4 rtl:left-4 rtl:right-auto px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full">
-                        <span class="en">KSA Ready</span><span class="ar">جاهز للسعودية</span>
-                    </div>
-                    <div class="w-14 h-14 rounded-2xl bg-brand-olive/10 flex items-center justify-center mb-6 text-brand-olive">
-                        <i class="ph-duotone ph-storefront text-3xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-brand-slate mb-2">
-                        <span class="en">Nayeb Vendor</span>
-                        <span class="ar">نائب المورّد</span>
-                    </h3>
-                    <p class="text-brand-olive text-sm font-bold mb-4 uppercase tracking-wide">TCO & Compliance</p>
-                    <p class="text-brand-slate/70 leading-relaxed text-start">
-                        <span class="en">Evaluates true historical vendor performance. Fully integrated for Saudi compliance: Local Content, ZATCA, and Nitaqat tracking.</span>
-                        <span class="ar">يقيّم الأداء التاريخي الحقيقي للمورد. متكامل تماماً للامتثال السعودي: المحتوى المحلي، هيئة الزكاة (ZATCA)، ونطاقات.</span>
-                    </p>
-                </div>
-
-                <!-- Save -->
-                <div class="bg-white rounded-3xl p-8 border border-gray-200 hover:border-brand-teal hover:shadow-[0_8px_30px_rgb(0,164,153,0.12)] transition-all duration-300 transform hover:-translate-y-1 relative group cursor-default">
-                    <div class="w-14 h-14 rounded-2xl bg-brand-teal/10 flex items-center justify-center mb-6 text-brand-teal">
-                        <i class="ph-duotone ph-scales text-3xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-brand-slate mb-2">
-                        <span class="en">Nayeb Save</span>
-                        <span class="ar">نائب وفّر</span>
-                    </h3>
-                    <p class="text-brand-teal text-sm font-bold mb-4 uppercase tracking-wide">Commercial Arbitrage</p>
-                    <p class="text-brand-slate/70 leading-relaxed text-start">
-                        <span class="en">Identify contract leakage and benchmark vendor bids against external market averages to maximize negotiation leverage.</span>
-                        <span class="ar">تحديد تسرب العقود ومقارنة عروض الموردين مع متوسطات السوق لتعظيم قوة التفاوض وتوفير التكاليف.</span>
-                    </p>
-                </div>
-
-                <!-- Verify -->
-                <div class="bg-white rounded-3xl p-8 border border-gray-200 hover:border-brand-olive hover:shadow-[0_8px_30px_rgb(107,142,95,0.12)] transition-all duration-300 transform hover:-translate-y-1 relative group cursor-default">
-                    <div class="w-14 h-14 rounded-2xl bg-brand-olive/10 flex items-center justify-center mb-6 text-brand-olive">
-                        <i class="ph-duotone ph-magnifying-glass text-3xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-brand-slate mb-2">
-                        <span class="en">Nayeb Verify</span>
-                        <span class="ar">نائب تحقّق</span>
-                    </h3>
-                    <p class="text-brand-olive text-sm font-bold mb-4 uppercase tracking-wide">3-Way Match Detective</p>
-                    <p class="text-brand-slate/70 leading-relaxed text-start">
-                        <span class="en">Cross-checks POs, Receipts, and Invoices. Automatically highlights phantom inventory requiring urgent physical spot-checks.</span>
-                        <span class="ar">يطابق أوامر الشراء والاستلام والفواتير بدقة. يبرز المخزون الوهمي الذي يتطلب فحصاً ميدانياً عاجلاً.</span>
-                    </p>
-                </div>
-
-                <!-- Protect -->
-                <div class="bg-white rounded-3xl p-8 border border-gray-200 hover:border-red-500 hover:shadow-[0_8px_30px_rgba(239,68,68,0.15)] transition-all duration-300 transform hover:-translate-y-1 relative group cursor-default">
-                    <div class="w-14 h-14 rounded-2xl bg-red-50 flex items-center justify-center mb-6 text-red-500">
-                        <i class="ph-duotone ph-shield-check text-3xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-brand-slate mb-2">
-                        <span class="en">Nayeb Protect</span>
-                        <span class="ar">نائب احمِ</span>
-                    </h3>
-                    <p class="text-red-500 text-sm font-bold mb-4 uppercase tracking-wide">AP Fraud Shield</p>
-                    <p class="text-brand-slate/70 leading-relaxed text-start">
-                        <span class="en">Stops duplicate invoices, split POs designed to bypass limits, and sudden vendor bank changes immediately before the payment run.</span>
-                        <span class="ar">يوقف الفواتير المكررة، وأوامر الشراء المجزأة، والتغييرات المفاجئة في حسابات البنوك قبل دورة الدفع.</span>
-                    </p>
-                </div>
-
-                <!-- Audit Trail -->
-                <div class="bg-brand-slate rounded-3xl p-8 border border-brand-slate hover:border-white/30 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 relative group cursor-default text-white">
-                    <div class="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center mb-6 text-white border border-white/20">
-                        <i class="ph-duotone ph-fingerprint text-3xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-white mb-2">
-                        <span class="en">Nayeb Audit Trail</span>
-                        <span class="ar">سجل نائب</span>
-                    </h3>
-                    <p class="text-gray-300 text-sm font-bold mb-4 uppercase tracking-wide">Executive Logging</p>
-                    <p class="text-gray-400 leading-relaxed text-start">
-                        <span class="en">Silently logs when users ignore system alerts, requiring a mandatory reason code. True accountability for executive oversight.</span>
-                        <span class="ar">يسجل بصمت تجاوزات المستخدمين لتنبيهات النظام، ويتطلب إدخال رمز سبب إلزامي. مساءلة حقيقية للإدارة.</span>
-                    </p>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <footer class="bg-brand-offwhite py-12 border-t border-gray-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="flex items-center gap-3 grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all cursor-pointer">
-                <img src="assets/nayeblogo.svg" alt="Nayeb Logo" class="h-8 w-auto">
-                <span class="text-brand-slate font-bold text-xl tracking-tight en">Nayeb</span>
-                <span class="text-brand-slate font-bold text-2xl tracking-tight ar mt-1">نائب</span>
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-900 lang-en">The Intelligence Layer Your ERP is Missing</h2>
+                <h2 class="text-3xl font-bold text-gray-900 lang-ar">طبقة الذكاء التي يفتقدها نظامك المالي</h2>
             </div>
             
-            <p class="text-brand-slate/60 text-sm font-semibold">
-                © 2026 Nayeb AI. 
-                <span class="en">All rights reserved. Riyadh, Saudi Arabia.</span>
-                <span class="ar">جميع الحقوق محفوظة. الرياض، المملكة العربية السعودية.</span>
-            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Module 1 -->
+                <div class="bg-nayebOffWhite p-8 rounded-2xl border border-gray-100 hover:shadow-xl transition relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-2 h-full bg-nayebTeal transform translate-x-2 group-hover:translate-x-0 transition rtl:right-auto rtl:left-0 rtl:-translate-x-2 rtl:group-hover:translate-x-0"></div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2 lang-en">Nayeb Draft <span class="text-gray-400 font-normal">· Smart Intake</span></h3>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2 lang-ar">نائب صُغ <span class="text-gray-400 font-normal">· الطلب الذكي</span></h3>
+                    <p class="text-nayebTeal font-semibold mb-4 lang-en">The True Budget Translator</p>
+                    <p class="text-nayebTeal font-semibold mb-4 lang-ar">مترجم الميزانية الحقيقية</p>
+                    <p class="text-gray-600 text-sm lang-en">Translates ERP accrual accounting into operational reality, showing business units their "Hidden Funds" before they draft a PR.</p>
+                    <p class="text-gray-600 text-sm lang-ar">يترجم المحاسبة الاستحقاقية إلى واقع تشغيلي، ويعرض للوحدات الميزانية المخفية قبل صياغة طلب الشراء.</p>
+                </div>
+
+                <!-- Module 2 -->
+                <div class="bg-nayebOffWhite p-8 rounded-2xl border border-gray-100 hover:shadow-xl transition relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-2 h-full bg-nayebOlive transform translate-x-2 group-hover:translate-x-0 transition rtl:right-auto rtl:left-0 rtl:-translate-x-2 rtl:group-hover:translate-x-0"></div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2 lang-en">Nayeb Vendor <span class="text-gray-400 font-normal">· Compliance</span></h3>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2 lang-ar">نائب المورّد <span class="text-gray-400 font-normal">· التقييم والمطابقة</span></h3>
+                    <p class="text-nayebOlive font-semibold mb-4 lang-en">Saudi Compliance Radar</p>
+                    <p class="text-nayebOlive font-semibold mb-4 lang-ar">رادار الامتثال السعودي</p>
+                    <p class="text-gray-600 text-sm lang-en">Evaluates vendors on true historical cost (TCO) and ranks them instantly on Local Content, Nitaqat, and ZATCA compliance.</p>
+                    <p class="text-gray-600 text-sm lang-ar">يقيّم الموردين بناءً على التكلفة الفعلية التاريخية ويرتبهم فوراً حسب المحتوى المحلي ونطاقات والتزام الزكاة.</p>
+                </div>
+
+                <!-- Module 3 -->
+                <div class="bg-nayebOffWhite p-8 rounded-2xl border border-gray-100 hover:shadow-xl transition relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-2 h-full bg-nayebTeal transform translate-x-2 group-hover:translate-x-0 transition rtl:right-auto rtl:left-0 rtl:-translate-x-2 rtl:group-hover:translate-x-0"></div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2 lang-en">Nayeb Save <span class="text-gray-400 font-normal">· Commercial</span></h3>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2 lang-ar">نائب وفّر <span class="text-gray-400 font-normal">· التجاري</span></h3>
+                    <p class="text-nayebTeal font-semibold mb-4 lang-en">Market Benchmark Arbitrage</p>
+                    <p class="text-nayebTeal font-semibold mb-4 lang-ar">المقارنة المعيارية للسوق</p>
+                    <p class="text-gray-600 text-sm lang-en">Flags price variance against past purchases and external market data, giving procurement hard leverage to negotiate lower bids.</p>
+                    <p class="text-gray-600 text-sm lang-ar">يكشف تباين الأسعار مقارنة بالمشتريات السابقة وبيانات السوق، مما يمنح المشتريات قوة تفاوضية فعلية لخفض التكاليف.</p>
+                </div>
+
+                <!-- Module 4 -->
+                <div class="bg-nayebOffWhite p-8 rounded-2xl border border-gray-100 hover:shadow-xl transition relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-2 h-full bg-nayebOlive transform translate-x-2 group-hover:translate-x-0 transition rtl:right-auto rtl:left-0 rtl:-translate-x-2 rtl:group-hover:translate-x-0"></div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2 lang-en">Nayeb Protect <span class="text-gray-400 font-normal">· Financial Shield</span></h3>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2 lang-ar">نائب احمِ <span class="text-gray-400 font-normal">· الدرع المالي</span></h3>
+                    <p class="text-nayebOlive font-semibold mb-4 lang-en">Pre-Payment Fraud Radar</p>
+                    <p class="text-nayebOlive font-semibold mb-4 lang-ar">رادار الاحتيال قبل الدفع</p>
+                    <p class="text-gray-600 text-sm lang-en">Pauses high-risk payments by catching duplicate invoices, split POs, and unauthorized bank routing changes right before the AP run.</p>
+                    <p class="text-gray-600 text-sm lang-ar">يوقف الدفعات الخطرة بالتقاط الفواتير المكررة، وأوامر الشراء المجزأة، والتغييرات البنكية قبل دورة الدفع.</p>
+                </div>
+
+                <!-- Module 5 -->
+                <div class="bg-nayebOffWhite p-8 rounded-2xl border border-gray-100 hover:shadow-xl transition relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-2 h-full bg-nayebTeal transform translate-x-2 group-hover:translate-x-0 transition rtl:right-auto rtl:left-0 rtl:-translate-x-2 rtl:group-hover:translate-x-0"></div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2 lang-en">Nayeb Verify <span class="text-gray-400 font-normal">· Quality Control</span></h3>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2 lang-ar">نائب تحقّق <span class="text-gray-400 font-normal">· مراقبة الجودة</span></h3>
+                    <p class="text-nayebTeal font-semibold mb-4 lang-en">The 3-Way Match Detective</p>
+                    <p class="text-nayebTeal font-semibold mb-4 lang-ar">محقق المطابقة الثلاثية</p>
+                    <p class="text-gray-600 text-sm lang-en">Cross-checks POs, Goods Receipts, and Invoices. Identifies "Phantom Inventory" and flags specific lines requiring physical spot-checks.</p>
+                    <p class="text-gray-600 text-sm lang-ar">يطابق أوامر الشراء والاستلام والفواتير. يحدد "المخزون الوهمي" ويوجه العمليات لمواقع الفحص الميداني بدقة.</p>
+                </div>
+
+                <!-- Module 6 -->
+                <div class="bg-nayebOffWhite p-8 rounded-2xl border border-gray-100 hover:shadow-xl transition relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-2 h-full bg-nayebOlive transform translate-x-2 group-hover:translate-x-0 transition rtl:right-auto rtl:left-0 rtl:-translate-x-2 rtl:group-hover:translate-x-0"></div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2 lang-en">Audit Trail <span class="text-gray-400 font-normal">· Oversight</span></h3>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2 lang-ar">سجل نائب <span class="text-gray-400 font-normal">· الرقابة</span></h3>
+                    <p class="text-nayebOlive font-semibold mb-4 lang-en">Executive Accountability</p>
+                    <p class="text-nayebOlive font-semibold mb-4 lang-ar">المساءلة الإدارية</p>
+                    <p class="text-gray-600 text-sm lang-en">Silently logs whenever a user ignores a Nayeb alert, requiring a mandatory reason code for executive review and compliance tracking.</p>
+                    <p class="text-gray-600 text-sm lang-ar">يسجل بصمت كل تجاوز لتنبيهات النظام، ملزماً المستخدم بإدخال "رمز سبب" لتتم مراجعته من قبل الإدارة العليا.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-12 border-t-4 border-nayebTeal">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-6 md:mb-0 text-center md:text-left rtl:md:text-right">
+                <img src="assets/nayeblogo.svg" alt="Nayeb Logo" class="h-10 w-auto mb-4 filter grayscale brightness-200 opacity-80 mx-auto md:mx-0">
+                <p class="text-sm lang-en">© 2026 Nayeb Intelligence. All rights reserved.</p>
+                <p class="text-sm lang-ar">© 2026 ذكاء نائب. جميع الحقوق محفوظة.</p>
+            </div>
+            <div class="flex space-x-6 rtl:space-x-reverse">
+                <a href="#" class="hover:text-white transition lang-en">Privacy Policy</a>
+                <a href="#" class="hover:text-white transition lang-ar">سياسة الخصوصية</a>
+                <a href="#" class="hover:text-white transition lang-en">Terms of Service</a>
+                <a href="#" class="hover:text-white transition lang-ar">شروط الخدمة</a>
+            </div>
         </div>
     </footer>
 
+    <!-- Localization Script -->
     <script>
-        // Language State Management
-        let currentLang = 'en';
-
         function toggleLanguage() {
             const htmlTag = document.documentElement;
-            currentLang = currentLang === 'en' ? 'ar' : 'en';
-            
-            htmlTag.setAttribute('lang', currentLang);
-            htmlTag.setAttribute('dir', currentLang === 'en' ? 'ltr' : 'rtl');
-            
-            // Re-render calculator to update currency formatting based on lang
-            updateCalculator();
+            if (htmlTag.lang === "en") {
+                htmlTag.lang = "ar";
+                htmlTag.dir = "rtl";
+            } else {
+                htmlTag.lang = "en";
+                htmlTag.dir = "ltr";
+            }
         }
-
-        // Smart ROI Calculator Logic
-        const formatSAR = (amount) => {
-            // Using standard toLocaleString with SAR suffix for clean enterprise look
-            const formattedNum = amount.toLocaleString('en-US');
-            return currentLang === 'en' ? `${formattedNum} SAR` : `${formattedNum} ر.س`;
-        };
-
-        function updateCalculator() {
-            const spend = parseFloat(document.getElementById('spendSlider').value) || 0;
-            const invoices = parseFloat(document.getElementById('invoiceSlider').value) || 0;
-
-            // Mathematical Model based on prompt (Est. 2% savings/leakage/fraud prevention)
-            // Splitting the 2% logic: 1.5% from Save (Leakage/Arbitrage), 0.5% + fixed cost per invoice from Protect
-            const leakageSavings = spend * 0.015; 
-            const fraudSavings = (spend * 0.005) + (invoices * 10); // Arbitrary smart calculation incorporating invoice volume
-            const totalROI = leakageSavings + fraudSavings;
-
-            // Update DOM
-            document.getElementById('spendDisplay').innerText = formatSAR(spend);
-            document.getElementById('invoiceDisplay').innerText = invoices.toLocaleString('en-US'); // No currency on count
-            
-            document.getElementById('leakageResult').innerText = formatSAR(leakageSavings);
-            document.getElementById('fraudResult').innerText = formatSAR(fraudSavings);
-            document.getElementById('totalResult').innerText = formatSAR(totalROI);
-        }
-
-        // Initialize Calculator on page load
-        document.addEventListener('DOMContentLoaded', updateCalculator);
     </script>
 </body>
 </html>
