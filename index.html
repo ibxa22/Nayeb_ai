@@ -1,4 +1,9 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="نايب: طبقة الذكاء الاصطناعي لإدارة ومتابعة المشتريات">
 <title>Nayeb</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -200,7 +205,9 @@ html[lang="ar"] .cta h2{letter-spacing:0;line-height:1.4}
 .form .fnote{font-size:14px;color:var(--bg);background:color-mix(in srgb,var(--teal) 30%,var(--ink));border-radius:12px;padding:10px 12px}
 footer{padding-block:28px;color:var(--muted);font-size:13px}
 </style>
-
+<style>body{margin:0}[hidden]{display:none!important}</style>
+</head>
+<body>
 <header class="nav">
   <div class="wrap flex items-center justify-between gap-4 py-3">
     <a href="#top" class="brand" aria-label="Nayeb">
@@ -214,6 +221,7 @@ footer{padding-block:28px;color:var(--muted);font-size:13px}
     </nav>
     <div class="flex items-center gap-2">
       <button id="langBtn" class="btn btn-light btn-sm lang-btn" type="button">English</button>
+      <a href="demo.html" class="btn btn-light btn-sm hidden sm:inline-flex" data-i18n="cta_demo"></a>
       <a href="#demo" class="btn btn-dark btn-sm hidden sm:inline-flex" data-i18n="cta_book"></a>
     </div>
   </div>
@@ -226,7 +234,8 @@ footer{padding-block:28px;color:var(--muted);font-size:13px}
     <p class="lead" data-i18n="hero_sub"></p>
     <div class="flex flex-wrap justify-center gap-3">
       <a href="#demo" class="btn btn-dark" data-i18n="cta_book"></a>
-      <a href="#story" class="btn btn-light"><span data-i18n="cta_story"></span> <span class="flip" aria-hidden="true">→</span></a>
+      <a href="demo.html" class="btn btn-light"><span data-i18n="cta_demo"></span> <span class="flip" aria-hidden="true">→</span></a>
+      <a href="#story" class="btn btn-light"><span data-i18n="cta_story"></span></a>
     </div>
   </section>
 
@@ -286,6 +295,7 @@ footer{padding-block:28px;color:var(--muted);font-size:13px}
       <div class="flex flex-col gap-4 min-w-0">
         <h2 data-i18n="c_h2"></h2>
         <p data-i18n="c_p"></p>
+        <a href="demo.html" class="btn btn-light" style="width:fit-content"><span data-i18n="cta_demo2"></span> <span class="flip" aria-hidden="true">→</span></a>
       </div>
       <form class="form" id="demoForm" novalidate>
         <label><span data-i18n="fm_name"></span><input id="fName" autocomplete="name"></label>
@@ -315,6 +325,8 @@ const I = {
   nav_sec:{en:"Security",ar:"الأمان"},
   cta_book:{en:"Request a demo",ar:"اطلب عرضاً تجريبياً"},
   cta_story:{en:"Follow one purchase",ar:"تابع قصة طلب واحد"},
+  cta_demo:{en:"Try the demo",ar:"جرّب النسخة التجريبية"},
+  cta_demo2:{en:"Or try the demo now",ar:"أو جرّب النسخة التجريبية الآن"},
   eyebrow:{en:"An AI layer on top of your ERP",ar:"طبقة ذكاء اصطناعي فوق نظام الـ ERP لديكم"},
   hero_sub:{en:"Your ERP records everything, but it doesn't tell you anything. Nayeb reads your procurement data and tells each team what needs its attention, from the request to the invoice. The decision stays with you.",
             ar:"نظام الـ ERP يسجّل كل شيء، لكنه لا يخبرك بشيء. نايب يقرأ بيانات المشتريات ويخبر كل فريق بما يحتاج انتباهه، من طلب الشراء حتى الفاتورة، والقرار يبقى لكم."},
@@ -671,4 +683,5 @@ $("#demoForm").addEventListener("submit", e => {
 applyLang();
 </script>
 
-</body></html>
+</body>
+</html>
