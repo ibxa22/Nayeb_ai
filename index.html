@@ -205,7 +205,19 @@ html[lang="ar"] .cta h2{letter-spacing:0;line-height:1.4}
 .form .fnote{font-size:14px;color:var(--bg);background:color-mix(in srgb,var(--teal) 30%,var(--ink));border-radius:12px;padding:10px 12px}
 footer{padding-block:28px;color:var(--muted);font-size:13px}
 </style>
-<style>body{margin:0}[hidden]{display:none!important}</style>
+<style>body{margin:0}[hidden]{display:none!important}
+/* demo pop-up */
+.demo-modal{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:24px;background:color-mix(in srgb,var(--ink) 55%,transparent);backdrop-filter:blur(4px)}
+.demo-box{width:min(1280px,100%);height:min(860px,100%);background:var(--surface);border-radius:20px;box-shadow:0 30px 80px -20px rgba(0,0,0,.45);display:flex;flex-direction:column;overflow:hidden}
+.demo-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px;border-bottom:1px solid var(--line);background:var(--bg)}
+.demo-bar strong{font-family:var(--font-display);font-weight:500;font-size:15px}
+.demo-bar .acts{display:flex;gap:8px}
+.demo-frame{flex:1;width:100%;border:0;background:var(--surface)}
+.icon-btn{display:inline-grid;place-items:center;width:36px;height:36px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+.icon-btn:hover{border-color:var(--teal)}
+@media (max-width:640px){.demo-modal{padding:0}.demo-box{border-radius:0;height:100%}}
+body.locked{overflow:hidden}
+</style>
 </head>
 <body>
 <header class="nav">
@@ -221,7 +233,7 @@ footer{padding-block:28px;color:var(--muted);font-size:13px}
     </nav>
     <div class="flex items-center gap-2">
       <button id="langBtn" class="btn btn-light btn-sm lang-btn" type="button">English</button>
-      <a href="demo.html" class="btn btn-light btn-sm hidden sm:inline-flex" data-i18n="cta_demo"></a>
+      <a href="demo.html" data-demo class="btn btn-light btn-sm hidden sm:inline-flex" data-i18n="cta_demo"></a>
       <a href="#demo" class="btn btn-dark btn-sm hidden sm:inline-flex" data-i18n="cta_book"></a>
     </div>
   </div>
@@ -234,7 +246,7 @@ footer{padding-block:28px;color:var(--muted);font-size:13px}
     <p class="lead" data-i18n="hero_sub"></p>
     <div class="flex flex-wrap justify-center gap-3">
       <a href="#demo" class="btn btn-dark" data-i18n="cta_book"></a>
-      <a href="demo.html" class="btn btn-light"><span data-i18n="cta_demo"></span> <span class="flip" aria-hidden="true">→</span></a>
+      <a href="demo.html" data-demo class="btn btn-light"><span data-i18n="cta_demo"></span> <span class="flip" aria-hidden="true">→</span></a>
       <a href="#story" class="btn btn-light"><span data-i18n="cta_story"></span></a>
     </div>
   </section>
@@ -295,7 +307,7 @@ footer{padding-block:28px;color:var(--muted);font-size:13px}
       <div class="flex flex-col gap-4 min-w-0">
         <h2 data-i18n="c_h2"></h2>
         <p data-i18n="c_p"></p>
-        <a href="demo.html" class="btn btn-light" style="width:fit-content"><span data-i18n="cta_demo2"></span> <span class="flip" aria-hidden="true">→</span></a>
+        <a href="demo.html" data-demo class="btn btn-light" style="width:fit-content"><span data-i18n="cta_demo2"></span> <span class="flip" aria-hidden="true">→</span></a>
       </div>
       <form class="form" id="demoForm" novalidate>
         <label><span data-i18n="fm_name"></span><input id="fName" autocomplete="name"></label>
@@ -313,6 +325,19 @@ footer{padding-block:28px;color:var(--muted);font-size:13px}
 
 </main>
 
+<div class="demo-modal" id="demoModal" role="dialog" aria-modal="true" aria-labelledby="demoTitle" hidden>
+  <div class="demo-box">
+    <div class="demo-bar">
+      <strong id="demoTitle" data-i18n="demo_title">Nayeb demo</strong>
+      <div class="acts">
+        <a class="btn btn-light btn-sm" href="demo.html" target="_blank" rel="noopener" data-i18n="demo_newwin">Open in a new window</a>
+        <button class="icon-btn" type="button" id="demoClose" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+    </div>
+    <iframe class="demo-frame" id="demoFrame" title="Nayeb demo"></iframe>
+  </div>
+</div>
+
 <footer class="wrap flex flex-wrap justify-between gap-3">
   <span>© 2026 Nayeb · نايب</span>
   <span data-i18n="foot"></span>
@@ -327,6 +352,8 @@ const I = {
   cta_story:{en:"Follow one purchase",ar:"تابع قصة طلب واحد"},
   cta_demo:{en:"Try the demo",ar:"جرّب النسخة التجريبية"},
   cta_demo2:{en:"Or try the demo now",ar:"أو جرّب النسخة التجريبية الآن"},
+  demo_title:{en:"Nayeb demo",ar:"النسخة التجريبية من نايب"},
+  demo_newwin:{en:"Open in a new window",ar:"افتح في نافذة جديدة"},
   eyebrow:{en:"An AI layer on top of your ERP",ar:"طبقة ذكاء اصطناعي فوق نظام الـ ERP لديكم"},
   hero_sub:{en:"Your ERP records everything, but it doesn't tell you anything. Nayeb reads your procurement data and tells each team what needs its attention, from the request to the invoice. The decision stays with you.",
             ar:"نظام الـ ERP يسجّل كل شيء، لكنه لا يخبرك بشيء. نايب يقرأ بيانات المشتريات ويخبر كل فريق بما يحتاج انتباهه، من طلب الشراء حتى الفاتورة، والقرار يبقى لكم."},
@@ -661,6 +688,7 @@ function applyLang(){
   b.textContent = lang === "ar" ? "English" : "العربية";
   b.setAttribute("aria-label", lang === "ar" ? "Switch to English" : "التبديل إلى العربية");
   render();
+  $("#demoClose").setAttribute("aria-label", lang === "ar" ? "إغلاق" : "Close");
   $("#formNote").hidden = true;
   try { localStorage.setItem("nayeb-lang", lang); } catch (e) {}
 }
@@ -680,6 +708,28 @@ $("#demoForm").addEventListener("submit", e => {
   const ok = $("#fName").value.trim() && $("#fCo").value.trim() && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test($("#fEmail").value.trim());
   const n = $("#formNote"); n.textContent = ok ? t("fm_ok") : t("fm_missing"); n.hidden = false;
 });
+
+/* demo pop-up */
+const modal = $("#demoModal"), frame = $("#demoFrame");
+let lastFocus = null;
+function openDemo(){
+  lastFocus = document.activeElement;
+  if (!frame.src) frame.src = "demo.html";
+  modal.hidden = false; document.body.classList.add("locked");
+  $("#demoClose").focus();
+}
+function closeDemo(){
+  modal.hidden = true; document.body.classList.remove("locked");
+  if (lastFocus) lastFocus.focus();
+}
+document.addEventListener("click", e => {
+  const a = e.target.closest("a[data-demo]");
+  if (a) { e.preventDefault(); openDemo(); }
+});
+$("#demoClose").addEventListener("click", closeDemo);
+modal.addEventListener("click", e => { if (e.target === modal) closeDemo(); });
+document.addEventListener("keydown", e => { if (e.key === "Escape" && !modal.hidden) closeDemo(); });
+$("#demoClose").setAttribute("aria-label", "Close");
 applyLang();
 </script>
 
