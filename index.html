@@ -84,8 +84,9 @@ html[lang="ar"] .hero h1{line-height:1.35;letter-spacing:0}
   radial-gradient(60% 80% at 100% 20%,var(--dune-b),transparent 70%),var(--sand)}
 .dunes svg.waves{position:absolute;inset-inline:0;bottom:0;width:100%;height:55%;pointer-events:none}
 .journey-t{position:relative;text-align:center;font-family:var(--font-display);font-size:17px;margin-bottom:20px}
-.journey{position:relative;list-style:none;margin:0 auto;padding:0;max-width:980px;display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-@media (min-width:760px){.journey{grid-template-columns:repeat(6,1fr)}}
+.journey{position:relative;list-style:none;margin:0 auto;padding:0;max-width:1100px;display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media (min-width:600px){.journey{grid-template-columns:repeat(4,1fr)}}
+@media (min-width:1000px){.journey{grid-template-columns:repeat(7,1fr)}}
 .journey a{display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px 10px;box-shadow:var(--shadow);transition:border-color .2s,transform .2s;height:100%}
 .journey a:hover{border-color:var(--teal);transform:translateY(-2px)}
 .journey .jn{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--teal-soft);color:var(--teal-ink)}
@@ -153,6 +154,16 @@ html[lang="ar"] .sec-head h2{line-height:1.4;letter-spacing:0}
 @media (min-width:600px){.result ul{grid-template-columns:1fr 1fr}}
 .result li{display:flex;gap:10px;align-items:flex-start;font-size:15px;color:color-mix(in srgb,var(--bg) 85%,var(--ink))}
 .result svg{flex:none;margin-top:4px;color:var(--teal)}
+
+
+/* built-in AI */
+.aigrid{display:grid;gap:14px;grid-template-columns:1fr}
+@media (min-width:640px){.aigrid{grid-template-columns:1fr 1fr}}
+@media (min-width:1040px){.aigrid{grid-template-columns:repeat(4,1fr)}}
+.aic{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:20px;display:flex;flex-direction:column;gap:8px}
+.aic .ti{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;background:var(--teal-soft);color:var(--teal-ink)}
+.aic h3{font-size:17px;line-height:1.35}
+.aic p{font-size:14px;color:var(--muted);line-height:1.6}
 
 /* teams */
 .teams{display:grid;gap:14px;grid-template-columns:1fr}
@@ -293,6 +304,15 @@ body.locked{overflow:hidden}
     </div>
   </section>
 
+  <section id="ai" class="sec wrap" style="padding-top:0">
+    <div class="sec-head">
+      <span class="label" data-i18n="ai_l"></span>
+      <h2 data-i18n="ai_h"></h2>
+      <p class="lead" data-i18n="ai_lead"></p>
+    </div>
+    <div class="aigrid" id="aiGrid"></div>
+  </section>
+
   <section id="teams" class="sec wrap">
     <div class="sec-head">
       <span class="label" data-i18n="teams_l"></span>
@@ -357,7 +377,7 @@ const I = {
   eyebrow:{en:"An AI layer on top of your ERP",ar:"طبقة ذكاء اصطناعي فوق نظام الـ ERP لديكم"},
   hero_sub:{en:"Your ERP records everything, but it doesn't tell you anything. Nayeb reads your procurement data and tells each team what needs its attention, from the request to the invoice. The decision stays with you.",
             ar:"نظام الـ ERP يسجّل كل شيء، لكنه لا يخبرك بشيء. نايب يقرأ بيانات المشتريات ويخبر كل فريق بما يحتاج انتباهه، من طلب الشراء حتى الفاتورة، والقرار يبقى لكم."},
-  journey_t:{en:"One purchase. Six moments where Nayeb helps.",ar:"طلب شراء واحد، وست لحظات يساعدك فيها نايب"},
+  journey_t:{en:"One purchase. Seven moments where Nayeb helps.",ar:"طلب شراء واحد، وسبع لحظات يساعدك فيها نايب"},
   strip_p:{en:"Built for Saudi enterprises",ar:"مصمّم للشركات السعودية"},
   why_l:{en:"Why you need Nayeb",ar:"لماذا تحتاج نايب"},
   why_h:{en:"The data is there. Nobody has time to watch it.",ar:"البيانات موجودة، لكن لا أحد لديه الوقت لمتابعتها"},
@@ -376,6 +396,9 @@ const I = {
   demand:{en:"On demand",ar:"عند الطلب"},
   result_h:{en:"The same purchase, with Nayeb",ar:"نفس الطلب، مع نايب"},
   story_note:{en:"Illustrative story. Names and numbers are examples.",ar:"قصة توضيحية، والأسماء والأرقام أمثلة."},
+  ai_l:{en:"Built-in AI",ar:"الذكاء الاصطناعي في نايب"},
+  ai_h:{en:"AI that works for each person",ar:"ذكاء اصطناعي يعمل لكل شخص"},
+  ai_lead:{en:"Everything it writes or suggests waits for a person to approve.",ar:"كل ما يكتبه أو يقترحه ينتظر موافقة شخص."},
   teams_l:{en:"For every team",ar:"لكل فريق"},
   teams_h:{en:"What changes for each team",ar:"ماذا يتغيّر لكل فريق"},
   teams_lead:{en:"Each person sees only what concerns them, based on what they can already see in the ERP.",ar:"كل شخص يرى ما يخصه فقط، حسب صلاحياته في الـ ERP."},
@@ -396,7 +419,7 @@ const HERO = {
   en:'See what\'s happening in your procurement, <span class="accent">before it costs you</span>',
   ar:'اعرف ما يحدث في مشترياتك، <span class="accent">قبل أن يكلّفك</span>'
 };
-const STRIP = {en:["ZATCA","Nitaqat","Local Content","Read-only","Data in Saudi Arabia"],ar:["زاتكا","نطاقات","المحتوى المحلي","للقراءة فقط","البيانات داخل المملكة"]};
+const STRIP = {en:["ZATCA","Nitaqat","Local Content","Read-only","Data in Saudi Arabia","Arabic & English"],ar:["زاتكا","نطاقات","المحتوى المحلي","للقراءة فقط","البيانات داخل المملكة","عربي وإنجليزي"]};
 const ERPS = ["SAP","Oracle","Microsoft Dynamics","Odoo"];
 
 const P = {
@@ -406,6 +429,7 @@ const P = {
   verify:'<path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>',
   protect:'<path d="M12 3L4 6v6c0 5 3.4 8 8 9 4.6-1 8-4 8-9V6z"/>',
   audit:'<path d="M2 4h7a3 3 0 0 1 3 3v14a2 2 0 0 0-2-2H2z"/><path d="M22 4h-7a3 3 0 0 0-3 3v14a2 2 0 0 1 2-2h8z"/>',
+  select:'<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1M9 12l2 2 4-4"/>',
   coins:'<circle cx="9" cy="9" r="6"/><path d="M15.5 9.5a6 6 0 1 1-6 6"/>',
   eyeoff:'<path d="M3 3l18 18"/><path d="M10.6 6.1A9.7 9.7 0 0 1 12 6c6.4 0 10 6 10 6a17 17 0 0 1-3 3.6M6.6 6.6C3.9 8.3 2 12 2 12s3.6 6 10 6a9.6 9.6 0 0 0 4.4-1"/>',
   clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
@@ -456,10 +480,10 @@ const CH = [
      today:{en:"Ahmed guesses SAR 150,000. The real offers come in much higher, and the budget falls short.",ar:"يقدّر أحمد التكلفة بـ 150,000 ريال تخميناً، فتأتي العروض أعلى بكثير ولا تكفي الميزانية."},
      with:{en:"Nayeb estimates SAR 196,400, based on the SAR 4,910 per laptop the company paid in March.",ar:"يقدّر نايب التكلفة بـ 196,400 ريال، بناءً على 4,910 ريال للجهاز دفعتها الشركة في مارس."},
      alert:{sev:"ok",en:"Expected cost: SAR 196,400 · based on the March PO",ar:"التكلفة المتوقعة: 196,400 ريال · بناءً على أمر شراء مارس"}}),
-   F({soon:true,name:{en:"Expected Cost Based on Market Prices",ar:"التكلفة المتوقعة بناءً على أسعار السوق"},
+   F({name:{en:"Expected Cost Based on Market Prices",ar:"التكلفة المتوقعة بناءً على أسعار السوق"},
      today:{en:"Ahmed also needs 2 rugged laptops for the warehouse. The company has never bought them, so there's no price to go on.",ar:"يحتاج أحمد أيضاً جهازين متينين للمستودع لم تشترهما الشركة من قبل، فلا يوجد سعر مرجعي."},
-     with:{en:"Nayeb estimates the market price of each line in the bill of quantities, including items never bought before.",ar:"يقدّر نايب سعر كل بند في جدول الكميات من السوق، حتى للأصناف التي لم تُشترَ من قبل."},
-     alert:{sev:"olive",en:"Market estimate per BOQ line",ar:"تقدير السوق لكل بند في جدول الكميات"}}),
+     with:{en:"Where a market benchmark exists, Nayeb estimates the price of each line in the bill of quantities, even for items never bought before, and shows the source and when it was last updated.",ar:"حيث يتوفر مرجع لأسعار السوق، يقدّر نايب سعر كل بند في جدول الكميات حتى للأصناف التي لم تُشترَ من قبل، ويوضّح المصدر وتاريخ آخر تحديث."},
+     alert:{sev:"ok",en:"Market estimate per BOQ line · source and last update shown",ar:"تقدير السوق لكل بند · مع المصدر وآخر تحديث"}}),
    F({name:{en:"Similar Requests from Other Departments",ar:"طلبات مشابهة من إدارات أخرى"},
      today:{en:"Operations asked for 15 similar laptops last week. Two separate orders mean two smaller deals.",ar:"طلبت العمليات 15 جهازاً مشابهاً الأسبوع الماضي، فيصبح الطلب صفقتين أصغر."},
      with:{en:"Nayeb shows Ahmed the Operations request, even though it was described differently. Combined, it's 55 laptops and a better price.",ar:"يعرض نايب لأحمد طلب العمليات حتى لو كُتب بوصف مختلف، ومعاً يصبحان 55 جهازاً بسعر أفضل."},
@@ -470,9 +494,9 @@ const CH = [
      alert:{sev:"ok",en:"PR-10045 · with Procurement for 3 days · next: RFQ",ar:"PR-10045 · لدى المشتريات منذ 3 أيام · التالي: طلب العروض"}})
   ]},
  {m:"vendor", mode:"auto", mname:{en:"Nayeb Vendor",ar:"نايب الموردين"},
-  t:{en:"Choosing the vendor",ar:"اختيار المورد"}, s:{en:"Procurement compares offers",ar:"المشتريات تقارن العروض"}, who:{en:"Procurement",ar:"المشتريات"},
-  today:{en:"The cheapest offer wins. Nobody notices the vendor was late on 3 of its last 4 contracts, or that its commercial registration expires next month.",ar:"يفوز العرض الأرخص، ولا أحد يلاحظ أن المورد تأخّر في 3 من آخر 4 عقود، وأن سجله التجاري ينتهي الشهر القادم."},
-  with:{en:"Nayeb shows each vendor's real record before the award: delivery performance, ZATCA, Nitaqat and Local Content status, and whether its documents are valid.",ar:"يعرض نايب ملف كل مورد قبل الترسية: أداءه الفعلي في التسليم، وحالته في زاتكا ونطاقات والمحتوى المحلي، وصلاحية وثائقه."},
+  t:{en:"Checking the vendors",ar:"فحص الموردين"}, s:{en:"Before vendors are invited",ar:"قبل دعوة الموردين"}, who:{en:"Procurement",ar:"المشتريات"},
+  today:{en:"Vendors are invited without checking their record. Nobody notices one was late on 3 of its last 4 contracts, or that its commercial registration expires next month.",ar:"يُدعى الموردون دون فحص سجلهم، ولا أحد يلاحظ أن أحدهم تأخّر في 3 من آخر 4 عقود، وأن سجله التجاري ينتهي الشهر القادم."},
+  with:{en:"Nayeb shows each vendor's real record before they're invited: delivery performance, ZATCA, Nitaqat and Local Content status, and whether its documents are valid.",ar:"يعرض نايب ملف كل مورد قبل دعوته: أداءه الفعلي في التسليم، وحالته في زاتكا ونطاقات والمحتوى المحلي، وصلاحية وثائقه."},
   alert:{sev:"warn",en:"Vendor A: late on 3 of last 4 contracts · CR expires in 21 days",ar:"المورد أ: تأخّر في 3 من آخر 4 عقود · السجل التجاري ينتهي خلال 21 يوماً"},
   feats:[
    F({name:{en:"Vendor Performance from Past Orders",ar:"تقييم أداء المورد من تعاملاته السابقة"},
@@ -496,6 +520,33 @@ const CH = [
      with:{en:"Nayeb drafts a professional reply for each one, explaining the reasons without revealing competitors' prices or names.",ar:"يكتب نايب رداً مهنياً لكل مورد يوضّح الأسباب دون كشف أسعار أو أسماء المنافسين."},
      alert:{sev:"ok",en:"3 replies drafted · no competitor details shown",ar:"3 ردود جاهزة · دون أي تفاصيل عن المنافسين"}})
   ]},
+ {m:"select", mode:"demand", mname:{en:"Nayeb Select",ar:"نايب المنافسات"},
+  t:{en:"Bids and award",ar:"العروض والترسية"}, s:{en:"The invited vendors send their bids",ar:"الموردون المدعوون يرسلون عروضهم"}, who:{en:"Procurement & the committee",ar:"المشتريات ولجنة الترسية"},
+  today:{en:"Bids arrive by email. The committee spends days reading them, prices are compared on different terms, and the scoring weights can change after the prices are seen.",ar:"تصل العروض بالإيميل، وتقضي اللجنة أياماً في قراءتها، وتُقارن الأسعار بشروط مختلفة، ويمكن أن تتغير أوزان التقييم بعد رؤية الأسعار."},
+  with:{en:"Bids come through a sealed portal and are opened by two people together. AI checks each bid against the scope and quotes the page, prices are made comparable, and Nayeb recommends an award using weights locked before opening. The committee decides.",ar:"تصل العروض عبر بوابة مختومة ويفتحها شخصان معاً، ويفحص الذكاء الاصطناعي كل عرض مقابل نطاق العمل مع ذكر الصفحة، وتُوحَّد الأسعار للمقارنة، ويوصي نايب بالترسية بأوزان ثُبّتت قبل الفتح، والقرار للجنة."},
+  alert:{sev:"ok",en:"5 bids · 4 passed technical · lowest comparable price: Vendor B · committee decides",ar:"5 عروض · 4 اجتازت التقييم الفني · أقل سعر بعد التوحيد: المورد ب · القرار للجنة"},
+  feats:[
+   F({name:{en:"Bid Portal with Sealed Opening",ar:"بوابة العروض مع فتح مختوم"},
+     today:{en:"Bids arrive in different inboxes. Some may be seen before the closing date.",ar:"تصل العروض إلى صناديق بريد مختلفة، وقد يطّلع أحد على بعضها قبل موعد الإغلاق."},
+     with:{en:"Vendors submit through a secure portal. Bids stay sealed until closing and are opened by two people together, and every step is logged.",ar:"يقدّم الموردون عروضهم عبر بوابة آمنة، وتبقى مختومة حتى الإغلاق، ويفتحها شخصان معاً، وكل خطوة مسجّلة."},
+     alert:{sev:"ok",en:"RFQ closed · 5 bids · opened by 2 people at 10:00",ar:"أُغلق طلب العروض · 5 عروض · فتحها شخصان الساعة 10:00"}}),
+   F({name:{en:"AI Technical Assessment",ar:"التقييم الفني بالذكاء الاصطناعي"},
+     today:{en:"The committee reads 5 bids of about 40 pages each, and it takes days.",ar:"تقرأ اللجنة 5 عروض بحوالي 40 صفحة لكل عرض، ويستغرق ذلك أياماً."},
+     with:{en:"AI checks each bid against every requirement in the scope and quotes the page for each finding. One bid offers a 1-year warranty instead of 3. The buyer reviews and approves the result.",ar:"يفحص الذكاء الاصطناعي كل عرض مقابل كل متطلب في نطاق العمل مع ذكر الصفحة لكل ملاحظة، ويتبيّن أن أحد العروض يقدّم ضماناً لسنة بدل 3 سنوات، ويراجع المشتري النتيجة ويعتمدها."},
+     alert:{sev:"warn",en:"4 of 5 passed · Vendor D: warranty 1 year, 3 required (page 12)",ar:"4 من 5 اجتازت · المورد د: الضمان سنة والمطلوب 3 (صفحة 12)"}}),
+   F({name:{en:"Commercial Assessment",ar:"التقييم التجاري"},
+     today:{en:"One price includes delivery and setup, another doesn't. The lowest number isn't the lowest real cost.",ar:"سعر يشمل التوصيل والتركيب وآخر لا يشملهما، فأقل رقم ليس بالضرورة أقل تكلفة فعلية."},
+     with:{en:"Approving the technical result opens the commercial step. Nayeb makes the prices comparable, and a bid that failed the technical pass is never shown as the cheapest option.",ar:"اعتماد النتيجة الفنية يفتح التقييم التجاري، فيوحّد نايب الأسعار للمقارنة، ولا يظهر العرض الذي لم يجتز التقييم الفني كأرخص خيار."},
+     alert:{sev:"ok",en:"Comparable prices · lowest real cost: Vendor B",ar:"أسعار موحّدة · أقل تكلفة فعلية: المورد ب"}}),
+   F({name:{en:"Best and Final Offer",ar:"أفضل وآخر عرض"},
+     today:{en:"The buyer phones one vendor for a better price. The others never get the same chance.",ar:"يتصل المشتري بمورد واحد لطلب سعر أفضل، ولا يحصل البقية على نفس الفرصة."},
+     with:{en:"The request goes to all qualified bidders at the same time. If only one bid qualified, Nayeb suggests asking it for a better price or re-tendering.",ar:"يُرسل الطلب لجميع المؤهلين في نفس الوقت، وإذا تأهل عرض واحد فقط يقترح نايب طلب سعر أفضل منه أو إعادة الطرح."},
+     alert:{sev:"ok",en:"Best and final offer sent to 4 qualified bidders at once",ar:"طلب أفضل وآخر عرض أُرسل لـ 4 مؤهلين في نفس الوقت"}}),
+   F({name:{en:"Award Recommendation",ar:"توصية الترسية"},
+     today:{en:"The award memo is written by hand, and nobody can show the weights were set before the prices were seen.",ar:"يُكتب محضر الترسية يدوياً، ولا يمكن إثبات أن الأوزان حُددت قبل رؤية الأسعار."},
+     with:{en:"The weights are locked before opening. Nayeb recommends the award and drafts the committee memo. The committee decides, and an authorized person records the award in the ERP.",ar:"تُثبّت الأوزان قبل الفتح، ويوصي نايب بالترسية ويجهّز محضر اللجنة، والقرار للجنة، ويسجّل الشخص المخوّل الترسية في الـ ERP."},
+     alert:{sev:"ok",en:"Recommendation: Vendor B · weights locked before opening · memo ready",ar:"التوصية: المورد ب · الأوزان مثبّتة قبل الفتح · المحضر جاهز"}})
+  ]},
  {m:"save", mode:"auto", mname:{en:"Nayeb Save",ar:"نايب التوفير"},
   t:{en:"Agreeing the price",ar:"الاتفاق على السعر"}, s:{en:"The offer comes in",ar:"يصل العرض"}, who:{en:"Procurement & finance",ar:"المشتريات والمالية"},
   today:{en:"The offer is SAR 5,640 per laptop. It looks reasonable, so it's approved.",ar:"العرض 5,640 ريال للجهاز. يبدو معقولاً، فيُعتمد."},
@@ -506,10 +557,10 @@ const CH = [
      today:{en:"SAR 5,640 per laptop looks fine, so it's approved.",ar:"5,640 ريال للجهاز يبدو مناسباً، فيُعتمد."},
      with:{en:"Nayeb shows the company paid SAR 4,910 for the same model in March: 14.9% less. Procurement asks the vendor to match it.",ar:"يوضّح نايب أن الشركة دفعت 4,910 ريال لنفس الموديل في مارس، أي أقل بـ 14.9%، فتطلب المشتريات من المورد المطابقة."},
      alert:{sev:"warn",en:"+14.9% vs. March price · potential saving SAR 29,200",ar:"+14.9% عن سعر مارس · وفر محتمل 29,200 ريال"}}),
-   F({soon:true,name:{en:"Bid Price vs. Market Price",ar:"سعر العرض مقارنة بسعر السوق"},
+   F({name:{en:"Bid Price vs. Market Price",ar:"سعر العرض مقارنة بسعر السوق"},
      today:{en:"There's no way to know if SAR 5,640 is fair in today's market.",ar:"لا توجد طريقة لمعرفة إن كان 5,640 ريال سعراً عادلاً في السوق اليوم."},
-     with:{en:"Nayeb compares the bid with the market average, to show whether you're overpaying.",ar:"يقارن نايب العرض بمتوسط السوق ليوضّح هل تدفع أكثر من اللازم."},
-     alert:{sev:"olive",en:"Bid compared with the market average",ar:"مقارنة العرض بمتوسط السوق"}}),
+     with:{en:"Where a market benchmark exists, Nayeb compares the bid with it and shows the source and last update, so you know if you're overpaying.",ar:"حيث يتوفر مرجع لأسعار السوق، يقارن نايب العرض به مع المصدر وتاريخ آخر تحديث، لتعرف هل تدفع أكثر من اللازم."},
+     alert:{sev:"ok",en:"Bid vs. market benchmark · source and last update shown",ar:"العرض مقابل مرجع السوق · مع المصدر وآخر تحديث"}}),
    F({name:{en:"Unclaimed Rebates Owed to You",ar:"خصومات الكميات (Rebate) المستحقة لكم ولم تُطالبوا بها"},
      today:{en:"Vendor B's contract gives a 3% rebate above 100 laptops a year. The company has bought 120, and nobody claimed it.",ar:"عقد المورد ب يمنح خصماً 3% بعد 100 جهاز سنوياً، والشركة اشترت 120 جهازاً ولم يطالب أحد بالخصم."},
      with:{en:"Nayeb reads the contract terms, compares them with actual purchases, and flags SAR 17,600 owed.",ar:"يقرأ نايب شروط العقد ويقارنها بالمشتريات الفعلية، وينبّه لخصم مستحق 17,600 ريال."},
@@ -520,8 +571,8 @@ const CH = [
      alert:{sev:"warn",en:"Same docking station: SAR 890 elsewhere vs. SAR 1,150 here",ar:"نفس محطة التوصيل: 890 ريال في عقد آخر مقابل 1,150 ريال هنا"}}),
    F({name:{en:"Contract Renewal Review: Renew, Renegotiate or Re-tender",ar:"مراجعة العقد قبل التجديد: تجديد أو تفاوض أو طرح جديد"},
      today:{en:"Vendor B's IT hardware contract renews automatically in 45 days, at the same prices. Nobody has prepared.",ar:"عقد أجهزة تقنية المعلومات مع المورد ب يتجدد تلقائياً بعد 45 يوماً بنفس الأسعار، ولم يستعد أحد."},
-     with:{en:"Before the notice deadline, Nayeb prepares a review: prices, rebates owed, vendor performance and alternatives. It recommends renegotiating, with target prices, and includes a negotiation pack.",ar:"قبل آخر موعد للإشعار، يجهّز نايب مراجعة كاملة: الأسعار، والخصومات المستحقة، وأداء المورد، والبدائل، ويوصي بإعادة التفاوض مع أسعار مستهدفة وملف تفاوض."},
-     alert:{sev:"warn",en:"Notice deadline in 15 days · recommendation: renegotiate",ar:"آخر موعد للإشعار بعد 15 يوماً · التوصية: إعادة التفاوض"}}),
+     with:{en:"Nayeb alerts you before the notice deadline. With your approval, it asks 2 other qualified vendors for prices, compares them and suggests a target price, then drafts the negotiation email from the procurement mailbox for you to approve. The vendor replies through a secure link and you accept or counter. The written confirmation and the saving are recorded, and an authorized person updates the ERP. If you re-tender, it opens a tender in Nayeb Select.",ar:"ينبّهك نايب قبل آخر موعد للإشعار، وبعد موافقتك يطلب أسعاراً من موردَين مؤهلَين آخرين، ويقارنها ويقترح سعراً مستهدفاً، ثم يجهّز رسالة التفاوض من بريد المشتريات لتعتمدها. يرد المورد عبر رابط آمن فتقبل أو ترسل عرضاً مضاداً، ويُسجّل التأكيد المكتوب والوفر، ويحدّث الشخص المخوّل الـ ERP. وإذا اخترت طرحاً جديداً، تُفتح منافسة في نايب المنافسات."},
+     alert:{sev:"warn",en:"Notice deadline in 15 days · 2 quotes received · target price 8% lower",ar:"آخر موعد للإشعار بعد 15 يوماً · وصل عرضان · السعر المستهدف أقل بـ 8%"}}),
    F({name:{en:"Savings Tracking Until Finance Approval",ar:"متابعة الوفورات حتى اعتماد المالية"},
      today:{en:"The SAR 29,200 saving appears in a presentation, but nobody has verified it.",ar:"يظهر وفر 29,200 ريال في عرض تقديمي، لكن لم يتحقق منه أحد."},
      with:{en:"Nayeb tracks it from identified to agreed to realized, until Finance signs it off. It's counted once, and executives see potential and verified savings separately.",ar:"يتابع نايب الوفر من اكتشافه حتى الاتفاق والتحقق واعتماد المالية، ويُحسب مرة واحدة، والإدارة ترى المحتمل والمعتمد كرقمين منفصلين."},
@@ -537,13 +588,17 @@ const CH = [
      today:{en:"Ahmed's PR arrives in the ERP. Procurement doesn't know the docking stations are already covered by Marketing's contract.",ar:"يصل طلب أحمد للـ ERP، ولا تعرف المشتريات أن محطات التوصيل يغطيها عقد التسويق."},
      with:{en:"As soon as the PR arrives, Nayeb alerts Procurement to the overlap, even if Ahmed never used Nayeb Draft.",ar:"فور وصول الطلب، ينبّه نايب المشتريات للتداخل، حتى لو لم يستخدم أحمد نايب الطلبات."},
      alert:{sev:"warn",en:"PR-10045 overlaps Marketing's contract · review before you proceed",ar:"الطلب PR-10045 يتداخل مع عقد التسويق · راجعه قبل المتابعة"}}),
+   F({name:{en:"Unclear Scope in Requests and Open POs",ar:"نطاق غير واضح في الطلبات وأوامر الشراء المفتوحة"},
+     today:{en:"An open PO for laptop setup says \"installation and support as needed\". That leaves room for work that was never agreed.",ar:"أمر شراء مفتوح لتجهيز الأجهزة مكتوب فيه «التركيب والدعم حسب الحاجة»، مما يترك مجالاً لأعمال لم يُتفق عليها."},
+     with:{en:"Nayeb scores the scope's clarity at 38 out of 100, marks the vague phrases, lists what's missing and suggests a clear scope. The buyer sends it to the requester or asks the vendor to confirm in writing, and both are logged.",ar:"يقيّم نايب وضوح النطاق بـ 38 من 100، ويحدد العبارات المبهمة، ويوضّح الناقص، ويقترح نطاقاً واضحاً، فيرسله المشتري للطالب أو يطلب من المورد التأكيد كتابياً، ويُسجّل الإجراءان."},
+     alert:{sev:"warn",en:"Scope clarity 38/100 · missing: quantities, rates, dates, acceptance",ar:"وضوح النطاق 38/100 · ناقص: الكميات والأسعار والمواعيد ومعايير القبول"}}),
    F({name:{en:"PO, Delivery and Invoice Match",ar:"مطابقة أمر الشراء والتسليم والفاتورة"},
      today:{en:"The invoice says 40 laptops. Only 36 arrived. It's approved anyway.",ar:"الفاتورة 40 جهازاً، والواصل 36 فقط، وتُعتمد رغم ذلك."},
      with:{en:"Nayeb matches the three documents and flags the gap before approval. It tells a real shortage apart from a partial delivery still on its way.",ar:"يطابق نايب المستندات الثلاثة وينبّه للفرق قبل الاعتماد، ويفرّق بين النقص الفعلي والتسليم الجزئي الذي ما زال في الطريق."},
      alert:{sev:"warn",en:"Invoice: 40 · delivery note: 36 · not a partial delivery",ar:"الفاتورة: 40 · سند التسليم: 36 · ليس تسليماً جزئياً"}}),
    F({name:{en:"Checking What Was Actually Delivered",ar:"التحقق مما تم تسليمه فعلاً"},
      today:{en:"The delivery note says everything arrived. Nobody opens the boxes.",ar:"سند التسليم يقول إن كل شيء وصل، ولا أحد يفتح الصناديق."},
-     with:{en:"Nayeb picks this delivery for a spot-check, because the vendor has had issues before. The check finds 4 laptops with 8 GB of memory instead of 16 GB.",ar:"يختار نايب هذه الشحنة للفحص لأن للمورد سجل مشاكل، فيكشف الفحص 4 أجهزة بذاكرة 8 جيجا بدل 16."},
+     with:{en:"Nayeb picks this delivery for a check, because the vendor has had issues before, and prepares what to check. A colleague on site who did not receive the goods does the check and finds 4 laptops with 8 GB of memory instead of 16 GB.",ar:"يختار نايب هذه الشحنة للفحص لأن للمورد سجل مشاكل، ويجهّز ما يجب فحصه، ويقوم بالفحص زميل في الموقع لم يستلم البضاعة، فيكشف 4 أجهزة بذاكرة 8 جيجا بدل 16."},
      alert:{sev:"warn",en:"Selected for spot-check · 4 units below the ordered spec",ar:"مختارة للفحص · 4 أجهزة أقل من المواصفات المطلوبة"}}),
    F({name:{en:"Invoices Entered More Than Once",ar:"فواتير مسجّلة أكثر من مرة"},
      today:{en:"The vendor emails the invoice again with a slightly different number, and it's entered twice.",ar:"يرسل المورد الفاتورة مرة أخرى برقم مختلف قليلاً، فتُسجّل مرتين."},
@@ -598,14 +653,25 @@ const CH = [
   ]}
 ];
 
+
+const AI = [
+ {i:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>', t:{en:"Today's brief",ar:"ملخص اليوم"}, d:{en:"A short brief each morning, written for your role.",ar:"ملخص قصير كل صباح، مكتوب لدورك."}},
+ {i:'<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/>', t:{en:"Ask Nayeb",ar:"اسأل نايب"}, d:{en:"Ask in Arabic or English. Answers use only data you're allowed to see.",ar:"اسأل بالعربي أو الإنجليزي، والإجابة من البيانات المسموح لك برؤيتها فقط."}},
+ {i:'<path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>', t:{en:"How Nayeb found it",ar:"كيف وصل نايب لهذا"}, d:{en:"Every finding explains its evidence, and what isn't known yet.",ar:"كل ملاحظة توضّح أدلتها، وما لا يُعرف بعد."}},
+ {i:'<path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M9 14l2 2 4-4"/>', t:{en:"Check a quotation",ar:"افحص عرض سعر"}, d:{en:"Upload a quotation, contract or invoice. Nayeb checks every line against your prices and the market.",ar:"ارفع عرض سعر أو عقداً أو فاتورة، ويفحص نايب كل بند مقابل أسعاركم والسوق."}},
+ {i:'<path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/>', t:{en:"Market price watch",ar:"متابعة أسعار السوق"}, d:{en:"Benchmarks refresh when their source updates, and the source is always shown.",ar:"تتحدث مراجع الأسعار مع تحديث مصدرها، والمصدر ظاهر دائماً."}},
+ {i:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>', t:{en:"Forecasts",ar:"التوقعات"}, d:{en:"The expected PO date, the expected real cost of each bid, and when a budget will run out.",ar:"موعد أمر الشراء المتوقع، والتكلفة الفعلية المتوقعة لكل عرض، وموعد نفاد الميزانية."}},
+ {i:'<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/>', t:{en:"Drafts",ar:"مسودات جاهزة"}, d:{en:"Committee memos, replies to vendors and renewal emails, ready for your approval.",ar:"محاضر اللجان والردود على الموردين ورسائل التجديد، جاهزة لاعتمادك."}}
+];
+
 const RESULT = {
-  en:["A complete PR the first time, with the budget clear","Docking stations bought through an existing contract","A vendor chosen on its real record","SAR 29,200 saved and verified by Finance","4 missing laptops caught before approval","A risky bank change reviewed in time"],
-  ar:["طلب مكتمل من أول مرة، والميزانية واضحة","شراء محطات التوصيل عبر عقد قائم","اختيار المورد بناءً على أدائه الفعلي","توفير 29,200 ريال معتمدة من المالية","اكتشاف 4 أجهزة ناقصة قبل الاعتماد","مراجعة تغيير بنكي مشبوه في الوقت المناسب"]
+  en:["A complete PR the first time, with the budget clear","Docking stations bought through an existing contract","Vendors invited on their real record","Bids assessed fairly, with weights locked before opening","SAR 29,200 saved and verified by Finance","A vague scope made clear before work started","4 missing laptops caught before approval","An unusual bank change reviewed in time"],
+  ar:["طلب مكتمل من أول مرة، والميزانية واضحة","شراء محطات التوصيل عبر عقد قائم","دعوة الموردين بناءً على أدائهم الفعلي","تقييم عادل للعروض بأوزان ثُبّتت قبل الفتح","توفير 29,200 ريال معتمدة من المالية","توضيح نطاق مبهم قبل بدء العمل","اكتشاف 4 أجهزة ناقصة قبل الاعتماد","مراجعة تغيير بنكي غير معتاد في الوقت المناسب"]
 };
 
 const TEAMS = [
  {i:"grid", t:{en:"Department heads",ar:"رؤساء الأقسام"}, d:{en:"A ready request from a few words, and a clear budget before you submit.",ar:"طلب جاهز من كلمات بسيطة، وميزانية واضحة قبل الرفع."}, m:{en:"Draft",ar:"نايب الطلبات"}},
- {i:"cart", t:{en:"Procurement & supply chain",ar:"المشتريات وسلاسل الإمداد"}, d:{en:"A better vendor, a better price, and deliveries that match the order.",ar:"مورد أفضل، وسعر أفضل، وتسليم مطابق للطلب."}, m:{en:"Vendor · Save · Verify",ar:"الموردين · التوفير · التحقّق"}},
+ {i:"cart", t:{en:"Procurement & supply chain",ar:"المشتريات وسلاسل الإمداد"}, d:{en:"A better vendor, a better price, and deliveries that match the order.",ar:"مورد أفضل، وسعر أفضل، وتسليم مطابق للطلب."}, m:{en:"Vendor · Select · Save · Verify",ar:"الموردين · المنافسات · التوفير · التحقّق"}},
  {i:"money", t:{en:"Finance",ar:"المالية"}, d:{en:"Correct invoices before approval, and savings you verify yourself.",ar:"فواتير صحيحة قبل الاعتماد، ووفورات تعتمدها بنفسك."}, m:{en:"Verify · Protect · Save",ar:"التحقّق · الحماية · التوفير"}},
  {i:"trend", t:{en:"Executives",ar:"الإدارة العليا"}, d:{en:"The full picture all year, not only at the year-end audit.",ar:"الصورة كاملة طوال السنة، لا في تدقيق نهايتها فقط."}, m:{en:"Save · Protect · Audit Trail",ar:"التوفير · الحماية · السجل"}},
  {i:"search", t:{en:"Audit",ar:"التدقيق"}, d:{en:"Every recommendation with its evidence and outcome, in one protected record.",ar:"كل توصية بأدلتها ونتيجتها، في سجل واحد محمي."}, m:{en:"Audit Trail",ar:"سجل نايب"}}
@@ -617,7 +683,7 @@ const TRUST = [
   {i:'<path d="M12 21s-7-6.5-7-12a7 7 0 0 1 14 0c0 5.5-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/>', t:{en:"Data hosted in Saudi Arabia",ar:"البيانات داخل المملكة"}, d:{en:"Your procurement data stays in the Kingdom.",ar:"بيانات مشترياتكم تبقى داخل المملكة."}},
   {i:'<circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l3 3"/>', t:{en:"Access follows your ERP",ar:"صلاحيات حسب الـ ERP"}, d:{en:"What you see in the ERP is what you see in Nayeb. Employee data is masked and every view is logged.",ar:"ما تراه في الـ ERP تراه في نايب، وبيانات الموظفين مخفية وكل اطلاع مسجّل."}},
   {i:'<path d="M12 3L4 6v6c0 5 3.4 8 8 9 4.6-1 8-4 8-9V6z"/><path d="M9 12l2 2 4-4"/>', t:{en:"Support access you approve",ar:"دعم فني بموافقتكم"}, d:{en:"Even our team sees nothing without your time-limited approval.",ar:"حتى فريقنا لا يرى بياناتكم إلا بموافقتكم ولمدة محددة."}},
-  {i:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>', t:{en:"Arabic and English",ar:"عربي وإنجليزي"}, d:{en:"Full interface in both, with Saudi compliance built in.",ar:"واجهة كاملة باللغتين، مع الامتثال السعودي مدمجاً."}}
+  {i:'<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/>', t:{en:"Set up by your own IT",ar:"إعداد ذاتي من فريقكم التقني"}, d:{en:"A guided setup your IT completes without Nayeb staff. Nayeb checks every step and shows which features are ready.",ar:"إعداد موجّه يكمله فريقكم التقني دون حاجة لفريق نايب، ونايب يتحقق من كل خطوة ويوضّح الميزات الجاهزة."}}
 ];
 
 let lang = "ar";
@@ -670,6 +736,7 @@ function render(){
   $("#whyCards").innerHTML = WHY.map(w => `<article><span class="wi">${svg(P[w.i])}</span><h3>${L(w.t)}</h3><p>${L(w.d)}</p></article>`).join("");
   renderChapters();
   $("#resultList").innerHTML = RESULT[lang].map(r => `<li>${svg(P.ok,18)}<span>${r}</span></li>`).join("");
+  $("#aiGrid").innerHTML = AI.map(x => `<article class="aic"><span class="ti">${svg(x.i)}</span><h3>${L(x.t)}</h3><p>${L(x.d)}</p></article>`).join("");
   $("#teamGrid").innerHTML = TEAMS.map(x => `<article class="team"><span class="ti">${svg(P[x.i])}</span><h3>${L(x.t)}</h3><p>${L(x.d)}</p><small>${L(x.m)}</small></article>`).join("");
   $("#trust").innerHTML = TRUST.map(x => `<div>${svg(x.i,20)}<span><b>${L(x.t)}</b>${L(x.d)}</span></div>`).join("");
   const rs = $("#fRole"), idx = rs.selectedIndex;
