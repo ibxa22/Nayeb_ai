@@ -121,11 +121,15 @@ html[lang="ar"] .sec-head h2{line-height:1.4;letter-spacing:0}
 .persona p{font-size:15px;min-width:0}
 .persona small{display:block;font-size:12px;color:var(--muted)}
 .chapters{display:grid;gap:22px;position:relative}
-.ch{display:grid;gap:16px;grid-template-columns:1fr;scroll-margin-top:90px}
-@media (min-width:900px){.ch{grid-template-columns:220px 1fr}}
+.ch{display:grid;gap:18px;grid-template-columns:1fr;scroll-margin-top:90px;background:var(--bg);border:1px solid var(--line);border-radius:28px;padding:22px}
+@media (min-width:900px){.ch{padding:28px}}
+@media (min-width:900px){.ch{grid-template-columns:230px 1fr}}
 .ch-side{display:flex;gap:14px;align-items:flex-start}
 @media (min-width:900px){.ch-side{flex-direction:column;gap:10px}}
-.ch-n{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:var(--ink);color:var(--bg);font-family:var(--font-display);font-weight:600;font-size:18px;flex:none}
+.ch-ic{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:var(--teal-soft);color:var(--teal-ink);flex:none}
+.ch-ic.olive{background:var(--olive-soft);color:var(--olive-ink)}
+.ch-side .q{font-size:15px;line-height:1.55;margin-top:4px}
+.ch-side .who{margin-top:6px}
 .ch-side h3{font-size:22px;line-height:1.25}
 .ch-side .who{font-size:13px;color:var(--muted)}
 .mpill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;background:var(--teal-soft);color:var(--teal-ink);border-radius:999px;padding:3px 10px;margin-top:4px;text-decoration:none}
@@ -133,7 +137,7 @@ html[lang="ar"] .sec-head h2{line-height:1.4;letter-spacing:0}
 .ch-body{display:grid;gap:12px;grid-template-columns:1fr;min-width:0}
 @media (min-width:700px){.ch-body{grid-template-columns:1fr 1.25fr}}
 .today,.with{border-radius:22px;padding:20px;display:flex;flex-direction:column;gap:10px;min-width:0}
-.today{background:var(--bg);border:1px dashed var(--line)}
+.today{background:var(--surface);border:1px dashed var(--line)}
 .with{background:var(--surface);border:1px solid var(--teal);box-shadow:0 0 0 3px var(--teal-soft)}
 .tag{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;width:fit-content}
 .today .tag{color:var(--risk)}
@@ -369,7 +373,7 @@ const I = {
   nav_story:{en:"How it helps",ar:"كيف يساعدك"},
   nav_sec:{en:"Security",ar:"الأمان"},
   cta_book:{en:"Request a demo",ar:"اطلب عرضاً تجريبياً"},
-  cta_story:{en:"Follow one purchase",ar:"تابع قصة طلب واحد"},
+  cta_story:{en:"See the modules",ar:"استعرض الوحدات"},
   cta_demo:{en:"Try the demo",ar:"جرّب النسخة التجريبية"},
   cta_demo2:{en:"Or try the demo now",ar:"أو جرّب النسخة التجريبية الآن"},
   demo_title:{en:"Nayeb demo",ar:"النسخة التجريبية من نايب"},
@@ -377,16 +381,16 @@ const I = {
   eyebrow:{en:"An AI layer on top of your ERP",ar:"طبقة ذكاء اصطناعي فوق نظام الـ ERP لديكم"},
   hero_sub:{en:"Your ERP records everything, but it doesn't tell you anything. Nayeb reads your procurement data and tells each team what needs its attention, from the request to the invoice. The decision stays with you.",
             ar:"نظام الـ ERP يسجّل كل شيء، لكنه لا يخبرك بشيء. نايب يقرأ بيانات المشتريات ويخبر كل فريق بما يحتاج انتباهه، من طلب الشراء حتى الفاتورة، والقرار يبقى لكم."},
-  journey_t:{en:"One purchase. Seven moments where Nayeb helps.",ar:"طلب شراء واحد، وسبع لحظات يساعدك فيها نايب"},
+  journey_t:{en:"7 modules, 37 features. Use the ones you need, in any order.",ar:"7 وحدات و37 ميزة، استخدم ما تحتاجه منها بأي ترتيب"},
   strip_p:{en:"Built for Saudi enterprises",ar:"مصمّم للشركات السعودية"},
   why_l:{en:"Why you need Nayeb",ar:"لماذا تحتاج نايب"},
   why_h:{en:"The data is there. Nobody has time to watch it.",ar:"البيانات موجودة، لكن لا أحد لديه الوقت لمتابعتها"},
   why_lead:{en:"Every request, PO and invoice is in your ERP. But problems only show up late: at renewal, at payment, or at the year-end audit.",ar:"كل طلب وأمر شراء وفاتورة مسجّل في الـ ERP، لكن المشاكل لا تظهر إلا متأخرة: عند التجديد، أو عند الدفع، أو في تدقيق نهاية السنة."},
-  story_l:{en:"The story of one purchase",ar:"قصة طلب شراء واحد"},
-  story_h:{en:"Follow one purchase, from idea to invoice",ar:"تابع طلباً واحداً، من الفكرة حتى الفاتورة"},
-  persona:{en:"Ahmed, Head of IT, needs 40 laptops for the new Jeddah branch.",ar:"أحمد، رئيس قسم تقنية المعلومات، يحتاج 40 لابتوب لفرع جدة الجديد."},
-  persona_s:{en:"Here is what happens today, and what happens with Nayeb.",ar:"هذا ما يحدث اليوم، وما يحدث مع نايب."},
-  pick_hint:{en:"Tap any feature in a step to see how it helps in this story",ar:"اضغط على أي ميزة لترى كيف تساعد في هذه القصة"},
+  story_l:{en:"Modules and features",ar:"الوحدات والميزات"},
+  story_h:{en:"Pick any feature to see how it helps",ar:"اختر أي ميزة لترى كيف تساعدك"},
+  persona:{en:"All examples use one case: Ahmed, Head of IT, needs 40 laptops for the new Jeddah branch.",ar:"كل الأمثلة من حالة واحدة: أحمد، رئيس قسم تقنية المعلومات، يحتاج 40 لابتوب لفرع جدة الجديد."},
+  persona_s:{en:"Each feature shows what happens today, and what happens with Nayeb.",ar:"كل ميزة توضّح ما يحدث اليوم، وما يحدث مع نايب."},
+  pick_hint:{en:"Every module works the same way: pick a feature and compare",ar:"كل الوحدات بنفس الطريقة: اختر ميزة وقارن"},
   overview:{en:"The step at a glance",ar:"الخطوة باختصار"},
   feats_in:{en:"features in this step",ar:"ميزات في هذه الخطوة"},
   today:{en:"Today",ar:"اليوم"},
@@ -394,7 +398,7 @@ const I = {
   soon:{en:"Coming soon",ar:"قريباً"},
   auto:{en:"Proactive",ar:"تلقائي"},
   demand:{en:"On demand",ar:"عند الطلب"},
-  result_h:{en:"The same purchase, with Nayeb",ar:"نفس الطلب، مع نايب"},
+  result_h:{en:"In this example, with Nayeb",ar:"في هذا المثال، مع نايب"},
   story_note:{en:"Illustrative story. Names and numbers are examples.",ar:"قصة توضيحية، والأسماء والأرقام أمثلة."},
   ai_l:{en:"Built-in AI",ar:"الذكاء الاصطناعي في نايب"},
   ai_h:{en:"AI that works for each person",ar:"ذكاء اصطناعي يعمل لكل شخص"},
@@ -687,7 +691,19 @@ const TRUST = [
 ];
 
 let lang = "ar";
-const sel = CH.map(() => -1); /* -1 = the step at a glance */
+const sel = CH.map(() => 0); /* selected feature per module */
+const Q = {
+  draft:{en:"What should I ask for, and can I afford it?",ar:"ماذا أطلب، وهل تكفي الميزانية؟"},
+  vendor:{en:"Who should we invite and buy from?",ar:"من ندعو ومن نشتري منه؟"},
+  select:{en:"Which bid should win, assessed fairly?",ar:"أي عرض يفوز، بتقييم عادل؟"},
+  save:{en:"Are we paying the right price?",ar:"هل ندفع السعر الصحيح؟"},
+  verify:{en:"Is every request, delivery and invoice correct?",ar:"هل كل طلب وتسليم وفاتورة صحيح؟"},
+  protect:{en:"Is anything unusual, from award to invoice?",ar:"هل يوجد ما هو غير معتاد، من الترسية حتى الفاتورة؟"},
+  audit:{en:"What did we do with each recommendation?",ar:"ماذا فعلنا بكل توصية؟"}
+};
+const fcount = n => lang === "ar"
+  ? (n === 1 ? "ميزة واحدة" : n === 2 ? "ميزتان" : n <= 10 ? `${n} ميزات` : `${n} ميزة`)
+  : (n === 1 ? "1 feature" : `${n} features`);
 try { const s = localStorage.getItem("nayeb-lang"); if (s === "ar" || s === "en") lang = s; } catch (e) {}
 if (location.hash === "#ar") lang = "ar";
 if (location.hash === "#en") lang = "en";
@@ -697,22 +713,19 @@ const t = k => (I[k] ? I[k][lang] : k);
 const L = o => o[lang];
 
 function chapterBody(c, i){
-  const f = sel[i] >= 0 ? c.feats[sel[i]] : null;
-  const src = f || c;
-  const chips = `<button class="fchip ov" type="button" data-ch="${i}" data-f="-1" aria-pressed="${sel[i]===-1}">${t("overview")}</button>` +
-    c.feats.map((x,j) => `<button class="fchip" type="button" data-ch="${i}" data-f="${j}" aria-pressed="${sel[i]===j}">${L(x.name)}${x.soon ? `<span class="soon-pill">${t("soon")}</span>` : ""}</button>`).join("");
+  const f = c.feats[sel[i]];
+  const chips = c.feats.map((x,j) => `<button class="fchip" type="button" data-ch="${i}" data-f="${j}" aria-pressed="${sel[i]===j}">${L(x.name)}</button>`).join("");
   return `
     <div class="pick">
-      <div class="pick-h"><span class="mode ${c.mode}">${t(c.mode)}</span><span>${c.feats.length} ${t("feats_in")}</span></div>
-      <div class="fchips" role="group">${chips}</div>
+      <div class="pick-h"><span class="mode ${c.mode}">${t(c.mode)}</span><span>${fcount(c.feats.length)}</span></div>
+      <div class="fchips" role="group" aria-label="${L(c.mname)}">${chips}</div>
     </div>
     <div class="cards2" aria-live="polite">
-      <div class="today"><span class="tag"><i></i>${t("today")}</span><p>${L(src.today)}</p></div>
+      <div class="today"><span class="tag"><i></i>${t("today")}</span><p>${L(f.today)}</p></div>
       <div class="with"><span class="tag"><i></i>${t("withn")}</span>
-        ${f ? `<h4>${L(f.name)}</h4>` : ""}
-        ${f && f.soon ? `<span class="soon-note">${t("soon")}</span>` : ""}
-        <p>${L(src.with)}</p>
-        <div class="alert"><span class="sev ${src.alert.sev}"></span><span>${src.alert[lang]}</span></div>
+        <h4>${L(f.name)}</h4>
+        <p>${L(f.with)}</p>
+        <div class="alert"><span class="sev ${f.alert.sev}"></span><span>${f.alert[lang]}</span></div>
       </div>
     </div>`;
 }
@@ -720,9 +733,8 @@ function chapterBody(c, i){
 function renderChapters(){
   $("#chapters").innerHTML = CH.map((c,i) => `<article class="ch" id="ch-${i+1}">
       <div class="ch-side">
-        <span class="ch-n">${i+1}</span>
-        <div><h3>${L(c.t)}</h3><p class="who">${L(c.s)} · ${L(c.who)}</p>
-        <span class="mpill${c.olive ? " olive" : ""}">${svg(P[c.m],14)}${L(c.mname)}</span></div>
+        <span class="ch-ic${c.olive ? " olive" : ""}">${svg(P[c.m],22)}</span>
+        <div><h3>${L(c.mname)}</h3><p class="q">${L(Q[c.m])}</p><p class="who">${L(c.who)}</p></div>
       </div>
       <div class="ch-body" id="chb-${i}">${chapterBody(c,i)}</div>
     </article>`).join("");
@@ -732,7 +744,7 @@ function render(){
   $("#heroTitle").innerHTML = HERO[lang];
   $("#stripList").innerHTML = STRIP[lang].map(s => `<li>${s}</li>`).join("");
   $("#avatar").textContent = lang === "ar" ? "أ" : "A";
-  $("#journey").innerHTML = CH.map((c,i) => `<li><a href="#ch-${i+1}"><span class="jn">${svg(P[c.m],20)}</span><b>${L(c.t)}</b><small>${L(c.mname)}</small></a></li>`).join("");
+  $("#journey").innerHTML = CH.map((c,i) => `<li><a href="#ch-${i+1}"><span class="jn">${svg(P[c.m],20)}</span><b>${L(c.mname)}</b><small>${fcount(c.feats.length)}</small></a></li>`).join("");
   $("#whyCards").innerHTML = WHY.map(w => `<article><span class="wi">${svg(P[w.i])}</span><h3>${L(w.t)}</h3><p>${L(w.d)}</p></article>`).join("");
   renderChapters();
   $("#resultList").innerHTML = RESULT[lang].map(r => `<li>${svg(P.ok,18)}<span>${r}</span></li>`).join("");
@@ -765,7 +777,7 @@ document.addEventListener("click", e => {
   const b = e.target.closest(".fchip");
   if (!b) return;
   const i = +b.dataset.ch, f = +b.dataset.f;
-  sel[i] = (sel[i] === f && f !== -1) ? -1 : f;
+  sel[i] = f;
   $("#chb-" + i).innerHTML = chapterBody(CH[i], i);
   const again = $(`#chb-${i} .fchip[data-f="${sel[i]}"]`);
   if (again) again.focus({preventScroll:true});
