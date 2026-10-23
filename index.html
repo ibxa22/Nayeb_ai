@@ -261,6 +261,61 @@ html[lang="ar"] .cta h2{letter-spacing:0;line-height:1.4}
 .form .btn{background:var(--teal);color:var(--on-teal)}
 .form .fnote{font-size:14px;color:var(--bg);background:color-mix(in srgb,var(--teal) 30%,var(--ink));border-radius:12px;padding:10px 12px}
 footer{padding-block:28px;color:var(--muted);font-size:13px}
+/* ---- UI review fixes ---- */
+/* dark panels stay dark in both themes */
+.result,.cta{--ink:#1B2422;--bg:#FBF9F1}
+/* contrast: accent text and teal-filled controls */
+.hero h1 .accent{color:var(--teal-ink)}
+.fchip[aria-pressed="true"],.form .btn{background:var(--teal-ink);border-color:var(--teal-ink);color:var(--on-teal)}
+:root:not([data-theme="dark"]) .fchip[aria-pressed="true"],:root:not([data-theme="dark"]) .form .btn{color:#fff}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .fchip[aria-pressed="true"],:root:not([data-theme="light"]) .form .btn{color:var(--on-teal)}}
+/* mobile: feature chips in one swipeable row */
+@media (max-width:699px){
+  .fchips{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding-bottom:4px;margin-inline:-4px;padding-inline:4px;scroll-snap-type:x proximity}
+  .fchips::-webkit-scrollbar{display:none}
+  .fchip{flex:none;white-space:nowrap;scroll-snap-align:start}
+  .ch{padding:18px}
+}
+/* AI grid: 7 cards fill the grid */
+@media (min-width:640px){.aic:first-child{grid-column:span 2}}
+/* calculator: even unit boxes */
+.nc-box{width:172px;justify-content:space-between;box-sizing:border-box}
+.nc-field > span:first-child{flex:1;min-width:0}
+.nc-unit{flex:1;min-width:0;text-align:start}
+#trust{scroll-margin-top:90px}
+.cta .btn-light{background:transparent;color:#FBF9F1;border:1px solid rgba(251,249,241,.35)}
+.cta .btn-light:hover{border-color:#FBF9F1}
+.mode{cursor:help}
+.form input,.form select{box-sizing:border-box}
+.fchip,.alert,.today,.with,.aic,.team,.why article,#journey a,#trust > div,#resultList li{overflow-wrap:break-word}
+/* ---- same size everywhere ---- */
+.journey,.why,.teams,.trust,.result ul{grid-auto-rows:1fr}
+.journey li{display:flex}.journey a{flex:1}
+/* AI cards: equal width, last row centred */
+.aigrid{display:flex;flex-wrap:wrap;justify-content:center;gap:14px}
+.aic{flex:0 0 100%;box-sizing:border-box;min-width:0}
+.fchip,.ch,.team,.why article,.journey a{box-sizing:border-box}
+@media (min-width:640px){.aic,.aic:first-child{flex:0 0 calc((100% - 14px)/2);grid-column:auto}}
+@media (min-width:1040px){.aic,.aic:first-child{flex:0 0 calc((100% - 42px)/4)}}
+/* feature chips: equal tiles */
+.fchips{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:8px}
+.fchip{display:flex;align-items:center;justify-content:center;text-align:center;border-radius:14px;padding:8px 12px;min-height:52px}
+@media (max-width:699px){
+  .fchips{display:grid;grid-template-columns:1fr 1fr;overflow:visible;flex-wrap:wrap;margin-inline:0;padding-inline:0}
+  .fchip{flex:none;white-space:normal}
+}
+/* module cards: body fills the card, Today / With Nayeb equal width */
+.ch-body{display:flex !important;flex-direction:column;gap:12px}
+.cards2{flex:1;grid-template-columns:1fr}
+@media (min-width:700px){.cards2{grid-template-columns:1fr 1fr}}
+.stack{display:grid;flex:1}
+.stack > *{grid-area:1/1;display:flex;flex-direction:column;gap:10px}
+.stack > [aria-hidden="true"]{visibility:hidden}
+.with .stack .alert{margin-top:auto}
+/* buttons in a group: same width */
+.hero-text .btn,.cta .btn-light{min-width:200px}
+
+
 </style>
 <style>body{margin:0}[hidden]{display:none!important}
 /* demo pop-up */
@@ -286,12 +341,12 @@ body.locked{overflow:hidden}
     <nav class="hidden md:flex items-center gap-7">
       <a class="navlink" href="#why" data-i18n="nav_why"></a>
       <a class="navlink" href="#story" data-i18n="nav_story"></a>
-      <a class="navlink" href="#demo" data-i18n="nav_sec"></a>
+      <a class="navlink" href="#trust" data-i18n="nav_sec"></a>
     </nav>
     <div class="flex items-center gap-2">
       <button id="langBtn" class="btn btn-light btn-sm lang-btn" type="button">English</button>
       <a href="demo.html" data-demo class="btn btn-light btn-sm hidden sm:inline-flex" data-i18n="cta_demo"></a>
-      <a href="#demo" class="btn btn-dark btn-sm hidden sm:inline-flex" data-i18n="cta_book"></a>
+      <a href="#demo" class="btn btn-dark btn-sm inline-flex" data-i18n="cta_book"></a>
     </div>
   </div>
 </header>
@@ -313,11 +368,11 @@ body.locked{overflow:hidden}
         <p class="nc-tag" data-nc-html="tag"></p>
         <p class="nc-sub" data-nc="sub"></p>
         <label class="nc-field"><span data-nc="spendL"></span>
-          <span class="nc-box"><input class="nc-spend" type="number" inputmode="decimal" min="0" placeholder="50"><span class="nc-unit" data-nc="mSar"></span></span></label>
+          <span class="nc-box"><input class="nc-spend" type="number" inputmode="decimal" min="0" placeholder="50" value="50"><span class="nc-unit" data-nc="mSar"></span></span></label>
         <label class="nc-field"><span data-nc="peopleL"></span>
-          <span class="nc-box"><input class="nc-people" type="number" inputmode="numeric" min="0" placeholder="6"><span class="nc-unit" data-nc="ppl"></span></span></label>
+          <span class="nc-box"><input class="nc-people" type="number" inputmode="numeric" min="0" placeholder="6" value="6"><span class="nc-unit" data-nc="ppl"></span></span></label>
         <label class="nc-field"><span data-nc="costL"></span>
-          <span class="nc-box"><input class="nc-cost" type="number" inputmode="numeric" min="0" placeholder="300"><span class="nc-unit" data-nc="kSar"></span></span></label>
+          <span class="nc-box"><input class="nc-cost" type="number" inputmode="numeric" min="0" placeholder="300" value="300"><span class="nc-unit" data-nc="kSar"></span></span></label>
         <div class="nc-out" aria-live="polite">
           <span class="nc-big-k" data-nc="bigK"></span>
           <b class="nc-big">—</b>
@@ -327,7 +382,6 @@ body.locked{overflow:hidden}
             <div><span data-nc="teamK"></span><b class="nc-team-v">—</b><small class="nc-team-s"></small></div>
           </div>
         </div>
-        <a class="nc-cta" href="#demo" data-nc="cta"></a>
         <p class="nc-note" data-nc="note"></p>
       </div>
     </div>
@@ -375,7 +429,7 @@ body.locked{overflow:hidden}
     </div>
   </section>
 
-  <section id="ai" class="sec wrap" style="padding-top:0">
+  <section id="ai" class="sec wrap">
     <div class="sec-head">
       <span class="label" data-i18n="ai_l"></span>
       <h2 data-i18n="ai_h"></h2>
@@ -405,7 +459,8 @@ body.locked{overflow:hidden}
         <label><span data-i18n="fm_co"></span><input id="fCo" autocomplete="organization"></label>
         <label><span data-i18n="fm_email"></span><input id="fEmail" type="email" autocomplete="email"></label>
         <label><span data-i18n="fm_role"></span><select id="fRole"></select></label>
-        <label class="full"><span data-i18n="fm_erp"></span><select id="fErp"></select></label>
+        <label><span data-i18n="fm_phone"></span><input id="fPhone" type="tel" autocomplete="tel" dir="ltr"></label>
+        <label><span data-i18n="fm_erp"></span><select id="fErp"></select></label>
         <button class="btn full" type="submit" data-i18n="fm_go"></button>
         <p class="fnote full" id="formNote" hidden></p>
       </form>
@@ -479,6 +534,10 @@ const I = {
   fm_co:{en:"Company",ar:"الشركة"},
   fm_email:{en:"Work email",ar:"البريد الإلكتروني للعمل"},
   fm_role:{en:"Your role",ar:"دورك"},
+  fm_role_ph:{en:"Choose your role",ar:"اختر دورك"},
+  fm_phone:{en:"Mobile (optional)",ar:"الجوال (اختياري)"},
+  auto_t:{en:"Runs by itself and alerts you",ar:"يشتغل لحاله وينبّهك"},
+  demand_t:{en:"You open it when you need it",ar:"تفتحه أنت لما تحتاجه"},
   fm_erp:{en:"Which ERP do you use?",ar:"وش نظام الـ ERP عندكم؟"},
   erp_other:{en:"Other",ar:"نظام آخر"},
   fm_go:{en:"Request a demo",ar:"احجز العرض التجريبي"},
@@ -684,7 +743,7 @@ const CH = [
   t:{en:"Behind the scenes",ar:"خلف الكواليس"}, s:{en:"Something doesn't look right",ar:"شيء لا يبدو صحيحاً"}, who:{en:"Finance, executives & audit",ar:"المالية والإدارة العليا والتدقيق"},
   today:{en:"Three days before the invoice, the vendor's bank account was changed. Nobody noticed.",ar:"قبل الفاتورة بثلاثة أيام، تغيّر الحساب البنكي للمورد، وما أحد انتبه."},
   with:{en:"Nayeb alerts Finance before the invoice is approved, and watches in the background for other patterns. A flag is never shown to the person it concerns.",ar:"ينبّه نايب المالية قبل اعتماد الفاتورة، ويراقب في الخلفية أنماطاً أخرى، ولا يظهر التنبيه أبداً للشخص المعني."},
-  alert:{sev:"risk",en:"Bank account changed 3 days before the invoice · review recommended",ar:"تغيّر الحساب البنكي قبل الفاتورة بـ 3 أيام · يوصي بالمراجعة"},
+  alert:{sev:"risk",en:"Bank account changed 3 days before the invoice · review recommended",ar:"تغيّر الحساب البنكي قبل الفاتورة بـ 3 أيام · يُنصح بالمراجعة"},
   feats:[
    F({name:{en:"Unusual Repeated Awards",ar:"ترسيات متكررة بشكل غير معتاد"},
      today:{en:"Vendor C has won 7 of the last 9 IT tenders, each time just under the confidential budget cap. Nobody connects the dots.",ar:"المورد ج فاز بـ 7 من آخر 9 منافسات تقنية، وكل مرة قريب جداً من سقف الميزانية السري، وما أحد ربط النقاط ببعض."},
@@ -705,7 +764,7 @@ const CH = [
    F({name:{en:"Vendor Bank Account Recently Changed",ar:"تغيّر حساب المورد البنكي مؤخراً"},
      today:{en:"Three days before the invoice, the vendor's bank account was changed. Nobody noticed.",ar:"قبل الفاتورة بثلاثة أيام، تغيّر الحساب البنكي للمورد، وما أحد انتبه."},
      with:{en:"Nayeb alerts Finance before the invoice is approved, so the change can be confirmed with the vendor directly.",ar:"نايب ينبّه المالية قبل اعتماد الفاتورة، عشان يتأكدون من التغيير مع المورد مباشرة."},
-     alert:{sev:"risk",en:"Bank account changed 3 days before the invoice · review recommended",ar:"تغيّر الحساب البنكي قبل الفاتورة بـ 3 أيام · يوصي بالمراجعة"}}),
+     alert:{sev:"risk",en:"Bank account changed 3 days before the invoice · review recommended",ar:"تغيّر الحساب البنكي قبل الفاتورة بـ 3 أيام · يُنصح بالمراجعة"}}),
    F({name:{en:"Employees Linked to Vendors",ar:"موظفون مرتبطون بموردين"},
      today:{en:"Vendor C's manager shares a phone number with an employee in IT. Nobody knows.",ar:"مدير المورد ج عنده نفس رقم جوال موظف في تقنية المعلومات، وما أحد يدري."},
      with:{en:"Nayeb finds the match, masks the personal details, and shows it only to authorised reviewers. Every view is logged.",ar:"نايب يكتشف التطابق، ويخفي البيانات الشخصية، ويعرضه للمراجعين المخوّلين بس، وكل اطلاع ينسجل."},
@@ -804,6 +863,10 @@ function ncLang(){
 }
 document.querySelectorAll("#ncalc input").forEach(el => el.addEventListener("input", ncRender));
 
+const ROLES = {
+  en:["Procurement & supply chain","Finance / CFO","IT","Executive management","Department head","Audit","Other"],
+  ar:["المشتريات وسلاسل الإمداد","المالية","تقنية المعلومات","الإدارة العليا","رئيس قسم","التدقيق","غير ذلك"]
+};
 let lang = "ar";
 const sel = CH.map(() => 0); /* selected feature per module */
 const Q = {
@@ -827,22 +890,38 @@ const t = k => (I[k] ? I[k][lang] : k);
 const L = o => o[lang];
 
 function chapterBody(c, i){
-  const f = c.feats[sel[i]];
   const chips = c.feats.map((x,j) => `<button class="fchip" type="button" data-ch="${i}" data-f="${j}" aria-pressed="${sel[i]===j}">${L(x.name)}</button>`).join("");
+  const hid = j => sel[i]===j ? "" : ' aria-hidden="true"';
   return `
     <div class="pick">
-      <div class="pick-h"><span class="mode ${c.mode}">${t(c.mode)}</span><span>${fcount(c.feats.length)}</span></div>
+      <div class="pick-h"><span class="mode ${c.mode}" title="${t(c.mode + "_t")}">${t(c.mode)}</span><span>${fcount(c.feats.length)}</span></div>
       <div class="fchips" role="group" aria-label="${L(c.mname)}">${chips}</div>
     </div>
     <div class="cards2" aria-live="polite">
-      <div class="today"><span class="tag"><i></i>${t("today")}</span><p>${L(f.today)}</p></div>
+      <div class="today"><span class="tag"><i></i>${t("today")}</span>
+        <div class="stack">${c.feats.map((f,j) => `<div${hid(j)}><p>${L(f.today)}</p></div>`).join("")}</div>
+      </div>
       <div class="with"><span class="tag"><i></i>${t("withn")}</span>
-        <h4>${L(f.name)}</h4>
-        <p>${L(f.with)}</p>
-        <div class="alert"><span class="sev ${f.alert.sev}"></span><span>${f.alert[lang]}</span></div>
+        <div class="stack">${c.feats.map((f,j) => `<div${hid(j)}><h4>${L(f.name)}</h4><p>${L(f.with)}</p>
+          <div class="alert"><span class="sev ${f.alert.sev}"></span><span>${f.alert[lang]}</span></div></div>`).join("")}</div>
       </div>
     </div>`;
 }
+
+/* every item in a group gets the height of the tallest one */
+const EQ = ["#journey a", ".why article", ".fchip", ".ch", ".aic", ".team", "#trust > div", "#resultList li"];
+function equalize(){
+  EQ.forEach(q => document.querySelectorAll(q).forEach(el => { el.style.minHeight = ""; }));
+  EQ.forEach(q => {
+    const els = [...document.querySelectorAll(q)];
+    const h = Math.max(0, ...els.map(el => el.getBoundingClientRect().height));
+    els.forEach(el => { el.style.minHeight = h + "px"; });
+  });
+}
+let eqT;
+addEventListener("resize", () => { clearTimeout(eqT); eqT = setTimeout(equalize, 120); });
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(equalize);
+addEventListener("load", equalize);
 
 function renderChapters(){
   $("#chapters").innerHTML = CH.map((c,i) => `<article class="ch" id="ch-${i+1}">
@@ -866,8 +945,8 @@ function render(){
   $("#teamGrid").innerHTML = TEAMS.map(x => `<article class="team"><span class="ti">${svg(P[x.i])}</span><h3>${L(x.t)}</h3><p>${L(x.d)}</p><small>${L(x.m)}</small></article>`).join("");
   $("#trust").innerHTML = TRUST.map(x => `<div>${svg(x.i,20)}<span><b>${L(x.t)}</b>${L(x.d)}</span></div>`).join("");
   const rs = $("#fRole"), idx = rs.selectedIndex;
-  rs.innerHTML = TEAMS.map(r => `<option>${L(r.t)}</option>`).join("");
-  rs.selectedIndex = idx > -1 ? idx : 0;
+  rs.innerHTML = `<option value="" disabled>${t("fm_role_ph")}</option>` + ROLES[lang].map(r => `<option>${r}</option>`).join("");
+  rs.selectedIndex = idx > 0 ? idx : 0;
   const e = $("#fErp"), ei = e.selectedIndex;
   e.innerHTML = ERPS.map(x => `<option>${x}</option>`).join("") + `<option>${t("erp_other")}</option>`;
   e.selectedIndex = ei > -1 ? ei : 0;
@@ -882,6 +961,7 @@ function applyLang(){
   b.setAttribute("aria-label", lang === "ar" ? "Switch to English" : "التبديل إلى العربية");
   render();
   ncLang();
+  equalize();
   $("#demoClose").setAttribute("aria-label", lang === "ar" ? "إغلاق" : "Close");
   $("#formNote").hidden = true;
   try { localStorage.setItem("nayeb-lang", lang); } catch (e) {}
@@ -891,11 +971,14 @@ $("#langBtn").addEventListener("click", () => { lang = lang === "en" ? "ar" : "e
 document.addEventListener("click", e => {
   const b = e.target.closest(".fchip");
   if (!b) return;
-  const i = +b.dataset.ch, f = +b.dataset.f;
+  const i = +b.dataset.ch, f = +b.dataset.f, box = $("#chb-" + i);
   sel[i] = f;
-  $("#chb-" + i).innerHTML = chapterBody(CH[i], i);
-  const again = $(`#chb-${i} .fchip[data-f="${sel[i]}"]`);
-  if (again) again.focus({preventScroll:true});
+  box.querySelectorAll(".fchip").forEach((x,j) => x.setAttribute("aria-pressed", j === f));
+  box.querySelectorAll(".stack").forEach(st => [...st.children].forEach((x,j) => {
+    if (j === f) x.removeAttribute("aria-hidden"); else x.setAttribute("aria-hidden", "true");
+  }));
+  b.scrollIntoView({block:"nearest", inline:"nearest"});
+  if (matchMedia("(max-width:699px)").matches) box.querySelector(".cards2").scrollIntoView({block:"nearest", behavior:"smooth"});
 });
 $("#demoForm").addEventListener("submit", e => {
   e.preventDefault();
