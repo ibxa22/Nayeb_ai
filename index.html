@@ -77,6 +77,48 @@ bdi{unicode-bidi:isolate}
 html[lang="ar"] .hero h1{line-height:1.35;letter-spacing:0}
 .hero h1 .accent{color:var(--teal)}
 .hero .lead{margin-inline:auto}
+/* hero with savings calculator */
+.hero-text{display:flex;flex-direction:column;align-items:center;gap:22px;min-width:0}
+.hero-calc{width:100%;display:flex;justify-content:center;min-width:0}
+@media (min-width:1000px){
+  .hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(340px,400px);align-items:center;gap:56px;text-align:start;padding-block:64px 36px}
+  .hero-text{align-items:flex-start}
+  .hero-text .lead{margin-inline:0}
+  .hero-text > .flex{justify-content:flex-start}
+  .hero h1{font-size:clamp(40px,4.6vw,60px)}
+}
+/* Nayeb savings calculator */
+.nayeb-calc{
+  --nc-teal-strong:var(--teal-ink);
+  width:100%;max-width:400px;margin:0 auto;background:var(--surface);color:var(--ink);
+  border:1px solid var(--line);border-radius:22px;padding:22px 18px 16px;display:flex;flex-direction:column;gap:12px;
+  font-size:15px;line-height:1.5;text-align:start;box-shadow:0 24px 60px -28px rgba(27,36,34,.35)}
+.nayeb-calc *{box-sizing:border-box}
+.nc-tag{margin:0;text-align:center;font-family:var(--font-display);font-weight:600;font-size:1.2rem;line-height:1.4}
+.nc-tag span{color:var(--teal-ink)}
+.nc-sub{margin:-6px 0 4px;text-align:center;color:var(--muted);font-size:.92rem}
+.nc-field{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:.88rem;font-weight:500}
+.nc-box{flex:none;display:inline-flex;align-items:center;gap:5px;border:1px solid var(--line);background:var(--bg);border-radius:10px;padding:5px 9px}
+.nc-box:focus-within{border-color:var(--teal);box-shadow:0 0 0 3px var(--teal-soft)}
+.nc-box input{width:64px;border:0;background:transparent;color:var(--ink);font:600 1rem var(--font-display);font-variant-numeric:tabular-nums;text-align:center;direction:ltr;outline:none;padding:0}
+.nc-box input{-moz-appearance:textfield;appearance:textfield}
+.nc-box input::-webkit-inner-spin-button,.nc-box input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+.nc-box input::placeholder{color:var(--muted);opacity:.55;font-weight:400}
+.nc-unit{color:var(--muted);font-size:.76rem;white-space:nowrap;min-width:52px}
+.nc-out{margin-top:4px;background:#1B2422;color:#FBF9F1;border:1px solid var(--line);border-radius:14px;padding:16px 14px 14px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:2px}
+.nc-big-k{font-size:.85rem;font-weight:600;opacity:.85}
+.nc-big{font:700 2.2rem/1.2 var(--font-display);color:#2BC2B6;font-variant-numeric:tabular-nums}
+.nc-out > small{font-size:.78rem;opacity:.7}
+.nc-split{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px;padding-top:12px;border-top:1px solid #34413E}
+.nc-split > div{display:flex;flex-direction:column;gap:1px;min-width:0}
+.nc-split span{font-size:.74rem;opacity:.75}
+.nc-split b{font:600 1.05rem var(--font-display);font-variant-numeric:tabular-nums}
+.nc-split small{font-size:.7rem;opacity:.7;line-height:1.35}
+.nc-cta{display:block;text-align:center;background:var(--teal);color:#fff;text-decoration:none;font:600 1rem var(--font-display);padding:11px;border-radius:11px}
+.nc-cta:hover{background:#00968B}
+.nc-note{margin:-4px 0 0;text-align:center;font-size:.7rem;color:var(--muted)}
+.nayeb-calc :focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+
 
 /* journey strip */
 .dunes{position:relative;border-radius:32px;overflow:hidden;padding:36px 20px 44px;background:
@@ -256,13 +298,38 @@ body.locked{overflow:hidden}
 
 <main id="top">
   <section class="wrap hero">
-    <span class="eyebrow" data-i18n="eyebrow"></span>
-    <h1 id="heroTitle"></h1>
-    <p class="lead" data-i18n="hero_sub"></p>
-    <div class="flex flex-wrap justify-center gap-3">
-      <a href="#demo" class="btn btn-dark" data-i18n="cta_book"></a>
-      <a href="demo.html" data-demo class="btn btn-light"><span data-i18n="cta_demo"></span> <span class="flip" aria-hidden="true">→</span></a>
-      <a href="#story" class="btn btn-light"><span data-i18n="cta_story"></span></a>
+    <div class="hero-text">
+      <span class="eyebrow" data-i18n="eyebrow"></span>
+      <h1 id="heroTitle"></h1>
+      <p class="lead" data-i18n="hero_sub"></p>
+      <div class="flex flex-wrap justify-center gap-3">
+        <a href="#demo" class="btn btn-dark" data-i18n="cta_book"></a>
+        <a href="demo.html" data-demo class="btn btn-light"><span data-i18n="cta_demo"></span> <span class="flip" aria-hidden="true">→</span></a>
+        <a href="#story" class="btn btn-light"><span data-i18n="cta_story"></span></a>
+      </div>
+    </div>
+    <div class="hero-calc">
+      <div class="nayeb-calc" id="ncalc">
+        <p class="nc-tag" data-nc-html="tag"></p>
+        <p class="nc-sub" data-nc="sub"></p>
+        <label class="nc-field"><span data-nc="spendL"></span>
+          <span class="nc-box"><input class="nc-spend" type="number" inputmode="decimal" min="0" placeholder="50"><span class="nc-unit" data-nc="mSar"></span></span></label>
+        <label class="nc-field"><span data-nc="peopleL"></span>
+          <span class="nc-box"><input class="nc-people" type="number" inputmode="numeric" min="0" placeholder="6"><span class="nc-unit" data-nc="ppl"></span></span></label>
+        <label class="nc-field"><span data-nc="costL"></span>
+          <span class="nc-box"><input class="nc-cost" type="number" inputmode="numeric" min="0" placeholder="300"><span class="nc-unit" data-nc="kSar"></span></span></label>
+        <div class="nc-out" aria-live="polite">
+          <span class="nc-big-k" data-nc="bigK"></span>
+          <b class="nc-big">—</b>
+          <small data-nc="perYear"></small>
+          <div class="nc-split">
+            <div><span data-nc="saveK"></span><b class="nc-save-v">—</b></div>
+            <div><span data-nc="teamK"></span><b class="nc-team-v">—</b><small class="nc-team-s"></small></div>
+          </div>
+        </div>
+        <a class="nc-cta" href="#demo" data-nc="cta"></a>
+        <p class="nc-note" data-nc="note"></p>
+      </div>
     </div>
   </section>
 
@@ -690,6 +757,53 @@ const TRUST = [
   {i:'<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/>', t:{en:"Set up by your own IT",ar:"إعداد ذاتي من فريقكم التقني"}, d:{en:"A guided setup your IT completes without Nayeb staff. Nayeb checks every step and shows which features are ready.",ar:"إعداد خطوة بخطوة يخلّصه فريقكم التقني بدون ما يحتاج فريق نايب، ونايب يتحقق من كل خطوة ويوريكم وش الميزات الجاهزة."}}
 ];
 
+/* ---------- savings calculator ---------- */
+/* Assumptions behind the "up to" estimate: 13% of spend saved, 30% of follow-up time freed. */
+const NC_SAVE_RATE = 0.13, NC_TIME_FREED = 0.30;
+const NC = {
+  ar:{tag:'المتابعة على نايب، <span>والقرار عليك.</span>', sub:"أدخل أرقامك، وشوف كم ممكن توفّر.",
+    spendL:"كم تصرف على المشتريات في السنة؟", mSar:"مليون ريال",
+    peopleL:"كم شخص يتابع المشتريات والفواتير؟", ppl:"شخص",
+    costL:"كم يكلّفك الموظف بدوام كامل في السنة؟", kSar:"ألف ريال",
+    bigK:"ممكن توفّر حتى", perYear:"في السنة", saveK:"من المشتريات", teamK:"من وقت الفريق",
+    fte:n => "كأنك أضفت "+n+" موظف بدون توظيف", empty:"أدخل عدد فريقك وتكلفته",
+    cta:"احجز عرض تجريبي", note:"* أرقام تقديرية للتوضيح. الرقم الحقيقي تقوله بياناتك."},
+  en:{tag:'Nayeb does the follow-up. <span>Your team makes the calls.</span>', sub:"Add your numbers and see what comes back.",
+    spendL:"Yearly procurement spend?", mSar:"million SAR",
+    peopleL:"People following up purchases and invoices?", ppl:"people",
+    costL:"Yearly cost of one full-time employee?", kSar:"thousand SAR",
+    bigK:"You could save up to", perYear:"per year", saveK:"From procurement", teamK:"From team time",
+    fte:n => "Like adding "+n+" people, without hiring", empty:"Add your team size and cost",
+    cta:"Request a demo", note:"* Illustrative estimate. Your own data gives the real number."}
+};
+const ncTrim = x => String(+x);
+const ncNum = el => { const v = parseFloat(el.value); return isNaN(v) || v <= 0 ? 0 : v; };
+function ncMoney(n){
+  const big = n >= 1e6, x = big ? ncTrim((n/1e6).toFixed(n >= 1e8 ? 0 : n >= 1e7 ? 1 : 2)) : ncTrim(Math.round(n/1e3));
+  return lang === "ar" ? x + " " + (big ? "مليون" : "ألف") + " ريال" : "SAR " + x + (big ? "M" : "K");
+}
+function ncRender(){
+  const r = $("#ncalc"), q = s => r.querySelector(s), tx = NC[lang];
+  const spend = ncNum(q(".nc-spend"))*1e6, people = ncNum(q(".nc-people")), cost = ncNum(q(".nc-cost"))*1e3;
+  const sv = spend*NC_SAVE_RATE, tm = (people && cost) ? people*cost*NC_TIME_FREED : 0;
+  q(".nc-big").textContent = (sv+tm) ? ncMoney(sv+tm) : "—";
+  q(".nc-save-v").textContent = spend ? ncMoney(sv) : "—";
+  if (people && cost){
+    q(".nc-team-v").textContent = ncMoney(tm);
+    q(".nc-team-s").textContent = tx.fte(ncTrim((people*NC_TIME_FREED).toFixed(1)));
+  } else {
+    q(".nc-team-v").textContent = "—";
+    q(".nc-team-s").textContent = tx.empty;
+  }
+}
+function ncLang(){
+  const r = $("#ncalc"), tx = NC[lang];
+  r.querySelectorAll("[data-nc]").forEach(el => { el.textContent = tx[el.dataset.nc]; });
+  r.querySelectorAll("[data-nc-html]").forEach(el => { el.innerHTML = tx[el.dataset.ncHtml]; });
+  ncRender();
+}
+document.querySelectorAll("#ncalc input").forEach(el => el.addEventListener("input", ncRender));
+
 let lang = "ar";
 const sel = CH.map(() => 0); /* selected feature per module */
 const Q = {
@@ -767,6 +881,7 @@ function applyLang(){
   b.textContent = lang === "ar" ? "English" : "العربية";
   b.setAttribute("aria-label", lang === "ar" ? "Switch to English" : "التبديل إلى العربية");
   render();
+  ncLang();
   $("#demoClose").setAttribute("aria-label", lang === "ar" ? "إغلاق" : "Close");
   $("#formNote").hidden = true;
   try { localStorage.setItem("nayeb-lang", lang); } catch (e) {}
